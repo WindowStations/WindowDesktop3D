@@ -845,7 +845,6 @@ Private Sub Form_Load()
     keymapRThumbLeft = CLng(GetSetting("Window3D", "ButtonMap", "RThumbLeft", "-4000"))
     keymapRThumbRight = CLng(GetSetting("Window3D", "ButtonMap", "RThumbRight", "4000"))
     keymapDisablegamepad = CLng(GetSetting("Window3D", "ButtonMap", "DisableGamepad", "0"))
-    
     If keymapA = "" Then keymapA = "1": SaveSetting "Window3D", "ButtonMap", "AButton", 1
     If keymapMenu = "" Then keymapMenu = "2": SaveSetting "Window3D", "ButtonMap", "Menu", 2
     If keymapB = "" Then keymapB = "3": SaveSetting "Window3D", "ButtonMap", "BButton", 3
@@ -860,9 +859,6 @@ Private Sub Form_Load()
     If keymapDUp = "" Then keymapDUp = "12": SaveSetting "Window3D", "ButtonMap", "DUp", 12
     If keymapDDown = "" Then keymapDDown = "13": SaveSetting "Window3D", "ButtonMap", "DDown", 13
     If keymapChange = "" Then keymapChange = "14": SaveSetting "Window3D", "ButtonMap", "Change", 14
-    
-
-    
     pointerMaxPointerSpeed = CLng(GetSetting("Window3D", "Pointer", "MaxPointerSpeed", "6"))
     pointerMaxPointerAcceleration = CLng(GetSetting("Window3D", "Pointer", "MaxPointerAcceleration", "20"))
     pointerMaxWheelSpeed = CLng(GetSetting("Window3D", "Pointer", "MaxWheelSpeed", "10"))
@@ -873,8 +869,6 @@ Private Sub Form_Load()
     pointerMaxWalkAcceleration = CLng(GetSetting("Window3D", "Pointer", "MaxWalkAcceleration", "4"))
     pointerDisable2D = CLng(GetSetting("Window3D", "Pointer", "Disable2D", "0"))
     pointerDisable3D = CLng(GetSetting("Window3D", "Pointer", "Disable3D", "0"))
-    
-   
     displayDelay = CLng(GetSetting("Window3D", "Display", "Delay", "500"))
     displaySpeed = CLng(GetSetting("Window3D", "Display", "Speed", "1"))
     displayFade = CLng(GetSetting("Window3D", "Display", "Fade", "3000"))
@@ -882,7 +876,6 @@ Private Sub Form_Load()
     displayTrans3D = CLng(GetSetting("Window3D", "Display", "3D", "255"))
     displayTransSettings = CInt(GetSetting("Window3D", "Display", "Settings", "250"))
     displayHide = CLng(GetSetting("Window3D", "Display", "Hide", "0"))
-     
     directxTexFilters = CLng(GetSetting("Window3D", "DirectX", "TexFilters", "2"))
     directxVSync = CBool(GetSetting("Window3D", "DirectX", "VSync", "0"))
     directxQuant = 1 / CDbl(GetSetting("Window3D", "DirectX", "Quant", "200"))
@@ -895,10 +888,7 @@ Private Sub Form_Load()
     Dim asra As Single
     asra = (Screen.Width / Screen.TwipsPerPixelX) / (Screen.Height / Screen.TwipsPerPixelY)
     directxAspect = CSng(GetSetting("Window3D", "DirectX", "Aspect", CStr(asra)))
-
     soundxMute = CLng(GetSetting("Window3D", "Soundeffects", "Mute", "0"))
-
-
     'initialize classes for 3d directx
     MapFileName = App.Path & "\3DEngine\Maps\" & "Quits" & ".map"
     MouseSensX = 0.00003 * 20
@@ -935,11 +925,10 @@ Private Sub Form_Load()
     TMRPollBatteries.Interval = 1
     TMRPoll.Enabled = True
     TMRPollBatteries.Enabled = True
-    
     If keymapDisablegamepad = 1 Then
-     xinputClass.Disable
+        xinputClass.Disable
     Else
-     xinputClass.Enable
+        xinputClass.Enable
     End If
     If pointerDisable3D = 1 And Me.Visible = True Then Me.Visible = False
     If pointerDisable3D = 0 And Me.Visible = False Then Me.Visible = True
@@ -1738,11 +1727,14 @@ Private Sub EscapeDialogMenuWindow()
     End If
     If xenable = True Then Exit Sub
     apikeybd_event Keys.vk_Escape, apiOemKeyScan(Keys.vk_Escape) And &HFF, KEYEVENTF_KEYDOWN, XINPUT_EXTRA_INFO: apikeybd_event Keys.vk_Escape, apiOemKeyScan(Keys.vk_Escape) And &HFF, KEYEVENTF_KEYUP, XINPUT_EXTRA_INFO
-    '    If modifierkeydown = True Then
-    apikeybd_event Keys.VK_LWIN, apiOemKeyScan(Keys.VK_LWIN) And &HFF, KEYEVENTF_KEYDOWN, XINPUT_EXTRA_INFO
-    apikeybd_event Keys.vk_b, apiOemKeyScan(Keys.vk_b) And &HFF, KEYEVENTF_KEYDOWN, XINPUT_EXTRA_INFO: apikeybd_event Keys.vk_b, apiOemKeyScan(Keys.vk_b) And &HFF, KEYEVENTF_KEYUP, XINPUT_EXTRA_INFO
-    apikeybd_event Keys.VK_LWIN, apiOemKeyScan(Keys.VK_LWIN) And &HFF, KEYEVENTF_KEYUP, XINPUT_EXTRA_INFO
-    '    End If
+    
+    fwnd = apiGetForegroundWindow
+    
+    If apiIsWindow(fwnd) = 0 Or fwnd = apiFindWindow("Shell_TrayWnd", vbNullString) Or fwnd = apiFindWindow("Progman", "Program Manager") Then
+        apikeybd_event Keys.VK_LWIN, apiOemKeyScan(Keys.VK_LWIN) And &HFF, KEYEVENTF_KEYDOWN, XINPUT_EXTRA_INFO
+        apikeybd_event Keys.vk_b, apiOemKeyScan(Keys.vk_b) And &HFF, KEYEVENTF_KEYDOWN, XINPUT_EXTRA_INFO: apikeybd_event Keys.vk_b, apiOemKeyScan(Keys.vk_b) And &HFF, KEYEVENTF_KEYUP, XINPUT_EXTRA_INFO
+        apikeybd_event Keys.VK_LWIN, apiOemKeyScan(Keys.VK_LWIN) And &HFF, KEYEVENTF_KEYUP, XINPUT_EXTRA_INFO
+    End If
 End Sub
 
 Private Function GetWindowUnderPointer() As Long

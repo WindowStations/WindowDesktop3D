@@ -1714,26 +1714,26 @@ Private Sub EscapeDialogMenuWindow()
     If pointerDisable2D = 1 Then Exit Sub
     Dim fwnd As Long
     fwnd = apiGetForegroundWindow
+    Dim metro As Boolean
     If apiIsWindow(fwnd) <> 0 Then
         Dim wn As WINNAME
         wn = GetWinNameAPI(fwnd, False, True)
+        '        frmSettings.lblTitle.Caption = wn.lpText & " " & wn.lpClass
         If wn.lpClass = "" Or wn.lpClass = "Windows.UI.Core.CoreWindow" Then
+            metro = True
             wn = GetWinNameAPI(fwnd, True, False)
             If Trim(LCase(wn.lpText)) = "action center" Or Trim(LCase(wn.lpText)) = "windows shell experience host" Then
                 winescape
                 Exit Sub
             End If
         End If
+    Else
+        fwnd = GetWindowUnderPointer
     End If
     If xenable = True Then Exit Sub
     apikeybd_event Keys.vk_Escape, apiOemKeyScan(Keys.vk_Escape) And &HFF, KEYEVENTF_KEYDOWN, XINPUT_EXTRA_INFO: apikeybd_event Keys.vk_Escape, apiOemKeyScan(Keys.vk_Escape) And &HFF, KEYEVENTF_KEYUP, XINPUT_EXTRA_INFO
-    
-    fwnd = apiGetForegroundWindow
-    
-    If apiIsWindow(fwnd) = 0 Or fwnd = apiFindWindow("Shell_TrayWnd", vbNullString) Or fwnd = apiFindWindow("Progman", "Program Manager") Then
-        apikeybd_event Keys.VK_LWIN, apiOemKeyScan(Keys.VK_LWIN) And &HFF, KEYEVENTF_KEYDOWN, XINPUT_EXTRA_INFO
-        apikeybd_event Keys.vk_b, apiOemKeyScan(Keys.vk_b) And &HFF, KEYEVENTF_KEYDOWN, XINPUT_EXTRA_INFO: apikeybd_event Keys.vk_b, apiOemKeyScan(Keys.vk_b) And &HFF, KEYEVENTF_KEYUP, XINPUT_EXTRA_INFO
-        apikeybd_event Keys.VK_LWIN, apiOemKeyScan(Keys.VK_LWIN) And &HFF, KEYEVENTF_KEYUP, XINPUT_EXTRA_INFO
+    If metro = True Or apiIsWindow(fwnd) = 0 Or fwnd = apiFindWindow("Shell_TrayWnd", vbNullString) Or fwnd = apiFindWindow("Progman", "Program Manager") Then
+        winescape
     End If
 End Sub
 

@@ -527,126 +527,126 @@ Private dragy As Long
 Private dragscr As Boolean
 Private Declare Function apiBringWindowToTop Lib "user32" Alias "BringWindowToTop" (ByVal hWnd As Long) As Long
 Private Sub Form_Load()
-    On Error Resume Next
-    CreateRoundRectFromWindow Me
-    CreateRoundRectFromWindow fraMain
-    dragx = -1
-    dragy = -1
-    isloaded = True
+   On Error Resume Next
+   CreateRoundRectFromWindow Me
+   CreateRoundRectFromWindow fraMain
+   dragx = -1
+   dragy = -1
+   isloaded = True
 End Sub
 Private Sub Form_Activate()
-    WindowTransparency Me.hWnd, 235, vbBlack
+   WindowTransparency Me.hWnd, 235, vbBlack
 End Sub
 Private Sub fraMain_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
-    dragx = x
-    dragy = y
+   dragx = x
+   dragy = y
 End Sub
 Private Sub fraMain_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-    dragx = -1
-    dragy = -1
+   dragx = -1
+   dragy = -1
 End Sub
 Private Sub fraTitle_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fraMain_MouseDown Button, Shift, x, y
+   fraMain_MouseDown Button, Shift, x, y
 End Sub
 Private Sub fraTitle_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fraMain_MouseMove Button, Shift, x, y
+   fraMain_MouseMove Button, Shift, x, y
 End Sub
 Private Sub fraTitle_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fraMain_MouseUp Button, Shift, x, y
+   fraMain_MouseUp Button, Shift, x, y
 End Sub
 Private Sub lblTitle_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fraMain_MouseDown Button, Shift, x, y
+   fraMain_MouseDown Button, Shift, x, y
 End Sub
 Private Sub lblTitle_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fraMain_MouseMove Button, Shift, x, y
+   fraMain_MouseMove Button, Shift, x, y
 End Sub
 Private Sub lblTitle_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fraMain_MouseUp Button, Shift, x, y
+   fraMain_MouseUp Button, Shift, x, y
 End Sub
 Private Sub fraMain_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    On Error Resume Next
-    If fracmdBack.BackColor <> &H404040 Then fracmdBack.BackColor = &H404040
-    If fracmdApply.BackColor <> &H404040 Then fracmdApply.BackColor = &H404040
-    If fracmdClose.BackColor <> &H404040 Then fracmdClose.BackColor = &H404040
-    If dragx > -1 Then
-        If x > dragx Then
-            Me.left = Me.left + (x - dragx)
-        ElseIf x < dragx Then
-            Me.left = Me.left - (dragx - x)
-        End If
-    End If
-    If dragy > -1 Then
-        If y > dragy Then
-            Me.top = Me.top + (y - dragy)
-        ElseIf y < dragy Then
-            Me.top = Me.top - (dragy - y)
-        End If
-    End If
+   On Error Resume Next
+   If fracmdBack.BackColor <> &H404040 Then fracmdBack.BackColor = &H404040
+   If fracmdApply.BackColor <> &H404040 Then fracmdApply.BackColor = &H404040
+   If fracmdClose.BackColor <> &H404040 Then fracmdClose.BackColor = &H404040
+   If dragx > -1 Then
+      If x > dragx Then
+         Me.left = Me.left + (x - dragx)
+      ElseIf x < dragx Then
+         Me.left = Me.left - (dragx - x)
+      End If
+   End If
+   If dragy > -1 Then
+      If y > dragy Then
+         Me.top = Me.top + (y - dragy)
+      ElseIf y < dragy Then
+         Me.top = Me.top - (dragy - y)
+      End If
+   End If
 End Sub
 Private Sub fracmdBack_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fracmdBack.BackColor = &H808080
+   fracmdBack.BackColor = &H808080
 End Sub
 Private Sub fracmdApply_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fracmdApply.BackColor = &H808080
+   fracmdApply.BackColor = &H808080
 End Sub
 Private Sub fracmdClose_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fracmdClose.BackColor = &H808080
+   fracmdClose.BackColor = &H808080
 End Sub
 Private Sub vscrChange(ByVal x As Single, ByVal y As Single)
-    Dim he As Long
-    Dim ra As Double
-    Dim tp As Long
-    he = frascrMain.Height - 135
-    ra = (y - 135) / he
-    tp = 1000 - (ra * (fraMainScroll.Height - 4000))
-    If Abs(tp) > (fraMainScroll.Height - 4000) Then
-        tp = -(Abs(tp) - (fraMainScroll.Height - 4000))
-        Exit Sub
-    End If
-    fraMainScroll.top = tp
+   Dim he As Long
+   Dim ra As Double
+   Dim tp As Long
+   he = frascrMain.Height - 135
+   ra = (y - 135) / he
+   tp = 1000 - (ra * (fraMainScroll.Height - 4000))
+   If Abs(tp) > (fraMainScroll.Height - 4000) Then
+      tp = -(Abs(tp) - (fraMainScroll.Height - 4000))
+      Exit Sub
+   End If
+   fraMainScroll.top = tp
 End Sub
 Private Sub frascrMain_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
-    dragscr = True
-    If y < 135 Then Exit Sub
-    If y > frascrMain.Height Then Exit Sub
-    vscrChange x, y
+   dragscr = True
+   If y < 135 Then Exit Sub
+   If y > frascrMain.Height Then Exit Sub
+   vscrChange x, y
 End Sub
 Private Sub frascrMain_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If dragscr = False Then Exit Sub
-    If y < 135 Then Exit Sub
-    If y > frascrMain.Height Then Exit Sub
-    vscrChange x, y
+   If dragscr = False Then Exit Sub
+   If y < 135 Then Exit Sub
+   If y > frascrMain.Height Then Exit Sub
+   vscrChange x, y
 End Sub
 Private Sub frascrMain_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-    dragscr = False
+   dragscr = False
 End Sub
 Private Sub fracmdBack_Click()
-    frmOptions.show
-    frmOptions.top = Me.top
-    frmOptions.left = Me.left
-    frmMain.SetWindowPos frmOptions.hWnd, -1, 0, 0, 0, 0, False, False
-    Unload Me
+   frmOptions.show
+   frmOptions.top = Me.top
+   frmOptions.left = Me.left
+   frmMain.SetWindowPos frmOptions.hWnd, -1, 0, 0, 0, 0, False, False
+   Unload Me
 End Sub
 Private Sub lblBack_Click()
-    fracmdBack_Click
+   fracmdBack_Click
 End Sub
 Private Sub fracmdApply_Click()
-    '    pointerTextSize = traTextSize.Value
-    '    pointerTextPosition = traTextPosition.Value
-    '    pointerTextSpeed = traTextSpeed.Value
-    '    pointerTextFade = traTextFade.Value
-    '    SaveSetting "Window3D", "ButtonMap", "TextSize", CStr(pointerTextSize)
-    '    SaveSetting "Window3D", "ButtonMap", "TextPosition", CStr(pointerTextPosition)
-    '    SaveSetting "Window3D", "ButtonMap", "TextSpeed", CStr(pointerTextSpeed)
-    '    SaveSetting "Window3D", "ButtonMap", "TextFade", CStr(pointerTextFade)
-    Beep
+   '    pointerTextSize = traTextSize.Value
+   '    pointerTextPosition = traTextPosition.Value
+   '    pointerTextSpeed = traTextSpeed.Value
+   '    pointerTextFade = traTextFade.Value
+   '    SaveSetting "Window3D", "ButtonMap", "TextSize", CStr(pointerTextSize)
+   '    SaveSetting "Window3D", "ButtonMap", "TextPosition", CStr(pointerTextPosition)
+   '    SaveSetting "Window3D", "ButtonMap", "TextSpeed", CStr(pointerTextSpeed)
+   '    SaveSetting "Window3D", "ButtonMap", "TextFade", CStr(pointerTextFade)
+   Beep
 End Sub
 Private Sub lblApply_Click()
-    fracmdApply_Click
+   fracmdApply_Click
 End Sub
 Private Sub fracmdClose_Click()
-    Unload Me
+   Unload Me
 End Sub
 Private Sub lblClose_Click()
-    fracmdClose_Click
+   fracmdClose_Click
 End Sub

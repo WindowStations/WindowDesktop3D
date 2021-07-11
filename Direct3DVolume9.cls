@@ -16,27 +16,23 @@ Private Declare Sub vol_Release Lib "dx9_vb" (ByVal pVol As Long)
 Private Declare Function vol_SetData Lib "dx9_vb" (ByVal pVol As Long, ByVal pBox As Long, ByVal Size As Long, ByVal pData As Long) As Long
 Private Declare Function vol_GetData Lib "dx9_vb" (ByVal pVol As Long, ByVal pBox As Long, ByVal Size As Long, ByVal pData As Long) As Long
 Private mePtr As Long
-
 Friend Function SetData(ByVal pBox As Long, ByVal Size As Long, ByVal pData As Long) As Boolean
-    If vol_SetData(Ptr, pBox, Size, pData) = D3D_FALSE Then Exit Function
-    SetData = True
+   If vol_SetData(Ptr, pBox, Size, pData) = D3D_FALSE Then Exit Function
+   SetData = True
 End Function
-
 Friend Function GetData(ByVal pBox As Long, ByVal Size As Long, ByVal pData As Long) As Boolean
-    If vol_GetData(Ptr, pBox, Size, pData) = D3D_FALSE Then Exit Function
-    GetData = True
+   If vol_GetData(Ptr, pBox, Size, pData) = D3D_FALSE Then Exit Function
+   GetData = True
 End Function
-
 Private Sub Class_Terminate()
-    If Ptr <> 0 Then
-        vol_Release Ptr
-    End If
+   If Ptr <> 0 Then
+      vol_Release Ptr
+   End If
 End Sub
-
 Public Property Let Ptr(p As Long)
-    If mePtr <> 0 Then vol_Release mePtr
-    mePtr = p
+   If mePtr <> 0 Then vol_Release mePtr
+   mePtr = p
 End Property
 Public Property Get Ptr() As Long
-    Ptr = mePtr
+   Ptr = mePtr
 End Property

@@ -23,21 +23,21 @@ Public Const MFT_STRING     As Long = &H0
 Public Const MFS_DEFAULT    As Long = &H1000
 Public Const MFS_ENABLED    As Long = &H0
 Public Type MENUITEMINFO
-    cbSize As Long
-    fMask As Long
-    fType As Long
-    fState As Long
-    wID As Long
-    hSubMenu As Long
-    hbmpChecked As Long
-    hbmpUnchecked As Long
-    dwItemData As Long
-    dwTypeData As String
-    cch As Long
+   cbSize As Long
+   fMask As Long
+   fType As Long
+   fState As Long
+   wID As Long
+   hSubMenu As Long
+   hbmpChecked As Long
+   hbmpUnchecked As Long
+   dwItemData As Long
+   dwTypeData As String
+   cch As Long
 End Type
 Public Type POINT_TYPE
-    x As Long
-    y As Long
+   x As Long
+   y As Long
 End Type
 Public Declare Function CreatePopupMenu Lib "user32" () As Long
 Public Declare Function DestroyMenu Lib "user32" (ByVal hMenu As Long) As Long

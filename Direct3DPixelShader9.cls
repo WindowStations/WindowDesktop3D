@@ -14,17 +14,15 @@ Attribute VB_Exposed = False
 Option Explicit
 Private Declare Sub ps_Release Lib "dx9_vb" (ByVal pShader As Long)
 Private mePtr As Long
-
 Private Sub Class_Terminate()
-    If Ptr <> 0 Then
-        ps_Release Ptr
-    End If
+   If Ptr <> 0 Then
+      ps_Release Ptr
+   End If
 End Sub
-
 Public Property Let Ptr(p As Long)
-    If mePtr <> 0 Then ps_Release mePtr
-    mePtr = p
+   If mePtr <> 0 Then ps_Release mePtr
+   mePtr = p
 End Property
 Public Property Get Ptr() As Long
-    Ptr = mePtr
+   Ptr = mePtr
 End Property

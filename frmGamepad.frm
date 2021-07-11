@@ -39,11 +39,11 @@ Begin VB.Form frmGamepad
       BackColor       =   &H00000000&
       BorderStyle     =   0  'None
       ForeColor       =   &H00FFFFFF&
-      Height          =   9735
-      Left            =   120
+      Height          =   9915
+      Left            =   30
       TabIndex        =   0
-      Top             =   120
-      Width           =   12735
+      Top             =   30
+      Width           =   12915
       Begin VB.Frame frachkDisableGamepad 
          Appearance      =   0  'Flat
          BackColor       =   &H00000000&
@@ -337,187 +337,182 @@ Private isloaded As Boolean
 Private dragx As Long
 Private dragy As Long
 Private Sub Form_Load()
-    On Error Resume Next
-    CreateRoundRectFromWindow Me
-    CreateRoundRectFromWindow Frame1
-    chkDisableGamepad.Value = keymapDisablegamepad
-    dragx = -1
-    dragy = -1
-    isloaded = True
+   On Error Resume Next
+   CreateRoundRectFromWindow Me
+   CreateRoundRectFromWindow Frame1
+   chkDisableGamepad.Value = keymapDisablegamepad
+   dragx = -1
+   dragy = -1
+   isloaded = True
 End Sub
 Private Sub Form_Activate()
-    WindowTransparency Me.hWnd, displayTransSettings, vbBlack
+   WindowTransparency Me.hWnd, displayTransSettings, vbBlack
 End Sub
 Private Sub Frame1_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
-    dragx = x
-    dragy = y
+   dragx = x
+   dragy = y
 End Sub
 Private Sub Frame1_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-    dragx = -1
-    dragy = -1
+   dragx = -1
+   dragy = -1
 End Sub
 Private Sub Label5_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
-    Frame1_MouseDown Button, Shift, x, y
+   Frame1_MouseDown Button, Shift, x, y
 End Sub
 Private Sub Label5_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    Frame1_MouseMove Button, Shift, x, y
+   Frame1_MouseMove Button, Shift, x, y
 End Sub
 Private Sub Label5_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-    Frame1_MouseUp Button, Shift, x, y
+   Frame1_MouseUp Button, Shift, x, y
 End Sub
-
 Private Sub Frame8_Click()
-    If isloaded = False Then Exit Sub
-    frmSettings.show
-    frmSettings.top = Me.top
-    frmSettings.left = Me.left
-    frmMain.SetWindowPos frmSettings.hWnd, -1, 0, 0, 0, 0, False, False
-    Unload Me
+   If isloaded = False Then Exit Sub
+   frmSettings.show
+   frmSettings.top = Me.top
+   frmSettings.left = Me.left
+   frmMain.SetWindowPos frmSettings.hWnd, -1, 0, 0, 0, 0, False, False
+   Unload Me
 End Sub
 Private Sub Label8_Click()
-    If isloaded = False Then Exit Sub
-    Frame8_Click
+   If isloaded = False Then Exit Sub
+   Frame8_Click
 End Sub
 Private Sub Frame4_Click()
-    On Error Resume Next
-    If isloaded = False Then Exit Sub
-    If List1.ListIndex = 0 Then keymapA = "1": SaveSetting "Window3D", "ButtonMap", "AButton", 1
-    If List1.ListIndex = 1 Then keymapMenu = "2": SaveSetting "Window3D", "ButtonMap", "Menu", 2
-    If List1.ListIndex = 2 Then keymapB = "3": SaveSetting "Window3D", "ButtonMap", "BButton", 3
-    If List1.ListIndex = 3 Then keymapY = "4": SaveSetting "Window3D", "ButtonMap", "YButton", 4
-    If List1.ListIndex = 4 Then keymapX = "5": SaveSetting "Window3D", "ButtonMap", "XButton", 5
-    If List1.ListIndex = 5 Then keymapLeftBumper = "6": SaveSetting "Window3D", "ButtonMap", "LeftBumper", 6
-    If List1.ListIndex = 6 Then keymapRightBumper = "7": SaveSetting "Window3D", "ButtonMap", "RightBumper", 7
-    If List1.ListIndex = 7 Then keymapLeftStick = "8": SaveSetting "Window3D", "ButtonMap", "LeftStick", 8
-    If List1.ListIndex = 8 Then keymapRightStick = "9": SaveSetting "Window3D", "ButtonMap", "RightStick", 9
-    If List1.ListIndex = 9 Then keymapDLeft = "10": SaveSetting "Window3D", "ButtonMap", "DLeft", 10
-    If List1.ListIndex = 10 Then keymapDRight = "11": SaveSetting "Window3D", "ButtonMap", "DRight", 11
-    If List1.ListIndex = 11 Then keymapDUp = "12": SaveSetting "Window3D", "ButtonMap", "DUp", 12
-    If List1.ListIndex = 12 Then keymapDDown = "13": SaveSetting "Window3D", "ButtonMap", "DDown", 13
-    If List1.ListIndex = 13 Then keymapChange = "14": SaveSetting "Window3D", "ButtonMap", "Change", 14
-    If List1.ListIndex > -1 Then Frame8_Click
+   On Error Resume Next
+   If isloaded = False Then Exit Sub
+   If List1.ListIndex = 0 Then keymapA = "1": SaveSetting "Window3D", "ButtonMap", "AButton", 1
+   If List1.ListIndex = 1 Then keymapMenu = "2": SaveSetting "Window3D", "ButtonMap", "Menu", 2
+   If List1.ListIndex = 2 Then keymapB = "3": SaveSetting "Window3D", "ButtonMap", "BButton", 3
+   If List1.ListIndex = 3 Then keymapY = "4": SaveSetting "Window3D", "ButtonMap", "YButton", 4
+   If List1.ListIndex = 4 Then keymapX = "5": SaveSetting "Window3D", "ButtonMap", "XButton", 5
+   If List1.ListIndex = 5 Then keymapLeftBumper = "6": SaveSetting "Window3D", "ButtonMap", "LeftBumper", 6
+   If List1.ListIndex = 6 Then keymapRightBumper = "7": SaveSetting "Window3D", "ButtonMap", "RightBumper", 7
+   If List1.ListIndex = 7 Then keymapLeftStick = "8": SaveSetting "Window3D", "ButtonMap", "LeftStick", 8
+   If List1.ListIndex = 8 Then keymapRightStick = "9": SaveSetting "Window3D", "ButtonMap", "RightStick", 9
+   If List1.ListIndex = 9 Then keymapDLeft = "10": SaveSetting "Window3D", "ButtonMap", "DLeft", 10
+   If List1.ListIndex = 10 Then keymapDRight = "11": SaveSetting "Window3D", "ButtonMap", "DRight", 11
+   If List1.ListIndex = 11 Then keymapDUp = "12": SaveSetting "Window3D", "ButtonMap", "DUp", 12
+   If List1.ListIndex = 12 Then keymapDDown = "13": SaveSetting "Window3D", "ButtonMap", "DDown", 13
+   If List1.ListIndex = 13 Then keymapChange = "14": SaveSetting "Window3D", "ButtonMap", "Change", 14
+   If List1.ListIndex > -1 Then Frame8_Click
 End Sub
 Private Sub Label6_Click()
-    If isloaded = False Then Exit Sub
-    Frame4_Click
+   If isloaded = False Then Exit Sub
+   Frame4_Click
 End Sub
 Private Sub Frame5_Click()
-    On Error Resume Next
-    If isloaded = False Then Exit Sub
-    keymapA = "1": SaveSetting "Window3D", "ButtonMap", "AButton", 1
-    keymapMenu = "2": SaveSetting "Window3D", "ButtonMap", "Menu", 2
-    keymapB = "3": SaveSetting "Window3D", "ButtonMap", "BButton", 3
-    keymapY = "4": SaveSetting "Window3D", "ButtonMap", "YButton", 4
-    keymapX = "5": SaveSetting "Window3D", "ButtonMap", "XButton", 5
-    keymapLeftBumper = "6": SaveSetting "Window3D", "ButtonMap", "LeftBumper", 6
-    keymapRightBumper = "7": SaveSetting "Window3D", "ButtonMap", "RightBumper", 7
-    keymapLeftStick = "8": SaveSetting "Window3D", "ButtonMap", "LeftStick", 8
-    keymapRightStick = "9": SaveSetting "Window3D", "ButtonMap", "RightStick", 9
-    keymapDLeft = "10": SaveSetting "Window3D", "ButtonMap", "DLeft", 10
-    keymapDRight = "11": SaveSetting "Window3D", "ButtonMap", "DRight", 11
-    keymapDUp = "12": SaveSetting "Window3D", "ButtonMap", "DUp", 12
-    keymapDDown = "13": SaveSetting "Window3D", "ButtonMap", "DDown", 13
-    keymapChange = "14": SaveSetting "Window3D", "ButtonMap", "Change", 14
-    Frame8_Click
+   On Error Resume Next
+   If isloaded = False Then Exit Sub
+   keymapA = "1": SaveSetting "Window3D", "ButtonMap", "AButton", 1
+   keymapMenu = "2": SaveSetting "Window3D", "ButtonMap", "Menu", 2
+   keymapB = "3": SaveSetting "Window3D", "ButtonMap", "BButton", 3
+   keymapY = "4": SaveSetting "Window3D", "ButtonMap", "YButton", 4
+   keymapX = "5": SaveSetting "Window3D", "ButtonMap", "XButton", 5
+   keymapLeftBumper = "6": SaveSetting "Window3D", "ButtonMap", "LeftBumper", 6
+   keymapRightBumper = "7": SaveSetting "Window3D", "ButtonMap", "RightBumper", 7
+   keymapLeftStick = "8": SaveSetting "Window3D", "ButtonMap", "LeftStick", 8
+   keymapRightStick = "9": SaveSetting "Window3D", "ButtonMap", "RightStick", 9
+   keymapDLeft = "10": SaveSetting "Window3D", "ButtonMap", "DLeft", 10
+   keymapDRight = "11": SaveSetting "Window3D", "ButtonMap", "DRight", 11
+   keymapDUp = "12": SaveSetting "Window3D", "ButtonMap", "DUp", 12
+   keymapDDown = "13": SaveSetting "Window3D", "ButtonMap", "DDown", 13
+   keymapChange = "14": SaveSetting "Window3D", "ButtonMap", "Change", 14
+   Frame8_Click
 End Sub
 Private Sub Label7_Click()
-    If isloaded = False Then Exit Sub
-    Frame5_Click
+   If isloaded = False Then Exit Sub
+   Frame5_Click
 End Sub
-
 Private Sub chkDisableGamepad_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
    If isloaded = False Then Exit Sub
-    CheckBoxSetting
+   CheckBoxSetting
 End Sub
 Private Sub lblDisablegamepad_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If chkDisableGamepad.Value = vbUnchecked Then
-        chkDisableGamepad.Value = vbChecked
-    Else
-        chkDisableGamepad.Value = vbUnchecked
-    End If
-    CheckBoxSetting
+   If chkDisableGamepad.Value = vbUnchecked Then
+      chkDisableGamepad.Value = vbChecked
+   Else
+      chkDisableGamepad.Value = vbUnchecked
+   End If
+   CheckBoxSetting
 End Sub
 Private Sub CheckBoxSetting()
-    keymapDisablegamepad = chkDisableGamepad.Value
-    If keymapDisablegamepad = 1 Then
-        frmMain.xinputClass.Disable
-    Else
-        frmMain.xinputClass.Enable
-    End If
+   keymapDisablegamepad = chkDisableGamepad.Value
+   If keymapDisablegamepad = 1 Then
+      frmMain.xinputClass.Disable
+   Else
+      frmMain.xinputClass.Enable
+   End If
 End Sub
-
 Private Sub Frame3_Click()
-    On Error Resume Next
-    If isloaded = False Then Exit Sub
-    
-    keymapDisablegamepad = chkDisableGamepad.Value
-    SaveSetting "Window3D", "ButtonMap", "DisableGamepad", CStr(keymapDisablegamepad)
-    
-    If List1.ListIndex <> -1 And List2.ListIndex <> -1 Then
-        If List1.List(List1.ListIndex) = "A button" Then SaveSetting "Window3D", "ButtonMap", "AButton", List2.ListIndex + 1: keymapA = CStr(List2.ListIndex + 1)
-        If List1.List(List1.ListIndex) = "Menu" Then SaveSetting "Window3D", "ButtonMap", "Menu", List2.ListIndex + 1: keymapMenu = CStr(List2.ListIndex + 1)
-        If List1.List(List1.ListIndex) = "B button" Then SaveSetting "Window3D", "ButtonMap", "BButton", List2.ListIndex + 1: keymapB = CStr(List2.ListIndex + 1)
-        If List1.List(List1.ListIndex) = "Y button" Then SaveSetting "Window3D", "ButtonMap", "YButton", List2.ListIndex + 1: keymapY = CStr(List2.ListIndex + 1)
-        If List1.List(List1.ListIndex) = "X button" Then SaveSetting "Window3D", "ButtonMap", "XButton", List2.ListIndex + 1: keymapX = CStr(List2.ListIndex + 1)
-        If List1.List(List1.ListIndex) = "Left bumper" Then SaveSetting "Window3D", "ButtonMap", "LeftBumper", List2.ListIndex + 1: keymapLeftBumper = CStr(List2.ListIndex + 1)
-        If List1.List(List1.ListIndex) = "Right bumper" Then SaveSetting "Window3D", "ButtonMap", "RightBumper", List2.ListIndex + 1: keymapRightBumper = CStr(List2.ListIndex + 1)
-        If List1.List(List1.ListIndex) = "Left stick click" Then SaveSetting "Window3D", "ButtonMap", "LeftStick", List2.ListIndex + 1: keymapLeftStick = CStr(List2.ListIndex + 1)
-        If List1.List(List1.ListIndex) = "Right stick click" Then SaveSetting "Window3D", "ButtonMap", "RightStick", List2.ListIndex + 1: keymapRightStick = CStr(List2.ListIndex + 1)
-        If List1.List(List1.ListIndex) = "D-pad left" Then SaveSetting "Window3D", "ButtonMap", "DLeft", List2.ListIndex + 1: keymapDLeft = CStr(List2.ListIndex + 1)
-        If List1.List(List1.ListIndex) = "D-pad right" Then SaveSetting "Window3D", "ButtonMap", "DRight", List2.ListIndex + 1: keymapDRight = CStr(List2.ListIndex + 1)
-        If List1.List(List1.ListIndex) = "D-pad up" Then SaveSetting "Window3D", "ButtonMap", "DUp", List2.ListIndex + 1: keymapDUp = CStr(List2.ListIndex + 1)
-        If List1.List(List1.ListIndex) = "D-pad down" Then SaveSetting "Window3D", "ButtonMap", "DDown", List2.ListIndex + 1: keymapDDown = CStr(List2.ListIndex + 1)
-        If List1.List(List1.ListIndex) = "Change Window" Then SaveSetting "Window3D", "ButtonMap", "Change", List2.ListIndex + 1: keymapChange = CStr(List2.ListIndex + 1)
-    End If
-    Beep
+   On Error Resume Next
+   If isloaded = False Then Exit Sub
+   keymapDisablegamepad = chkDisableGamepad.Value
+   SaveSetting "Window3D", "ButtonMap", "DisableGamepad", CStr(keymapDisablegamepad)
+   If List1.ListIndex <> -1 And List2.ListIndex <> -1 Then
+      If List1.List(List1.ListIndex) = "A button" Then SaveSetting "Window3D", "ButtonMap", "AButton", List2.ListIndex + 1: keymapA = CStr(List2.ListIndex + 1)
+      If List1.List(List1.ListIndex) = "Menu" Then SaveSetting "Window3D", "ButtonMap", "Menu", List2.ListIndex + 1: keymapMenu = CStr(List2.ListIndex + 1)
+      If List1.List(List1.ListIndex) = "B button" Then SaveSetting "Window3D", "ButtonMap", "BButton", List2.ListIndex + 1: keymapB = CStr(List2.ListIndex + 1)
+      If List1.List(List1.ListIndex) = "Y button" Then SaveSetting "Window3D", "ButtonMap", "YButton", List2.ListIndex + 1: keymapY = CStr(List2.ListIndex + 1)
+      If List1.List(List1.ListIndex) = "X button" Then SaveSetting "Window3D", "ButtonMap", "XButton", List2.ListIndex + 1: keymapX = CStr(List2.ListIndex + 1)
+      If List1.List(List1.ListIndex) = "Left bumper" Then SaveSetting "Window3D", "ButtonMap", "LeftBumper", List2.ListIndex + 1: keymapLeftBumper = CStr(List2.ListIndex + 1)
+      If List1.List(List1.ListIndex) = "Right bumper" Then SaveSetting "Window3D", "ButtonMap", "RightBumper", List2.ListIndex + 1: keymapRightBumper = CStr(List2.ListIndex + 1)
+      If List1.List(List1.ListIndex) = "Left stick click" Then SaveSetting "Window3D", "ButtonMap", "LeftStick", List2.ListIndex + 1: keymapLeftStick = CStr(List2.ListIndex + 1)
+      If List1.List(List1.ListIndex) = "Right stick click" Then SaveSetting "Window3D", "ButtonMap", "RightStick", List2.ListIndex + 1: keymapRightStick = CStr(List2.ListIndex + 1)
+      If List1.List(List1.ListIndex) = "D-pad left" Then SaveSetting "Window3D", "ButtonMap", "DLeft", List2.ListIndex + 1: keymapDLeft = CStr(List2.ListIndex + 1)
+      If List1.List(List1.ListIndex) = "D-pad right" Then SaveSetting "Window3D", "ButtonMap", "DRight", List2.ListIndex + 1: keymapDRight = CStr(List2.ListIndex + 1)
+      If List1.List(List1.ListIndex) = "D-pad up" Then SaveSetting "Window3D", "ButtonMap", "DUp", List2.ListIndex + 1: keymapDUp = CStr(List2.ListIndex + 1)
+      If List1.List(List1.ListIndex) = "D-pad down" Then SaveSetting "Window3D", "ButtonMap", "DDown", List2.ListIndex + 1: keymapDDown = CStr(List2.ListIndex + 1)
+      If List1.List(List1.ListIndex) = "Change Window" Then SaveSetting "Window3D", "ButtonMap", "Change", List2.ListIndex + 1: keymapChange = CStr(List2.ListIndex + 1)
+   End If
+   Beep
 End Sub
 Private Sub Label2_Click()
-    If isloaded = False Then Exit Sub
-    Frame3_Click
+   If isloaded = False Then Exit Sub
+   Frame3_Click
 End Sub
 Private Sub Frame2_Click()
-    If isloaded = False Then Exit Sub
-    Unload Me
+   If isloaded = False Then Exit Sub
+   Unload Me
 End Sub
 Private Sub Label1_Click()
-    If isloaded = False Then Exit Sub
-    Frame2_Click
+   If isloaded = False Then Exit Sub
+   Frame2_Click
 End Sub
 Private Sub Frame8_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    Frame8.BackColor = &H808080
+   Frame8.BackColor = &H808080
 End Sub
 Private Sub Frame4_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    Frame4.BackColor = &H808080
+   Frame4.BackColor = &H808080
 End Sub
 Private Sub Frame5_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    Frame5.BackColor = &H808080
+   Frame5.BackColor = &H808080
 End Sub
 Private Sub Frame3_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    Frame3.BackColor = &H808080
+   Frame3.BackColor = &H808080
 End Sub
 Private Sub Frame2_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    Frame2.BackColor = &H808080
+   Frame2.BackColor = &H808080
 End Sub
 Private Sub Frame1_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If Frame8.BackColor <> &H404040 Then Frame8.BackColor = &H404040
-    If Frame5.BackColor <> &H404040 Then Frame5.BackColor = &H404040
-    If Frame4.BackColor <> &H404040 Then Frame4.BackColor = &H404040
-    If Frame3.BackColor <> &H404040 Then Frame3.BackColor = &H404040
-    If Frame2.BackColor <> &H404040 Then Frame2.BackColor = &H404040
-    If dragx > -1 Then
-        If x > dragx Then
-            Me.left = Me.left + (x - dragx)
-        ElseIf x < dragx Then
-            Me.left = Me.left - (dragx - x)
-        End If
-    End If
-    If dragy > -1 Then
-        If y > dragy Then
-            Me.top = Me.top + (y - dragy)
-        ElseIf y < dragy Then
-            Me.top = Me.top - (dragy - y)
-        End If
-    End If
+   If Frame8.BackColor <> &H404040 Then Frame8.BackColor = &H404040
+   If Frame5.BackColor <> &H404040 Then Frame5.BackColor = &H404040
+   If Frame4.BackColor <> &H404040 Then Frame4.BackColor = &H404040
+   If Frame3.BackColor <> &H404040 Then Frame3.BackColor = &H404040
+   If Frame2.BackColor <> &H404040 Then Frame2.BackColor = &H404040
+   If dragx > -1 Then
+      If x > dragx Then
+         Me.left = Me.left + (x - dragx)
+      ElseIf x < dragx Then
+         Me.left = Me.left - (dragx - x)
+      End If
+   End If
+   If dragy > -1 Then
+      If y > dragy Then
+         Me.top = Me.top + (y - dragy)
+      ElseIf y < dragy Then
+         Me.top = Me.top - (dragy - y)
+      End If
+   End If
 End Sub
 'Private Sub List1_KeyUp(KeyCode As Integer, Shift As Integer)
 '   Dim inx As Long
@@ -533,7 +528,4 @@ End Sub
 '   Picture1.Picture = ImageList1.ListImages.Item(inx).Picture
 'End Sub
 Private Sub lblDisablegamepad_Click()
-
 End Sub
-
-

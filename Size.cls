@@ -18,20 +18,20 @@ Private mvarSize    As New Size
 Private mvarWidth_  As Long
 Private mvarHeight_ As Long
 Public Property Let Height_(ByVal vData As Long)
-    mvarHeight_ = vData
+   mvarHeight_ = vData
 End Property
 Public Property Get Height_() As Long
-    Height_ = mvarHeight_
+   Height_ = mvarHeight_
 End Property
 Public Property Let Width_(ByVal vData As Long)
-    mvarWidth_ = vData
+   mvarWidth_ = vData
 End Property
 Public Property Get Width_() As Long
-    Width_ = mvarWidth_
+   Width_ = mvarWidth_
 End Property
 Friend Function add(ByVal sz1 As Size, ByVal sz2 As Size) As Size
-    'todo
+   'todo
 End Function
 Friend Function Subtract(ByVal sz1 As Size, ByVal sz2 As Size) As Size
-    'todo
+   'todo
 End Function

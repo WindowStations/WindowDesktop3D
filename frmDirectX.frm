@@ -28,11 +28,11 @@ Begin VB.Form frmDirectX
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   9735
-      Left            =   120
+      Height          =   9915
+      Left            =   30
       TabIndex        =   0
-      Top             =   120
-      Width           =   12735
+      Top             =   30
+      Width           =   12915
       Begin VB.Frame fracmdspawn 
          Appearance      =   0  'Flat
          BackColor       =   &H00404040&
@@ -615,174 +615,150 @@ Option Explicit
 Private isloaded  As Boolean
 Private dragx As Long
 Private dragy As Long
-
-
 Private Sub Form_Load()
-    On Error Resume Next
-    CreateRoundRectFromWindow Me
-    CreateRoundRectFromWindow Frame1
-    
-    
-    If directxTexFilters = TextureFilter.TextureFilter_BiLinear Then
-        Option1.Value = True
-        Option2.Value = False
-        Option3.Value = False
-    ElseIf directxTexFilters = TextureFilter.TextureFilter_TriLinear Then
-        Option2.Value = True
-        Option1.Value = False
-        Option3.Value = False
-    ElseIf directxTexFilters = TextureFilter.TextureFilter_Anisotropic Then
-        Option3.Value = True
-        Option1.Value = False
-        Option2.Value = False
-    End If
-    chkVSync.Value = Abs(CLng(directxVSync))
-    txtQuant.Text = CStr(1 / directxQuant)
-    txtGravity.Text = CStr(1 / directxGravity)
-    txtTexFIndex.Text = CStr(directxTexFIndex)
-    txtFovY.Text = CStr(directxFovY)
-    txtAspect.Text = CStr(directxAspect)
-    dragx = -1
-    dragy = -1
-    isloaded = True
+   On Error Resume Next
+   CreateRoundRectFromWindow Me
+   CreateRoundRectFromWindow Frame1
+   If directxTexFilters = TextureFilter.TextureFilter_BiLinear Then
+      Option1.Value = True
+      Option2.Value = False
+      Option3.Value = False
+   ElseIf directxTexFilters = TextureFilter.TextureFilter_TriLinear Then
+      Option2.Value = True
+      Option1.Value = False
+      Option3.Value = False
+   ElseIf directxTexFilters = TextureFilter.TextureFilter_Anisotropic Then
+      Option3.Value = True
+      Option1.Value = False
+      Option2.Value = False
+   End If
+   chkVSync.Value = Abs(CLng(directxVSync))
+   txtQuant.Text = CStr(1 / directxQuant)
+   txtGravity.Text = CStr(1 / directxGravity)
+   txtTexFIndex.Text = CStr(directxTexFIndex)
+   txtFovY.Text = CStr(directxFovY)
+   txtAspect.Text = CStr(directxAspect)
+   dragx = -1
+   dragy = -1
+   isloaded = True
 End Sub
 Private Sub Form_Activate()
-    WindowTransparency Me.hWnd, displayTransSettings, vbBlack
+   WindowTransparency Me.hWnd, displayTransSettings, vbBlack
 End Sub
-
-
-
-
-
-
 Private Sub fracmdSpawn_Click()
-    frmMain.Respawn
+   frmMain.Respawn
 End Sub
-
-
-
-
 Private Sub Frame1_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
-    dragx = x
-    dragy = y
+   dragx = x
+   dragy = y
 End Sub
 Private Sub Frame1_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-    dragx = -1
-    dragy = -1
+   dragx = -1
+   dragy = -1
 End Sub
-
-
 Private Sub Frame6_Click()
-    directxTexFilters = 2
-    directxVSync = False
-    directxQuant = 1 / 200
-    directxGravity = 1 / -1000
-    directxTexFIndex = 4
-    directxAnisotropy = 2 ^ (directxTexFIndex - 1)
-    Frame3_Click
+   directxTexFilters = 2
+   directxVSync = False
+   directxQuant = 1 / 200
+   directxGravity = 1 / -1000
+   directxTexFIndex = 4
+   directxAnisotropy = 2 ^ (directxTexFIndex - 1)
+   Frame3_Click
 End Sub
 Private Sub lblDefault_Click()
-    Frame6_Click
+   Frame6_Click
 End Sub
-
-
 Private Sub Label1_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
-    Frame1_MouseDown Button, Shift, x, y
+   Frame1_MouseDown Button, Shift, x, y
 End Sub
 Private Sub Label1_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    Frame1_MouseMove Button, Shift, x, y
+   Frame1_MouseMove Button, Shift, x, y
 End Sub
 Private Sub Label1_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-    Frame1_MouseUp Button, Shift, x, y
+   Frame1_MouseUp Button, Shift, x, y
 End Sub
 Private Sub Label2_Click()
-Frame4_Click
+   Frame4_Click
 End Sub
-
 Private Sub Label3_Click()
-Frame2_Click
+   Frame2_Click
 End Sub
-
 Private Sub Label4_Click()
-Frame3_Click
+   Frame3_Click
 End Sub
 Private Sub Frame4_Click()
-    Unload Me
+   Unload Me
 End Sub
 Private Sub Frame4_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    Frame4.BackColor = &H808080
+   Frame4.BackColor = &H808080
 End Sub
 Private Sub Frame3_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    Frame3.BackColor = &H808080
+   Frame3.BackColor = &H808080
 End Sub
 Private Sub Frame2_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    Frame2.BackColor = &H808080
+   Frame2.BackColor = &H808080
 End Sub
 Private Sub fracmdspawn_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fracmdspawn.BackColor = &H808080
+   fracmdspawn.BackColor = &H808080
 End Sub
 Private Sub Frame1_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If Frame4.BackColor <> &H404040 Then Frame4.BackColor = &H404040
-    If Frame3.BackColor <> &H404040 Then Frame3.BackColor = &H404040
-    If Frame2.BackColor <> &H404040 Then Frame2.BackColor = &H404040
-      If fracmdspawn.BackColor <> &H404040 Then fracmdspawn.BackColor = &H404040
-    If dragx > -1 Then
-        If x > dragx Then
-            Me.left = Me.left + (x - dragx)
-        ElseIf x < dragx Then
-            Me.left = Me.left - (dragx - x)
-        End If
-    End If
-    If dragy > -1 Then
-        If y > dragy Then
-            Me.top = Me.top + (y - dragy)
-        ElseIf y < dragy Then
-            Me.top = Me.top - (dragy - y)
-        End If
-    End If
+   If Frame4.BackColor <> &H404040 Then Frame4.BackColor = &H404040
+   If Frame3.BackColor <> &H404040 Then Frame3.BackColor = &H404040
+   If Frame2.BackColor <> &H404040 Then Frame2.BackColor = &H404040
+   If fracmdspawn.BackColor <> &H404040 Then fracmdspawn.BackColor = &H404040
+   If dragx > -1 Then
+      If x > dragx Then
+         Me.left = Me.left + (x - dragx)
+      ElseIf x < dragx Then
+         Me.left = Me.left - (dragx - x)
+      End If
+   End If
+   If dragy > -1 Then
+      If y > dragy Then
+         Me.top = Me.top + (y - dragy)
+      ElseIf y < dragy Then
+         Me.top = Me.top - (dragy - y)
+      End If
+   End If
 End Sub
 Private Sub chkVSync_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If isloaded = False Then Exit Sub
+   If isloaded = False Then Exit Sub
    CheckBoxSetting
 End Sub
-
 Private Sub lblRespawn_Click()
-fracmdSpawn_Click
+   fracmdSpawn_Click
 End Sub
-
 Private Sub lblvsync_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
-  If isloaded = False Then Exit Sub
-  If chkVSync.Value = vbUnchecked Then
-     chkVSync.Value = vbChecked
-  Else
-     chkVSync.Value = vbUnchecked
-  End If
-  CheckBoxSetting
+   If isloaded = False Then Exit Sub
+   If chkVSync.Value = vbUnchecked Then
+      chkVSync.Value = vbChecked
+   Else
+      chkVSync.Value = vbUnchecked
+   End If
+   CheckBoxSetting
 End Sub
 Private Sub CheckBoxSetting()
-    directxVSync = CBool(chkVSync.Value)
+   directxVSync = CBool(chkVSync.Value)
 End Sub
-
-
 Private Sub Option1_Click()
-    If isloaded = False Then Exit Sub
-    directxTexFilters = TextureFilter.TextureFilter_BiLinear
+   If isloaded = False Then Exit Sub
+   directxTexFilters = TextureFilter.TextureFilter_BiLinear
 End Sub
 Private Sub Option2_Click()
-    If isloaded = False Then Exit Sub
-    directxTexFilters = TextureFilter.TextureFilter_TriLinear
+   If isloaded = False Then Exit Sub
+   directxTexFilters = TextureFilter.TextureFilter_TriLinear
 End Sub
 Private Sub Option3_Click()
-    If isloaded = False Then Exit Sub
-    directxTexFilters = TextureFilter.TextureFilter_Anisotropic
+   If isloaded = False Then Exit Sub
+   directxTexFilters = TextureFilter.TextureFilter_Anisotropic
 End Sub
 Private Sub txtQuant_Change()
-    If isloaded = False Then Exit Sub
-    If IsNumeric(txtQuant.Text) = True Then directxQuant = 1 / CDbl(txtQuant.Text)
+   If isloaded = False Then Exit Sub
+   If IsNumeric(txtQuant.Text) = True Then directxQuant = 1 / CDbl(txtQuant.Text)
 End Sub
 Private Sub txtGravity_Change()
-    If isloaded = False Then Exit Sub
-    If IsNumeric(txtGravity.Text) = True Then directxGravity = 1 / CSng(txtGravity.Text)
+   If isloaded = False Then Exit Sub
+   If IsNumeric(txtGravity.Text) = True Then directxGravity = 1 / CSng(txtGravity.Text)
 End Sub
 'Private Sub txtAnisotropy_Change()
 '    If isloaded = False Then Exit Sub
@@ -792,44 +768,43 @@ End Sub
 '    End If
 'End Sub
 Private Sub txtTexFIndex_Change()
-    If isloaded = False Then Exit Sub
-    If IsNumeric(txtTexFIndex.Text) = True Then
-        directxTexFIndex = CLng(txtTexFIndex.Text)
-        directxAnisotropy = 2 ^ (directxTexFIndex - 1)
-    End If
+   If isloaded = False Then Exit Sub
+   If IsNumeric(txtTexFIndex.Text) = True Then
+      directxTexFIndex = CLng(txtTexFIndex.Text)
+      directxAnisotropy = 2 ^ (directxTexFIndex - 1)
+   End If
 End Sub
 Private Sub txtFovY_Change()
-    If isloaded = False Then Exit Sub
-    If IsNumeric(txtFovY.Text) = True Then directxFovY = CSng(txtFovY.Text)
+   If isloaded = False Then Exit Sub
+   If IsNumeric(txtFovY.Text) = True Then directxFovY = CSng(txtFovY.Text)
 End Sub
 Private Sub txtAspect_Change()
-    If isloaded = False Then Exit Sub
-    If IsNumeric(txtAspect.Text) = True Then directxAspect = CSng(txtAspect.Text)
+   If isloaded = False Then Exit Sub
+   If IsNumeric(txtAspect.Text) = True Then directxAspect = CSng(txtAspect.Text)
 End Sub
 Private Sub Frame2_Click()
-    frmSettings.show
-    frmSettings.top = Me.top
-    frmSettings.left = Me.left
-    frmMain.SetWindowPos frmSettings.hWnd, -1, 0, 0, 0, 0, False, False
-    Unload Me
+   frmSettings.show
+   frmSettings.top = Me.top
+   frmSettings.left = Me.left
+   frmMain.SetWindowPos frmSettings.hWnd, -1, 0, 0, 0, 0, False, False
+   Unload Me
 End Sub
 Private Sub Frame3_Click()
-    On Error Resume Next
-    SaveSetting "Window3D", "DirectX", "TexFilters", CStr(directxTexFilters)
-    SaveSetting "Window3D", "DirectX", "VSync", CStr(Abs(CLng(directxVSync)))
-    SaveSetting "Window3D", "DirectX", "Quant", CStr(1 / directxQuant)
-    SaveSetting "Window3D", "DirectX", "Gravity", CStr(1 / directxGravity)
-    SaveSetting "Window3D", "DirectX", "TexFIndex", CStr(directxTexFIndex)
-    SaveSetting "Window3D", "DirectX", "Anisotropy", CStr(directxAnisotropy)
-    SaveSetting "Window3D", "DirectX", "FovY", CStr(directxFovY)
-    SaveSetting "Window3D", "DirectX", "Aspect", CStr(directxAspect)
-    Dim batfn As String
-    batfn = App.Path & "\" & App.EXEName & ".bat"
-    Open batfn For Output As #1
-    Print #1, "start " & Replace(LCase(batfn), ".bat", ".exe")
-    Close #1
-    Shell batfn, vbNormalFocus
-    Unload frmMain
-    Beep
+   On Error Resume Next
+   SaveSetting "Window3D", "DirectX", "TexFilters", CStr(directxTexFilters)
+   SaveSetting "Window3D", "DirectX", "VSync", CStr(Abs(CLng(directxVSync)))
+   SaveSetting "Window3D", "DirectX", "Quant", CStr(1 / directxQuant)
+   SaveSetting "Window3D", "DirectX", "Gravity", CStr(1 / directxGravity)
+   SaveSetting "Window3D", "DirectX", "TexFIndex", CStr(directxTexFIndex)
+   SaveSetting "Window3D", "DirectX", "Anisotropy", CStr(directxAnisotropy)
+   SaveSetting "Window3D", "DirectX", "FovY", CStr(directxFovY)
+   SaveSetting "Window3D", "DirectX", "Aspect", CStr(directxAspect)
+   Dim batfn As String
+   batfn = App.Path & "\" & App.EXEName & ".bat"
+   Open batfn For Output As #1
+   Print #1, "start " & Replace(VBA.LCase(batfn), ".bat", ".exe")
+   Close #1
+   Shell batfn, vbNormalFocus
+   Unload frmMain
+   Beep
 End Sub
-

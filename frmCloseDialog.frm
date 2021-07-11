@@ -19,11 +19,11 @@ Begin VB.Form frmCloseDialog
       BackColor       =   &H00000000&
       BorderStyle     =   0  'None
       Caption         =   "Frame1"
-      Height          =   3375
-      Left            =   120
+      Height          =   3570
+      Left            =   30
       TabIndex        =   0
-      Top             =   120
-      Width           =   5175
+      Top             =   30
+      Width           =   5355
       Begin VB.Frame Frame2 
          Appearance      =   0  'Flat
          BackColor       =   &H00404040&
@@ -114,30 +114,29 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub Form_Load()
-    CreateRoundRectFromWindow Me
-    CreateRoundRectFromWindow Frame1
-    frmMain.SetWindowPos Me.hWnd, -1, 0, 0, 0, 0, False, False
+   CreateRoundRectFromWindow Me
+   CreateRoundRectFromWindow Frame1
+   frmMain.SetWindowPos Me.hWnd, -1, 0, 0, 0, 0, False, False
 End Sub
-
 Private Sub Frame2_Click()
-    Unload frmMain
+   Unload frmMain
 End Sub
 Private Sub Frame8_Click()
-    Unload Me
+   Unload Me
 End Sub
 Private Sub Label2_Click()
-    Frame2_Click
+   Frame2_Click
 End Sub
 Private Sub Label8_Click()
-    Frame8_Click
+   Frame8_Click
 End Sub
 Private Sub Frame8_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    Frame8.BackColor = &H808080
+   Frame8.BackColor = &H808080
 End Sub
 Private Sub Frame2_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    Frame2.BackColor = &H808080
+   Frame2.BackColor = &H808080
 End Sub
 Private Sub Frame1_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If Frame8.BackColor <> &H404040 Then Frame8.BackColor = &H404040
-    If Frame2.BackColor <> &H404040 Then Frame2.BackColor = &H404040
+   If Frame8.BackColor <> &H404040 Then Frame8.BackColor = &H404040
+   If Frame2.BackColor <> &H404040 Then Frame2.BackColor = &H404040
 End Sub

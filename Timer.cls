@@ -24,86 +24,86 @@ Public Event Timer()
 Private mIndex As Long
 Private mParentsColKey
 Private Sub Class_Initialize()
-    Interval = 2000
+   Interval = 2000
 End Sub
 Private Sub Class_Terminate()
-    TimerDestroy
+   TimerDestroy
 End Sub
 Friend Property Let index(lIndex As Long)
-    mIndex = lIndex
+mIndex = lIndex
 End Property
 Friend Property Get index() As Long
-    index = mIndex
+index = mIndex
 End Property
 Friend Property Let ParentsColKey(key As Long)
-    mParentsColKey = key
+mParentsColKey = key
 End Property
 Friend Property Get ParentsColKey() As Long
-    ParentsColKey = mParentsColKey
+ParentsColKey = mParentsColKey
 End Property
 Property Get Enabled() As Boolean
-    Enabled = isActive
+   Enabled = isActive
 End Property
 Property Let Enabled(activateIt As Boolean)
-    If activateIt And isActive Then
-        Reset
-    ElseIf activateIt And Not isActive Then
-        Enable
-    ElseIf isActive And Not activateIt Then
-        Disable
-    ElseIf Not isActive And Not activateIt Then
-    End If
+   If activateIt And isActive Then
+      Reset
+   ElseIf activateIt And Not isActive Then
+      Enable
+   ElseIf isActive And Not activateIt Then
+      Disable
+   ElseIf Not isActive And Not activateIt Then
+   End If
 End Property
 Sub EnableTimer(mInterval As Long)
-    If Interval = mInterval And isActive Then TimerDestroy
-    Interval = mInterval
-    Enable
+   If Interval = mInterval And isActive Then TimerDestroy
+   Interval = mInterval
+   Enable
 End Sub
 Sub Enable()
-    If isActive Then TimerDestroy
-    TimerCreate
+   If isActive Then TimerDestroy
+   TimerCreate
 End Sub
 Sub Disable()
-    TimerDestroy
+   TimerDestroy
 End Sub
 Sub Reset()
-    TimerDestroy
-    TimerCreate
+   TimerDestroy
+   TimerCreate
 End Sub
 Public Sub RaiseTimer_Event()
-    RaiseEvent Timer
-    ' RaiseEvent Elapsed
+   RaiseEvent Timer
+   ' RaiseEvent Elapsed
 End Sub
 Private Function TimerCreate() As Boolean
-    If Interval <= 0 Then Exit Function
-    timerId = apiSetTimer(0, 0, Interval, AddressOf TimerProc)
-    If timerId Then
-        TimerCreate = True
-        Timercollection.add Me, "id:" & timerId
-        isActive = True
-    Else
-        TimerCreate = False
-        timerId = 0
-        isActive = False
-    End If
+   If Interval <= 0 Then Exit Function
+   timerId = apiSetTimer(0, 0, Interval, AddressOf TimerProc)
+   If timerId Then
+      TimerCreate = True
+      Timercollection.add Me, "id:" & timerId
+      isActive = True
+   Else
+      TimerCreate = False
+      timerId = 0
+      isActive = False
+   End If
 End Function
 Private Function TimerDestroy() As Long
-    Dim i As Integer
-    Dim f As Boolean
-    If TimerExists() = True Then
-        f = apiKillTimer(0, timerId)
-        Timercollection.Remove "id:" & timerId
-        TimerDestroy = True
-        isActive = False
-    End If
+   Dim i As Integer
+   Dim f As Boolean
+   If TimerExists() = True Then
+      f = apiKillTimer(0, timerId)
+      Timercollection.Remove "id:" & timerId
+      TimerDestroy = True
+      isActive = False
+   End If
 End Function
 Private Function TimerExists() As Boolean
-    On Error Resume Next
-    Dim c As Timer
-    Set c = Timercollection("id:" & timerId)
-    If Err.Number = 0 Then
-        TimerExists = True
-    Else
-    End If
-    Set c = Nothing
+   On Error Resume Next
+   Dim c As Timer
+   Set c = Timercollection("id:" & timerId)
+   If Err.Number = 0 Then
+      TimerExists = True
+   Else
+   End If
+   Set c = Nothing
 End Function

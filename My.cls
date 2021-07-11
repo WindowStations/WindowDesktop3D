@@ -17,15 +17,15 @@ Attribute VB_Ext_KEY = "Top_Level" ,"Yes"
 Option Explicit
 Private mvarComputer As Computer
 Private Sub Class_Initialize()
-    'create the mComputer object when the My class is created
-    Set mvarComputer = New Computer
+   'create the mComputer object when the My class is created
+   Set mvarComputer = New Computer
 End Sub
 Public Property Get Computer() As Computer
-    Set Computer = mvarComputer
+   Set Computer = mvarComputer
 End Property
 Public Property Set Computer(vData As Computer)
-    Set mvarComputer = vData
+   Set mvarComputer = vData
 End Property
 Private Sub Class_Terminate()
-    Set mvarComputer = Nothing
+   Set mvarComputer = Nothing
 End Sub

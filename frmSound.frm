@@ -27,11 +27,11 @@ Begin VB.Form frmSound
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   9735
-      Left            =   120
+      Height          =   9915
+      Left            =   30
       TabIndex        =   0
-      Top             =   120
-      Width           =   12735
+      Top             =   30
+      Width           =   12915
       Begin VB.Frame fraTitle 
          Appearance      =   0  'Flat
          BackColor       =   &H00000000&
@@ -611,144 +611,142 @@ Private dragy As Long
 Private dragscr As Boolean
 'Private Declare Function apiBringWindowToTop Lib "user32" Alias "BringWindowToTop" (ByVal hWnd As Long) As Long
 Private Sub Form_Load()
-    On Error Resume Next
-    CreateRoundRectFromWindow Me
-    CreateRoundRectFromWindow fraMain
-    chkMuteSounds.Value = soundxMute
-    dragx = -1
-    dragy = -1
-    isloaded = True
+   On Error Resume Next
+   CreateRoundRectFromWindow Me
+   CreateRoundRectFromWindow fraMain
+   chkMuteSounds.Value = soundxMute
+   dragx = -1
+   dragy = -1
+   isloaded = True
 End Sub
 Private Sub Form_Activate()
-    WindowTransparency Me.hWnd, displayTransSettings, vbBlack
+   WindowTransparency Me.hWnd, displayTransSettings, vbBlack
 End Sub
 Private Sub fraMain_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
-    dragx = x
-    dragy = y
+   dragx = x
+   dragy = y
 End Sub
 Private Sub fraMain_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-    dragx = -1
-    dragy = -1
+   dragx = -1
+   dragy = -1
 End Sub
 Private Sub fraTitle_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fraMain_MouseDown Button, Shift, x, y
+   fraMain_MouseDown Button, Shift, x, y
 End Sub
 Private Sub fraTitle_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fraMain_MouseMove Button, Shift, x, y
+   fraMain_MouseMove Button, Shift, x, y
 End Sub
 Private Sub fraTitle_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fraMain_MouseUp Button, Shift, x, y
+   fraMain_MouseUp Button, Shift, x, y
 End Sub
 Private Sub chkMuteSounds_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
    CheckBoxSetting
 End Sub
 Private Sub lblMuteSounds_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If chkMuteSounds.Value = vbUnchecked Then
-        chkMuteSounds.Value = vbChecked
-    Else
-        chkMuteSounds.Value = vbUnchecked
-    End If
-    CheckBoxSetting
+   If chkMuteSounds.Value = vbUnchecked Then
+      chkMuteSounds.Value = vbChecked
+   Else
+      chkMuteSounds.Value = vbUnchecked
+   End If
+   CheckBoxSetting
 End Sub
 Private Sub CheckBoxSetting()
-soundxMute = chkMuteSounds.Value
+   soundxMute = chkMuteSounds.Value
 End Sub
-
 Private Sub lblTitle_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fraMain_MouseDown Button, Shift, x, y
+   fraMain_MouseDown Button, Shift, x, y
 End Sub
 Private Sub lblTitle_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fraMain_MouseMove Button, Shift, x, y
+   fraMain_MouseMove Button, Shift, x, y
 End Sub
 Private Sub lblTitle_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fraMain_MouseUp Button, Shift, x, y
+   fraMain_MouseUp Button, Shift, x, y
 End Sub
 Private Sub fraMain_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    On Error Resume Next
-    If fracmdBack.BackColor <> &H404040 Then fracmdBack.BackColor = &H404040
-    If fracmdApply.BackColor <> &H404040 Then fracmdApply.BackColor = &H404040
-    If fracmdClose.BackColor <> &H404040 Then fracmdClose.BackColor = &H404040
-    If dragx > -1 Then
-        If x > dragx Then
-            Me.left = Me.left + (x - dragx)
-        ElseIf x < dragx Then
-            Me.left = Me.left - (dragx - x)
-        End If
-    End If
-    If dragy > -1 Then
-        If y > dragy Then
-            Me.top = Me.top + (y - dragy)
-        ElseIf y < dragy Then
-            Me.top = Me.top - (dragy - y)
-        End If
-    End If
+   On Error Resume Next
+   If fracmdBack.BackColor <> &H404040 Then fracmdBack.BackColor = &H404040
+   If fracmdApply.BackColor <> &H404040 Then fracmdApply.BackColor = &H404040
+   If fracmdClose.BackColor <> &H404040 Then fracmdClose.BackColor = &H404040
+   If dragx > -1 Then
+      If x > dragx Then
+         Me.left = Me.left + (x - dragx)
+      ElseIf x < dragx Then
+         Me.left = Me.left - (dragx - x)
+      End If
+   End If
+   If dragy > -1 Then
+      If y > dragy Then
+         Me.top = Me.top + (y - dragy)
+      ElseIf y < dragy Then
+         Me.top = Me.top - (dragy - y)
+      End If
+   End If
 End Sub
 Private Sub fracmdBack_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fracmdBack.BackColor = &H808080
+   fracmdBack.BackColor = &H808080
 End Sub
 Private Sub fracmdApply_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fracmdApply.BackColor = &H808080
+   fracmdApply.BackColor = &H808080
 End Sub
 Private Sub fracmdClose_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fracmdClose.BackColor = &H808080
+   fracmdClose.BackColor = &H808080
 End Sub
 Private Sub vscrChange(ByVal x As Single, ByVal y As Single)
-    Dim he As Long
-    Dim ra As Double
-    Dim tp As Long
-    he = frascrMain.Height - 135
-    ra = (y - 135) / he
-    tp = 1000 - (ra * (fraMainScroll.Height - 4000))
-    If Abs(tp) > (fraMainScroll.Height - 4000) Then
-        tp = -(Abs(tp) - (fraMainScroll.Height - 4000))
-        Exit Sub
-    End If
-    fraMainScroll.top = tp
+   Dim he As Long
+   Dim ra As Double
+   Dim tp As Long
+   he = frascrMain.Height - 135
+   ra = (y - 135) / he
+   tp = 1000 - (ra * (fraMainScroll.Height - 4000))
+   If Abs(tp) > (fraMainScroll.Height - 4000) Then
+      tp = -(Abs(tp) - (fraMainScroll.Height - 4000))
+      Exit Sub
+   End If
+   fraMainScroll.top = tp
 End Sub
 Private Sub frascrMain_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
-    dragscr = True
-    If y < 135 Then Exit Sub
-    If y > frascrMain.Height Then Exit Sub
-    vscrChange x, y
+   dragscr = True
+   If y < 135 Then Exit Sub
+   If y > frascrMain.Height Then Exit Sub
+   vscrChange x, y
 End Sub
 Private Sub frascrMain_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If dragscr = False Then Exit Sub
-    If y < 135 Then Exit Sub
-    If y > frascrMain.Height Then Exit Sub
-    vscrChange x, y
+   If dragscr = False Then Exit Sub
+   If y < 135 Then Exit Sub
+   If y > frascrMain.Height Then Exit Sub
+   vscrChange x, y
 End Sub
 Private Sub frascrMain_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-    dragscr = False
+   dragscr = False
 End Sub
 Private Sub fracmdBack_Click()
-    frmSettings.show
-    frmSettings.top = Me.top
-    frmSettings.left = Me.left
-    frmMain.SetWindowPos frmSettings.hWnd, -1, 0, 0, 0, 0, False, False
-    Unload Me
+   frmSettings.show
+   frmSettings.top = Me.top
+   frmSettings.left = Me.left
+   frmMain.SetWindowPos frmSettings.hWnd, -1, 0, 0, 0, 0, False, False
+   Unload Me
 End Sub
 Private Sub lblBack_Click()
-    fracmdBack_Click
+   fracmdBack_Click
 End Sub
-
 Private Sub fracmdApply_Click()
-    '    pointerTextSize = traTextSize.Value
-    '    pointerTextPosition = traTextPosition.Value
-    '    pointerTextSpeed = traTextSpeed.Value
-    '    pointerTextFade = traTextFade.Value
-    soundxMute = chkMuteSounds.Value
-       SaveSetting "Window3D", "Soundeffects", "Mute", CStr(soundxMute)
-    '    SaveSetting "Window3D", "ButtonMap", "TextPosition", CStr(pointerTextPosition)
-    '    SaveSetting "Window3D", "ButtonMap", "TextSpeed", CStr(pointerTextSpeed)
-    '    SaveSetting "Window3D", "ButtonMap", "TextFade", CStr(pointerTextFade)
-    Beep
+   '    pointerTextSize = traTextSize.Value
+   '    pointerTextPosition = traTextPosition.Value
+   '    pointerTextSpeed = traTextSpeed.Value
+   '    pointerTextFade = traTextFade.Value
+   soundxMute = chkMuteSounds.Value
+   SaveSetting "Window3D", "Soundeffects", "Mute", CStr(soundxMute)
+   '    SaveSetting "Window3D", "ButtonMap", "TextPosition", CStr(pointerTextPosition)
+   '    SaveSetting "Window3D", "ButtonMap", "TextSpeed", CStr(pointerTextSpeed)
+   '    SaveSetting "Window3D", "ButtonMap", "TextFade", CStr(pointerTextFade)
+   Beep
 End Sub
 Private Sub lblApply_Click()
-    fracmdApply_Click
+   fracmdApply_Click
 End Sub
 Private Sub fracmdClose_Click()
-    Unload Me
+   Unload Me
 End Sub
 Private Sub lblClose_Click()
-    fracmdClose_Click
+   fracmdClose_Click
 End Sub

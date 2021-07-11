@@ -18,20 +18,20 @@ Private mvarPoint As New Point
 Private mvarX     As Long
 Private mvarY     As Long
 Public Property Let y(ByVal vData As Long)
-    mvarY = vData
+   mvarY = vData
 End Property
 Public Property Get y() As Long
-    y = mvarY
+   y = mvarY
 End Property
 Public Property Let x(ByVal vData As Long)
-    mvarX = vData
+   mvarX = vData
 End Property
 Public Property Get x() As Long
-    x = mvarX
+   x = mvarX
 End Property
 Friend Function add(ByVal pt As Point, ByVal sz As Size) As Point
-    'todo
+   'todo
 End Function
 Friend Function Subtract(ByVal pt As Point, ByVal sz As Size) As Point
-    'todo
+   'todo
 End Function

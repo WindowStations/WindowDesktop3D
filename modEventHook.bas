@@ -60,35 +60,34 @@ Private Const SWP_NOOWNERZORDER     As Long = &H200
 Private Const SWP_NOSENDCHANGING    As Long = &H400
 Private Const HWND_BOTTOM           As Long = 1
 Private Type WINEVENTPROC
-    hWinEventHook As Long
-    event As Long
-    hWnd As Long
-    idObject As Long
-    idChild As Long
-    idEventThread As Long
-    dwmsEventTime As Long
+   hWinEventHook As Long
+   event As Long
+   hWnd As Long
+   idObject As Long
+   idChild As Long
+   idEventThread As Long
+   dwmsEventTime As Long
 End Type
 Private Declare Function apiSetWinEventHook Lib "user32" Alias "SetWinEventHook" (ByVal eventMin As Long, ByVal eventMax As Long, ByVal hmodWinEventProc As Long, ByVal pfnWinEventProc As Long, ByVal idProcess As Long, ByVal idThread As Long, ByVal dwFlags As Long) As Long
 Private Declare Function apiUnhookWinEvent Lib "user32" Alias "UnhookWinEvent" (ByVal LHandle As Long) As Long
 Private Declare Function apiSetWindowPos Lib "user32" Alias "SetWindowPos" (ByVal hWnd As Long, ByVal hWndInsertAfter As Long, ByVal x As Long, ByVal y As Long, ByVal cx As Long, ByVal cy As Long, ByVal wFlags As Long) As Long
 Private eHook          As Long
 Public xinputToDesktop As Boolean
-
 Public Sub StartEventHook()
-    On Error Resume Next
-    eHook = apiSetWinEventHook(EVENT_MIN, EVENT_MAX, 0, AddressOf WinEventFunc, 0, 0, WINEVENT_OUTOFCONTEXT)
+   On Error Resume Next
+   eHook = apiSetWinEventHook(EVENT_MIN, EVENT_MAX, 0, AddressOf WinEventFunc, 0, 0, WINEVENT_OUTOFCONTEXT)
 End Sub
 Public Sub StopEventHook()
-    On Error Resume Next
-    If eHook = 0 Then Exit Sub
-    If apiUnhookWinEvent(eHook) <> 0 Then eHook = 0
+   On Error Resume Next
+   If eHook = 0 Then Exit Sub
+   If apiUnhookWinEvent(eHook) <> 0 Then eHook = 0
 End Sub
 Private Function WinEventFunc(ByVal eWnd As Long, ByVal LEvent As Long, ByVal hWnd As Long, ByVal idObject As Long, ByVal idChild As Long, ByVal idEventThread As Long, ByVal dwmsEventTime As Long) As Long
-    On Error Resume Next
-    If LEvent = EVENT_OB_FOREGROUND Then
-        If hWnd <> frmMain.hWnd Then
-            Call frmMain.abort3Dxinput(False)
-        End If
-        Call apiSetWindowPos(frmMain.hWnd, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOSIZE Or SWP_NOMOVE Or SWP_NOACTIVATE Or SWP_NOOWNERZORDER Or SWP_NOSENDCHANGING)
-    End If
+   On Error Resume Next
+   If LEvent = EVENT_OB_FOREGROUND Then
+      If hWnd <> frmMain.hWnd Then
+         Call frmMain.abort3Dxinput(False)
+      End If
+      Call apiSetWindowPos(frmMain.hWnd, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOSIZE Or SWP_NOMOVE Or SWP_NOACTIVATE Or SWP_NOOWNERZORDER Or SWP_NOSENDCHANGING)
+   End If
 End Function

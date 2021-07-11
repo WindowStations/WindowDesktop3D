@@ -18,49 +18,49 @@ Private mCol      As New Collection
 Private mClassKey As Integer
 Private mvarTimer As Timer
 Private Sub Class_Initialize()
-    mClassKey = RegisterTimerCollection(Me)
-    Set mvarTimer = New Timer
+   mClassKey = RegisterTimerCollection(Me)
+   Set mvarTimer = New Timer
 End Sub
 Private Sub Class_Terminate()
-    Set mvarTimer = Nothing
-    Dim t As Timer
-    For Each t In mCol
-        Set t = Nothing
-    Next
-    Set mCol = Nothing
-    CTimersCol.Remove "key:" & mClassKey
+   Set mvarTimer = Nothing
+   Dim t As Timer
+   For Each t In mCol
+      Set t = Nothing
+   Next
+   Set mCol = Nothing
+   CTimersCol.Remove "key:" & mClassKey
 End Sub
 Public Property Get Timer() As Timer
-    Set Timer = mvarTimer
+   Set Timer = mvarTimer
 End Property
 Public Property Set Timer(vData As Timer)
-    Set mvarTimer = vData
+   Set mvarTimer = vData
 End Property
 Property Get Count() As Integer
-    Count = mCount
+   Count = mCount
 End Property
 Function add() As Integer
-    Dim t As New Timer
-    mCount = mCount + 1
-    t.index = mCount
-    t.ParentsColKey = mClassKey
-    mCol.add t
-    add = mCount
+   Dim t As New Timer
+   mCount = mCount + 1
+   t.index = mCount
+   t.ParentsColKey = mClassKey
+   mCol.add t
+   add = mCount
 End Function
 Public Function BulkLoad(num As Integer)
-    Dim i As Long
-    If num > 0 And num < 200 Then
-        For i = 0 To num
-            add
-        Next
-    Else
-        Err.Raise vbObjectError, "CTimers.BulkLoad", "No more than 200 times allowed per class"
-    End If
+   Dim i As Long
+   If num > 0 And num < 200 Then
+      For i = 0 To num
+         add
+      Next
+   Else
+      Err.Raise vbObjectError, "CTimers.BulkLoad", "No more than 200 times allowed per class"
+   End If
 End Function
 Public Function Item(ByVal index As Integer) As Timer
-    If index > Count Then Err.Raise vbObjectError, "CTimers.Item", "Index does not Exist"
-    Set Item = mCol(index)
+   If index > Count Then Err.Raise vbObjectError, "CTimers.Item", "Index does not Exist"
+   Set Item = mCol(index)
 End Function
 Friend Function RaiseTimer_Event(ByVal index As Integer)
-    RaiseEvent TimerEvent(index)
+   RaiseEvent TimerEvent(index)
 End Function

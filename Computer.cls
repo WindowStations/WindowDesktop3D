@@ -17,15 +17,15 @@ Attribute VB_Ext_KEY = "Member0" ,"Screen"
 Option Explicit
 Private mvarScreen As Screen
 Private Sub Class_Initialize()
-    'create the mScreen object when the Computer class is created
-    Set mvarScreen = New Screen
+   'create the mScreen object when the Computer class is created
+   Set mvarScreen = New Screen
 End Sub
 Public Property Get Screen() As Screen
-    Set Screen = mvarScreen
+   Set Screen = mvarScreen
 End Property
 Public Property Set Screen(vData As Screen)
-    Set mvarScreen = vData
+   Set mvarScreen = vData
 End Property
 Private Sub Class_Terminate()
-    Set mvarScreen = Nothing
+   Set mvarScreen = Nothing
 End Sub

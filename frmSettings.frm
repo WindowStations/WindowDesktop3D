@@ -32,11 +32,11 @@ Begin VB.Form frmSettings
    Begin VB.Frame fraMain 
       BackColor       =   &H00000000&
       BorderStyle     =   0  'None
-      Height          =   9745
-      Left            =   120
+      Height          =   9915
+      Left            =   30
       TabIndex        =   0
-      Top             =   120
-      Width           =   12735
+      Top             =   30
+      Width           =   12915
       Begin VB.Frame fracmdExit 
          Appearance      =   0  'Flat
          BackColor       =   &H00404040&
@@ -527,225 +527,202 @@ Private isloaded As Boolean
 Private dragx As Long
 Private dragy As Long
 Private Sub Form_Load()
-    On Error Resume Next
-    CreateRoundRectFromWindow Me
-    CreateRoundRectFromWindow fraMain
-    CreateRoundRectFromWindow fracmdPointer
-    CreateRoundRectFromWindow fracmdThumb
-    CreateRoundRectFromWindow fracmdGamepad
-    CreateRoundRectFromWindow fracmdSound
-    CreateRoundRectFromWindow fracmdDisplay
-    CreateRoundRectFromWindow fracmdDirectx
-    dragx = -1
-    dragy = -1
-    Me.left = (Screen.Width - Me.Width) / 2
-    Me.top = (Screen.Height - Me.Height) / 2
-    isloaded = True
+   On Error Resume Next
+   CreateRoundRectFromWindow Me
+   CreateRoundRectFromWindow fraMain
+   CreateRoundRectFromWindow fracmdPointer
+   CreateRoundRectFromWindow fracmdThumb
+   CreateRoundRectFromWindow fracmdGamepad
+   CreateRoundRectFromWindow fracmdSound
+   CreateRoundRectFromWindow fracmdDisplay
+   CreateRoundRectFromWindow fracmdDirectx
+   dragx = -1
+   dragy = -1
+   Me.left = (Screen.Width - Me.Width) / 2
+   Me.top = (Screen.Height - Me.Height) / 2
+   isloaded = True
 End Sub
 Private Sub Form_Activate()
-    WindowTransparency Me.hWnd, displayTransSettings, vbBlack
+   WindowTransparency Me.hWnd, displayTransSettings, vbBlack
 End Sub
 Public Sub CenterForm(oForm As Object)
-    On Error Resume Next
-    oForm.Move (Screen.Width - oForm.Width) / 2, (Screen.Height - oForm.Height) / 2
+   On Error Resume Next
+   oForm.Move (Screen.Width - oForm.Width) / 2, (Screen.Height - oForm.Height) / 2
 End Sub
 Private Sub fraMain_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    If fracmdExit.BackColor <> &H404040 Then fracmdExit.BackColor = &H404040
-  If fracmdClose.BackColor <> &H404040 Then fracmdClose.BackColor = &H404040
-    If fracmdPointer.BackColor <> vbBlack Then fracmdPointer.BackColor = vbBlack: picPointer.Picture = picPointerB.Picture
-    If fracmdThumb.BackColor <> vbBlack Then fracmdThumb.BackColor = vbBlack: picThumb.Picture = picThumbB.Picture
-    If fracmdGamepad.BackColor <> vbBlack Then fracmdGamepad.BackColor = vbBlack: picGamepad.Picture = picGamepadB.Picture
-    If fracmdSound.BackColor <> vbBlack Then fracmdSound.BackColor = vbBlack: picSound.Picture = picSoundB.Picture
-    If fracmdDisplay.BackColor <> vbBlack Then fracmdDisplay.BackColor = vbBlack: picDisplay.Picture = picDisplayB.Picture
-    If fracmdDirectx.BackColor <> vbBlack Then fracmdDirectx.BackColor = vbBlack: picDirectx.Picture = picDirectxB.Picture
-    If dragx > -1 Then
-        If x > dragx Then
-            Me.left = Me.left + (x - dragx)
-        ElseIf x < dragx Then
-            Me.left = Me.left - (dragx - x)
-        End If
-    End If
-    If dragy > -1 Then
-        If y > dragy Then
-            Me.top = Me.top + (y - dragy)
-        ElseIf y < dragy Then
-            Me.top = Me.top - (dragy - y)
-        End If
-    End If
+   If fracmdExit.BackColor <> &H404040 Then fracmdExit.BackColor = &H404040
+   If fracmdClose.BackColor <> &H404040 Then fracmdClose.BackColor = &H404040
+   If fracmdPointer.BackColor <> vbBlack Then fracmdPointer.BackColor = vbBlack: picPointer.Picture = picPointerB.Picture
+   If fracmdThumb.BackColor <> vbBlack Then fracmdThumb.BackColor = vbBlack: picThumb.Picture = picThumbB.Picture
+   If fracmdGamepad.BackColor <> vbBlack Then fracmdGamepad.BackColor = vbBlack: picGamepad.Picture = picGamepadB.Picture
+   If fracmdSound.BackColor <> vbBlack Then fracmdSound.BackColor = vbBlack: picSound.Picture = picSoundB.Picture
+   If fracmdDisplay.BackColor <> vbBlack Then fracmdDisplay.BackColor = vbBlack: picDisplay.Picture = picDisplayB.Picture
+   If fracmdDirectx.BackColor <> vbBlack Then fracmdDirectx.BackColor = vbBlack: picDirectx.Picture = picDirectxB.Picture
+   If dragx > -1 Then
+      If x > dragx Then
+         Me.left = Me.left + (x - dragx)
+      ElseIf x < dragx Then
+         Me.left = Me.left - (dragx - x)
+      End If
+   End If
+   If dragy > -1 Then
+      If y > dragy Then
+         Me.top = Me.top + (y - dragy)
+      ElseIf y < dragy Then
+         Me.top = Me.top - (dragy - y)
+      End If
+   End If
 End Sub
 Private Sub fraMain_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
-    dragx = x
-    dragy = y
+   dragx = x
+   dragy = y
 End Sub
 Private Sub fraMain_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-    dragx = -1
-    dragy = -1
+   dragx = -1
+   dragy = -1
 End Sub
-
-
-
 Private Sub lblClose_Click()
-fracmdClose_Click
-
+   fracmdClose_Click
 End Sub
-
 Private Sub lblExit_Click()
-fracmdExit_Click
+   fracmdExit_Click
 End Sub
-
-
-
 Private Sub lblTitle_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fraMain_MouseDown Button, Shift, x, y
+   fraMain_MouseDown Button, Shift, x, y
 End Sub
 Private Sub lblTitle_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fraMain_MouseMove Button, Shift, x, y
+   fraMain_MouseMove Button, Shift, x, y
 End Sub
 Private Sub lblTitle_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fraMain_MouseUp Button, Shift, x, y
+   fraMain_MouseUp Button, Shift, x, y
 End Sub
 Private Sub fracmdPointer_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fracmdPointer.BackColor = &H808080
-    picPointer.Picture = picPointerG.Picture
+   fracmdPointer.BackColor = &H808080
+   picPointer.Picture = picPointerG.Picture
 End Sub
 Private Sub fracmdThumb_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fracmdThumb.BackColor = &H808080
-    picThumb.Picture = picThumbG.Picture
+   fracmdThumb.BackColor = &H808080
+   picThumb.Picture = picThumbG.Picture
 End Sub
 Private Sub fracmdGamepad_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fracmdGamepad.BackColor = &H808080
-    picGamepad.Picture = picGamepadG.Picture
+   fracmdGamepad.BackColor = &H808080
+   picGamepad.Picture = picGamepadG.Picture
 End Sub
 Private Sub fracmdSound_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fracmdSound.BackColor = &H808080
-    picSound.Picture = picSoundG.Picture
+   fracmdSound.BackColor = &H808080
+   picSound.Picture = picSoundG.Picture
 End Sub
 Private Sub fracmdDisplay_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fracmdDisplay.BackColor = &H808080
-    picDisplay.Picture = picDisplayG.Picture
+   fracmdDisplay.BackColor = &H808080
+   picDisplay.Picture = picDisplayG.Picture
 End Sub
 Private Sub fracmdDirectx_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fracmdDirectx.BackColor = &H808080
-    picDirectx.Picture = picDirectxG.Picture
+   fracmdDirectx.BackColor = &H808080
+   picDirectx.Picture = picDirectxG.Picture
 End Sub
 Private Sub fracmdExit_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fracmdExit.BackColor = &H808080
+   fracmdExit.BackColor = &H808080
 End Sub
-
 Private Sub fracmdClose_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
-    fracmdClose.BackColor = &H808080
+   fracmdClose.BackColor = &H808080
 End Sub
 Private Sub fracmdPointer_Click()
-    On Error Resume Next
-    If isloaded = False Then Exit Sub
-    frmPointer.left = Me.left
-    frmPointer.top = Me.top
-    frmPointer.show
-    frmMain.SetWindowPos frmPointer.hWnd, -1, 0, 0, 0, 0, False, False
-    Unload Me
+   On Error Resume Next
+   If isloaded = False Then Exit Sub
+   frmPointer.left = Me.left
+   frmPointer.top = Me.top
+   frmPointer.show
+   frmMain.SetWindowPos frmPointer.hWnd, -1, 0, 0, 0, 0, False, False
+   Unload Me
 End Sub
 Private Sub fracmdThumb_Click()
-    On Error Resume Next
-    If isloaded = False Then Exit Sub
-    frmThumb.left = Me.left
-    frmThumb.top = Me.top
-    frmThumb.show
-    frmMain.SetWindowPos frmThumb.hWnd, -1, 0, 0, 0, 0, False, False
-    Unload Me
+   On Error Resume Next
+   If isloaded = False Then Exit Sub
+   frmThumb.left = Me.left
+   frmThumb.top = Me.top
+   frmThumb.show
+   frmMain.SetWindowPos frmThumb.hWnd, -1, 0, 0, 0, 0, False, False
+   Unload Me
 End Sub
 Private Sub fracmdGamepad_Click()
-    On Error Resume Next
-    If isloaded = False Then Exit Sub
-    frmGamepad.left = Me.left
-    frmGamepad.top = Me.top
-    frmGamepad.show
-    frmMain.SetWindowPos frmGamepad.hWnd, -1, 0, 0, 0, 0, False, False
-    Unload Me
+   On Error Resume Next
+   If isloaded = False Then Exit Sub
+   frmGamepad.left = Me.left
+   frmGamepad.top = Me.top
+   frmGamepad.show
+   frmMain.SetWindowPos frmGamepad.hWnd, -1, 0, 0, 0, 0, False, False
+   Unload Me
 End Sub
 Private Sub fracmdSound_Click()
-    On Error Resume Next
-    If isloaded = False Then Exit Sub
-    frmSound.left = Me.left
-    frmSound.top = Me.top
-    frmSound.show
-    frmMain.SetWindowPos frmSound.hWnd, -1, 0, 0, 0, 0, False, False
-    Unload Me
+   On Error Resume Next
+   If isloaded = False Then Exit Sub
+   frmSound.left = Me.left
+   frmSound.top = Me.top
+   frmSound.show
+   frmMain.SetWindowPos frmSound.hWnd, -1, 0, 0, 0, 0, False, False
+   Unload Me
 End Sub
 Private Sub fracmdDisplay_Click()
-    On Error Resume Next
-    If isloaded = False Then Exit Sub
-    frmDisplay.left = Me.left
-    frmDisplay.top = Me.top
-    frmDisplay.show
-    frmMain.SetWindowPos frmDisplay.hWnd, -1, 0, 0, 0, 0, False, False
-    Unload Me
+   On Error Resume Next
+   If isloaded = False Then Exit Sub
+   frmDisplay.left = Me.left
+   frmDisplay.top = Me.top
+   frmDisplay.show
+   frmMain.SetWindowPos frmDisplay.hWnd, -1, 0, 0, 0, 0, False, False
+   Unload Me
 End Sub
 Private Sub fracmdDirectx_Click()
-    If isloaded = False Then Exit Sub
-    frmDirectX.left = Me.left
-    frmDirectX.top = Me.top
-    frmDirectX.show
-    frmMain.SetWindowPos frmDirectX.hWnd, -1, 0, 0, 0, 0, False, False
-    Unload Me
+   If isloaded = False Then Exit Sub
+   frmDirectX.left = Me.left
+   frmDirectX.top = Me.top
+   frmDirectX.show
+   frmMain.SetWindowPos frmDirectX.hWnd, -1, 0, 0, 0, 0, False, False
+   Unload Me
 End Sub
 Private Sub fracmdExit_Click()
-    On Error Resume Next
-    If isloaded = False Then Exit Sub
-    frmCloseDialog.show
-    frmMain.SetWindowPos frmCloseDialog.hWnd, -1, 0, 0, 0, 0, False, False
+   On Error Resume Next
+   If isloaded = False Then Exit Sub
+   frmCloseDialog.show
+   frmMain.SetWindowPos frmCloseDialog.hWnd, -1, 0, 0, 0, 0, False, False
 End Sub
-
 Private Sub fracmdClose_Click()
-    On Error Resume Next
-    If isloaded = False Then Exit Sub
-    Unload Me
+   On Error Resume Next
+   If isloaded = False Then Exit Sub
+   Unload Me
 End Sub
 Private Sub lblDirectx_Click()
    fracmdDirectx_Click
 End Sub
-
 Private Sub lblDisplay_Click()
-fracmdDisplay_Click
+   fracmdDisplay_Click
 End Sub
-
 Private Sub lblGamepad_Click()
-fracmdGamepad_Click
+   fracmdGamepad_Click
 End Sub
-
 Private Sub lblPointer_Click()
-fracmdPointer_Click
+   fracmdPointer_Click
 End Sub
-
 Private Sub lblSound_Click()
-fracmdSound_Click
+   fracmdSound_Click
 End Sub
-
 Private Sub lblThumb_Click()
-fracmdThumb_Click
+   fracmdThumb_Click
 End Sub
-
-
 Private Sub picDirectx_Click()
-fracmdDirectx_Click
+   fracmdDirectx_Click
 End Sub
-
 Private Sub picDisplay_Click()
-fracmdDisplay_Click
+   fracmdDisplay_Click
 End Sub
-
 Private Sub picGamepad_Click()
-fracmdGamepad_Click
+   fracmdGamepad_Click
 End Sub
-
 Private Sub picPointer_Click()
-fracmdPointer_Click
+   fracmdPointer_Click
 End Sub
-
 Private Sub picSound_Click()
-fracmdSound_Click
+   fracmdSound_Click
 End Sub
-
 Private Sub picThumb_Click()
-fracmdThumb_Click
+   fracmdThumb_Click
 End Sub
-

@@ -22,38 +22,33 @@ Public Event OnKeyDDown()
 Public Event OnKeyDUp()
 Public Event OnKeyEscDown()
 Public Event OnKeyEscUp()
-
 Public Sub KeyWDown()
-    RaiseEvent OnKeyWDown
+   RaiseEvent OnKeyWDown
 End Sub
 Public Sub KeyWUp()
-    RaiseEvent OnKeyWUp
+   RaiseEvent OnKeyWUp
 End Sub
-
 Public Sub KeyADown()
-    RaiseEvent OnKeyADown
+   RaiseEvent OnKeyADown
 End Sub
 Public Sub KeyAUp()
-    RaiseEvent OnKeyAUp
+   RaiseEvent OnKeyAUp
 End Sub
-
 Public Sub KeySDown()
-    RaiseEvent OnKeySDown
+   RaiseEvent OnKeySDown
 End Sub
 Public Sub KeySUp()
-    RaiseEvent OnKeySUp
+   RaiseEvent OnKeySUp
 End Sub
-
 Public Sub KeyDDown()
-    RaiseEvent OnKeyDDown
+   RaiseEvent OnKeyDDown
 End Sub
 Public Sub KeyDUp()
-    RaiseEvent OnKeyDUp
+   RaiseEvent OnKeyDUp
 End Sub
-
 Public Sub KeyEscDown()
-    RaiseEvent OnKeyEscDown
+   RaiseEvent OnKeyEscDown
 End Sub
 Public Sub KeyEscUp()
-    RaiseEvent OnKeyEscUp
+   RaiseEvent OnKeyEscUp
 End Sub

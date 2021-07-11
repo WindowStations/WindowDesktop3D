@@ -11,40 +11,39 @@ Private Declare Function apiIsWindow Lib "user32" Alias "IsWindow" (ByVal hWnd A
 Private cwnds()     As Long
 Private handlecount As Long
 Public Function ChildWindows(Optional ByVal hWnd As Long) As Long() 'If hWnd = 0 it returns all the top-level windows.
-    handlecount = 0
-    If hWnd = 0 Then apiEnumWindows AddressOf EnumWindowsProc, 1
-    If hWnd <> 0 Then apiEnumChildWindows hWnd, AddressOf EnumWindowsProc, 1
-    ReDim Preserve cwnds(handlecount) As Long
-    ChildWindows = cwnds()
+   handlecount = 0
+   If hWnd = 0 Then apiEnumWindows AddressOf EnumWindowsProc, 1
+   If hWnd <> 0 Then apiEnumChildWindows hWnd, AddressOf EnumWindowsProc, 1
+   ReDim Preserve cwnds(handlecount) As Long
+   ChildWindows = cwnds()
 End Function
 Private Function EnumWindowsProc(ByVal hWnd As Long, ByVal lParam As Long) As Long
-    If apiIsWindow(hWnd) <> 0 Then
-        If handlecount = 0 Then ReDim cwnds(100) As Long
-        If handlecount >= UBound(cwnds) Then ReDim Preserve cwnds(handlecount + 100) As Long
-        handlecount = handlecount + 1
-        cwnds(handlecount) = hWnd
-    End If
-    EnumWindowsProc = 1
+   If apiIsWindow(hWnd) <> 0 Then
+      If handlecount = 0 Then ReDim cwnds(100) As Long
+      If handlecount >= UBound(cwnds) Then ReDim Preserve cwnds(handlecount + 100) As Long
+      handlecount = handlecount + 1
+      cwnds(handlecount) = hWnd
+   End If
+   EnumWindowsProc = 1
 End Function
-
 Public Function GetClassName(ByVal hWnd As Long) As String
-    On Error Resume Next
-    Dim tLength As Long
-    Dim rValue  As Long
-    Dim css     As String
-    css = "" ''''''''''''''''''''''Initialize string for class name
-    css = Strings.Space(260) ''Pad with buffer
-    rValue = apiGetClassName(hWnd, css, 260) 'Get classname
-    css = left(css, rValue) 'Strip buffer
-    GetClassName = css
+   On Error Resume Next
+   Dim tLength As Long
+   Dim rValue  As Long
+   Dim css     As String
+   css = "" ''''''''''''''''''''''Initialize string for class name
+   css = Strings.Space(260) ''Pad with buffer
+   rValue = apiGetClassName(hWnd, css, 260) 'Get classname
+   css = left(css, rValue) 'Strip buffer
+   GetClassName = css
 End Function
 Public Function GetWindowText(ByVal hWnd As Long) As String
-    On Error Resume Next
-    Dim tLength As Long
-    Dim rValue  As Long
-    Dim txt     As String
-    tLength = apiGetWindowTextLength(hWnd) + 4 'Get length
-    txt = Strings.Space(tLength) 'Pad with buffer
-    rValue = apiGetWindowText(hWnd, txt, tLength) 'Get text
-    txt = left(txt, rValue) 'Strip buffer
+   On Error Resume Next
+   Dim tLength As Long
+   Dim rValue  As Long
+   Dim txt     As String
+   tLength = apiGetWindowTextLength(hWnd) + 4 'Get length
+   txt = Strings.Space(tLength) 'Pad with buffer
+   rValue = apiGetWindowText(hWnd, txt, tLength) 'Get text
+   txt = left(txt, rValue) 'Strip buffer
 End Function

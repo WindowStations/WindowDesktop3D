@@ -25,14 +25,14 @@ Private Const ACM_OPEN          As Long = (WM_USER + 100)
 Private Const ACM_PLAY          As Long = (WM_USER + 101)
 Private Const ACM_STOP          As Long = (WM_USER + 102)
 Private Type tagInitCommonControlsEx
-    dwSize As Long
-    dwICC As Long
+   dwSize As Long
+   dwICC As Long
 End Type
 Private Type RECT
-    left As Long
-    top As Long
-    right As Long
-    bottom As Long
+   left As Long
+   top As Long
+   right As Long
+   bottom As Long
 End Type
 Private Declare Function apiLoadLibrary Lib "kernel32" Alias "LoadLibraryA" (ByVal lpLibFileName As String) As Long
 Private Declare Function apiFreeLibrary Lib "kernel32" Alias "FreeLibrary" (ByVal hLibModule As Long) As Long
@@ -47,65 +47,61 @@ Private Declare Function apiInitCommonControlsEx Lib "Comctl32" Alias "InitCommo
 Private bInit   As Boolean
 Private hAVI    As Long
 Private hModule As Long
-
 Friend Function PlayAviCtrl(ByVal hParent As Long, ByVal sFileName As String, Optional ResourceID As Long = 0, Optional bCenter As Boolean = True, Optional bAutoPlay As Boolean = True, Optional bTransparent As Boolean = True) As Boolean
-    Dim lStyle As Long
-    Dim ret    As Long
-    StopAviCtrl
-    On Error GoTo ErrPlay
-    If Not (bInit = True) Then Call InitComctl32(ICC_ANIMATE_CLASS)
-    lStyle = WS_CHILD Or WS_VISIBLE
-    If bAutoPlay = True Then lStyle = lStyle Or ACS_AUTOPLAY
-    If bTransparent = True Then lStyle = lStyle Or ACS_TRANSPARENT
-    If hAVI <> 0 Then Call apiDestroyWindow(hAVI)
-    If ResourceID = 0 Then
-        hAVI = apiCreateWindowEx(0, ANIMATE_CLASSA, vbNullString, lStyle, 0, 0, 0, 0, hParent, 0&, App.hInstance, ByVal 0&)
-        ret = apiSendMessageLongLongLongString(hAVI, ACM_OPEN, 0, ByVal sFileName)
-    Else
-        hModule = apiLoadLibrary(sFileName)
-        If hModule = 0 Then GoTo ErrPlay
-        hAVI = apiCreateWindowEx(0, ANIMATE_CLASSA, vbNullString, lStyle, 0, 0, 0, 0, hParent, 0&, hModule, ByVal 0&)
-        ret = apiSendMessageLongLongLongLong(hAVI, ACM_OPEN, 0, ByVal ResourceID)
-    End If
-    If ret = 0 Or hAVI = 0 Then GoTo ErrPlay
-    ' If bCenter = True Then Call CenterAVI(hParent)
-    Call apiSendMessageLongLongLongLong(hAVI, ACM_PLAY, -1, ByVal 0&)
-    PlayAviCtrl = True
-    Exit Function
+   Dim lStyle As Long
+   Dim ret    As Long
+   StopAviCtrl
+   On Error GoTo ErrPlay
+   If Not (bInit = True) Then Call InitComctl32(ICC_ANIMATE_CLASS)
+   lStyle = WS_CHILD Or WS_VISIBLE
+   If bAutoPlay = True Then lStyle = lStyle Or ACS_AUTOPLAY
+   If bTransparent = True Then lStyle = lStyle Or ACS_TRANSPARENT
+   If hAVI <> 0 Then Call apiDestroyWindow(hAVI)
+   If ResourceID = 0 Then
+      hAVI = apiCreateWindowEx(0, ANIMATE_CLASSA, vbNullString, lStyle, 0, 0, 0, 0, hParent, 0&, App.hInstance, ByVal 0&)
+      ret = apiSendMessageLongLongLongString(hAVI, ACM_OPEN, 0, ByVal sFileName)
+   Else
+      hModule = apiLoadLibrary(sFileName)
+      If hModule = 0 Then GoTo ErrPlay
+      hAVI = apiCreateWindowEx(0, ANIMATE_CLASSA, vbNullString, lStyle, 0, 0, 0, 0, hParent, 0&, hModule, ByVal 0&)
+      ret = apiSendMessageLongLongLongLong(hAVI, ACM_OPEN, 0, ByVal ResourceID)
+   End If
+   If ret = 0 Or hAVI = 0 Then GoTo ErrPlay
+   ' If bCenter = True Then Call CenterAVI(hParent)
+   Call apiSendMessageLongLongLongLong(hAVI, ACM_PLAY, -1, ByVal 0&)
+   PlayAviCtrl = True
+   Exit Function
 ErrPlay:
-    If hModule <> 0 Then Call apiFreeLibrary(hModule)
-    Call apiDestroyWindow(hAVI)
+   If hModule <> 0 Then Call apiFreeLibrary(hModule)
+   Call apiDestroyWindow(hAVI)
 End Function
-
 Friend Sub StopAviCtrl()
-    On Error Resume Next
-    If hAVI <> 0 Then
-        Call apiSendMessageLongLongLongLong(hAVI, ACM_STOP, 0, ByVal 0&)
-        Call apiSendMessageLongLongLongLong(hAVI, ACM_OPEN, 0, ByVal 0&)
-        Call apiDestroyWindow(hAVI)
-    End If
-    If hModule <> 0 Then Call apiFreeLibrary(hModule)
+   On Error Resume Next
+   If hAVI <> 0 Then
+      Call apiSendMessageLongLongLongLong(hAVI, ACM_STOP, 0, ByVal 0&)
+      Call apiSendMessageLongLongLongLong(hAVI, ACM_OPEN, 0, ByVal 0&)
+      Call apiDestroyWindow(hAVI)
+   End If
+   If hModule <> 0 Then Call apiFreeLibrary(hModule)
 End Sub
-
 Private Sub InitComctl32(dwFlags As Long)
-    On Error Resume Next
-    Dim icc As tagInitCommonControlsEx
-    bInit = True
-    On Error GoTo Err_OldVersion
-    icc.dwSize = Len(icc)
-    icc.dwICC = dwFlags
-    Call apiInitCommonControlsEx(icc)
-    On Error GoTo 0
-    Exit Sub
+   On Error Resume Next
+   Dim icc As tagInitCommonControlsEx
+   bInit = True
+   On Error GoTo Err_OldVersion
+   icc.dwSize = Len(icc)
+   icc.dwICC = dwFlags
+   Call apiInitCommonControlsEx(icc)
+   On Error GoTo 0
+   Exit Sub
 Err_OldVersion:
-    Call apiInitCommonControls
+   Call apiInitCommonControls
 End Sub
-
 Private Sub CenterAVI(ByVal h As Long)
-    On Error Resume Next
-    Dim rcAVI    As RECT
-    Dim rcParent As RECT
-    Call apiGetWindowRect(h, rcParent)
-    Call apiGetWindowRect(hAVI, rcAVI)
-    Call apiMoveWindow(hAVI, (rcParent.right - rcParent.left - rcAVI.right + rcAVI.left) / 2, (rcParent.bottom - rcParent.top - rcAVI.bottom + rcAVI.top) / 2, rcAVI.right - rcAVI.left, rcAVI.bottom - rcAVI.top, True)
+   On Error Resume Next
+   Dim rcAVI    As RECT
+   Dim rcParent As RECT
+   Call apiGetWindowRect(h, rcParent)
+   Call apiGetWindowRect(hAVI, rcAVI)
+   Call apiMoveWindow(hAVI, (rcParent.right - rcParent.left - rcAVI.right + rcAVI.left) / 2, (rcParent.bottom - rcParent.top - rcAVI.bottom + rcAVI.top) / 2, rcAVI.right - rcAVI.left, rcAVI.bottom - rcAVI.top, True)
 End Sub

@@ -71,143 +71,143 @@ Option Explicit
 '=============================================================================================================
 ' Type - General
 Public Type RECT
-    left   As Long
-    top    As Long
-    right  As Long
-    bottom As Long
+   left   As Long
+   top    As Long
+   right  As Long
+   bottom As Long
 End Type
 ' Type - General
 Public Type POINTAPI
-    x As Long
-    y As Long
+   x As Long
+   y As Long
 End Type
 ' Type - GetEnhMetaFileHeader.lpEMH.(rclBounds/rclFrame)
 Public Type RECTL
-    left   As Long
-    top    As Long
-    right  As Long
-    bottom As Long
+   left   As Long
+   top    As Long
+   right  As Long
+   bottom As Long
 End Type
 ' Type - GetEnhMetaFileHeader.lpEMH.(szlDevice/szlMillimeters/szlMicrometers)
 Public Type SIZEL
-    cx As Long
-    cy As Long
+   cx As Long
+   cy As Long
 End Type
 ' Type - OleCreatePictureIndirect
 Public Type GUID
-    Data1    As Long
-    Data2    As Integer
-    Data3    As Integer
-    Data4(7) As Byte
+   Data1    As Long
+   Data2    As Integer
+   Data3    As Integer
+   Data4(7) As Byte
 End Type
 ' Type - OleCreatePictureIndirect / OleLoadPicture
 Public Type PICTDESC_ALL
-    cbSizeOfStruct As Long 'UINT     // Size of the PICTDESC structure.
-    PicType        As Long 'UINT     // Type of picture described by this structure, which can be any of the following values: PICTYPE_UNINITIALIZED, PICTYPE_NONE, PICTYPE_BITMAP, PICTYPE_METAFILE, PICTYPE_ICON, PICTYPE_ENHMETAFILE
-    hPicture       As Long 'LPVLOID  // Pointer to the bits that make up the picture.  This varies depending on the type of picture (see following structures)
-    hPalette       As Long 'HPALETTE // Pointer to the picture's palette (where applicable)
-    Reserved       As Long '         // Reserved
+   cbSizeOfStruct As Long 'UINT     // Size of the PICTDESC structure.
+   PicType        As Long 'UINT     // Type of picture described by this structure, which can be any of the following values: PICTYPE_UNINITIALIZED, PICTYPE_NONE, PICTYPE_BITMAP, PICTYPE_METAFILE, PICTYPE_ICON, PICTYPE_ENHMETAFILE
+   hPicture       As Long 'LPVLOID  // Pointer to the bits that make up the picture.  This varies depending on the type of picture (see following structures)
+   hPalette       As Long 'HPALETTE // Pointer to the picture's palette (where applicable)
+   Reserved       As Long '         // Reserved
 End Type
 ' Type - OleCreatePictureIndirect / OleLoadPicture
 Public Type PICTDESC_BMP 'picType = PICTYPE_BITMAP
-    cbSizeOfStruct As Long 'UINT     // Size of the PICTDESC structure.
-    PicType        As Long 'UINT     // Type of picture described by this structure, which can be any of the following values: PICTYPE_UNINITIALIZED, PICTYPE_NONE, PICTYPE_BITMAP, PICTYPE_METAFILE, PICTYPE_ICON, PICTYPE_ENHMETAFILE
-    hBitmap        As Long 'HBITMAP  // The HBITMAP identifying the bitmap assigned to the picture object.
-    hPal           As Long 'HPALETTE // The HPALETTE identifying the color palette for the bitmap.
+   cbSizeOfStruct As Long 'UINT     // Size of the PICTDESC structure.
+   PicType        As Long 'UINT     // Type of picture described by this structure, which can be any of the following values: PICTYPE_UNINITIALIZED, PICTYPE_NONE, PICTYPE_BITMAP, PICTYPE_METAFILE, PICTYPE_ICON, PICTYPE_ENHMETAFILE
+   hBitmap        As Long 'HBITMAP  // The HBITMAP identifying the bitmap assigned to the picture object.
+   hPal           As Long 'HPALETTE // The HPALETTE identifying the color palette for the bitmap.
 End Type
 ' Type - OleCreatePictureIndirect / OleLoadPicture
 Public Type PICTDESC_META 'picType = PICTYPE_METAFILE
-    cbSizeOfStruct As Long 'UINT      // Size of the PICTDESC structure.
-    PicType        As Long 'UINT      // Type of picture described by this structure, which can be any of the following values: PICTYPE_UNINITIALIZED, PICTYPE_NONE, PICTYPE_BITMAP, PICTYPE_METAFILE, PICTYPE_ICON, PICTYPE_ENHMETAFILE
-    hMeta          As Long 'HMETAFILE // The HMETAFILE handle identifying the metafile assigned to the picture object.
-    xExt           As Long 'int       // Horizontal extent of the metafile in HIMETRIC units.
-    yExt           As Long 'int       // Vertical extent of the metafile in HIMETRIC units.
+   cbSizeOfStruct As Long 'UINT      // Size of the PICTDESC structure.
+   PicType        As Long 'UINT      // Type of picture described by this structure, which can be any of the following values: PICTYPE_UNINITIALIZED, PICTYPE_NONE, PICTYPE_BITMAP, PICTYPE_METAFILE, PICTYPE_ICON, PICTYPE_ENHMETAFILE
+   hMeta          As Long 'HMETAFILE // The HMETAFILE handle identifying the metafile assigned to the picture object.
+   xExt           As Long 'int       // Horizontal extent of the metafile in HIMETRIC units.
+   yExt           As Long 'int       // Vertical extent of the metafile in HIMETRIC units.
 End Type
 ' Type - OleCreatePictureIndirect / OleLoadPicture
 Public Type PICTDESC_ICON 'picType = PICTYPE_ICON
-    cbSizeOfStruct As Long 'UINT  // Size of the PICTDESC structure.
-    PicType        As Long 'UINT  // Type of picture described by this structure, which can be any of the following values: PICTYPE_UNINITIALIZED, PICTYPE_NONE, PICTYPE_BITMAP, PICTYPE_METAFILE, PICTYPE_ICON, PICTYPE_ENHMETAFILE
-    hIcon          As Long 'HICON // The HICON identifying the icon assigned to the picture object.
+   cbSizeOfStruct As Long 'UINT  // Size of the PICTDESC structure.
+   PicType        As Long 'UINT  // Type of picture described by this structure, which can be any of the following values: PICTYPE_UNINITIALIZED, PICTYPE_NONE, PICTYPE_BITMAP, PICTYPE_METAFILE, PICTYPE_ICON, PICTYPE_ENHMETAFILE
+   hIcon          As Long 'HICON // The HICON identifying the icon assigned to the picture object.
 End Type
 ' Type - OleCreatePictureIndirect / OleLoadPicture
 Public Type PICTDESC_EMETA 'picType = PICTYPE_ENHMETAFILE
-    cbSizeOfStruct As Long 'UINT         // Size of the PICTDESC structure.
-    PicType        As Long 'UINT         // Type of picture described by this structure, which can be any of the following values: PICTYPE_UNINITIALIZED, PICTYPE_NONE, PICTYPE_BITMAP, PICTYPE_METAFILE, PICTYPE_ICON, PICTYPE_ENHMETAFILE
-    hEMF           As Long 'HENHMETAFILE // The HENHMETAFILE identifying the enhanced metafile to assign to the picture object.
+   cbSizeOfStruct As Long 'UINT         // Size of the PICTDESC structure.
+   PicType        As Long 'UINT         // Type of picture described by this structure, which can be any of the following values: PICTYPE_UNINITIALIZED, PICTYPE_NONE, PICTYPE_BITMAP, PICTYPE_METAFILE, PICTYPE_ICON, PICTYPE_ENHMETAFILE
+   hEMF           As Long 'HENHMETAFILE // The HENHMETAFILE identifying the enhanced metafile to assign to the picture object.
 End Type
 ' Type - GetObjectAPI.lpObject
 Public Type BITMAP
-    bmType       As Long    'LONG   // Specifies the bitmap type. This member must be zero.
-    bmWidth      As Long    'LONG   // Specifies the width, in pixels, of the bitmap. The width must be greater than zero.
-    bmHeight     As Long    'LONG   // Specifies the height, in pixels, of the bitmap. The height must be greater than zero.
-    bmWidthBytes As Long    'LONG   // Specifies the number of bytes in each scan line. This value must be divisible by 2, because Windows assumes that the bit values of a bitmap form an array that is word aligned.
-    bmPlanes     As Integer 'WORD   // Specifies the count of color planes.
-    bmBitsPixel  As Integer 'WORD   // Specifies the number of bits required to indicate the color of a pixel.
-    bmBits       As Long    'LPVOID // Points to the location of the bit values for the bitmap. The bmBits member must be a long pointer to an array of character (1-byte) values.
+   bmType       As Long    'LONG   // Specifies the bitmap type. This member must be zero.
+   bmWidth      As Long    'LONG   // Specifies the width, in pixels, of the bitmap. The width must be greater than zero.
+   bmHeight     As Long    'LONG   // Specifies the height, in pixels, of the bitmap. The height must be greater than zero.
+   bmWidthBytes As Long    'LONG   // Specifies the number of bytes in each scan line. This value must be divisible by 2, because Windows assumes that the bit values of a bitmap form an array that is word aligned.
+   bmPlanes     As Integer 'WORD   // Specifies the count of color planes.
+   bmBitsPixel  As Integer 'WORD   // Specifies the number of bits required to indicate the color of a pixel.
+   bmBits       As Long    'LPVOID // Points to the location of the bit values for the bitmap. The bmBits member must be a long pointer to an array of character (1-byte) values.
 End Type
 ' Type - CreateIconIndirect / GetIconInfo
 Public Type ICONINFO
-    fIcon    As Long 'BOOL    // Specifies whether this structure defines an icon or a cursor. A value of TRUE specifies an icon; FALSE specifies a cursor.
-    xHotspot As Long 'DWORD   // Specifies the x-coordinate of a cursor’s hot spot. If this structure defines an icon, the hot spot is always in the center of the icon, and this member is ignored.
-    yHotspot As Long 'DWORD   // Specifies the y-coordinate of the cursor’s hot spot. If this structure defines an icon, the hot spot is always in the center of the icon, and this member is ignored.
-    hbmMask  As Long 'HBITMAP // Specifies the icon bitmask bitmap. If this structure defines a black and white icon, this bitmask is formatted so that the upper half is the icon AND bitmask and the lower half is the icon XOR bitmask. Under this condition, the height should be an even multiple of two. If this structure defines a color icon, this mask only defines the AND bitmask of the icon.
-    hbmColor As Long 'HBITMAP // Identifies the icon color bitmap. This member can be optional if this structure defines a black and white icon. The AND bitmask of hbmMask is applied with the SRCAND flag to the destination; subsequently, the color bitmap is applied (using XOR) to the destination by using the SRCINVERT flag.
+   fIcon    As Long 'BOOL    // Specifies whether this structure defines an icon or a cursor. A value of TRUE specifies an icon; FALSE specifies a cursor.
+   xHotspot As Long 'DWORD   // Specifies the x-coordinate of a cursor’s hot spot. If this structure defines an icon, the hot spot is always in the center of the icon, and this member is ignored.
+   yHotspot As Long 'DWORD   // Specifies the y-coordinate of the cursor’s hot spot. If this structure defines an icon, the hot spot is always in the center of the icon, and this member is ignored.
+   hbmMask  As Long 'HBITMAP // Specifies the icon bitmask bitmap. If this structure defines a black and white icon, this bitmask is formatted so that the upper half is the icon AND bitmask and the lower half is the icon XOR bitmask. Under this condition, the height should be an even multiple of two. If this structure defines a color icon, this mask only defines the AND bitmask of the icon.
+   hbmColor As Long 'HBITMAP // Identifies the icon color bitmap. This member can be optional if this structure defines a black and white icon. The AND bitmask of hbmMask is applied with the SRCAND flag to the destination; subsequently, the color bitmap is applied (using XOR) to the destination by using the SRCINVERT flag.
 End Type
 ' Type - GetEnhMetaFileHeader.lpEMH
 Public Type ENHMETAHEADER
-    iType          As Long    'DWORD // Specifies the record type. This member must specify the value assigned to the EMR_HEADER constant.
-    nSize          As Long    'DWORD // Specifies the structure size, in bytes.
-    rclBounds      As RECTL   'RECTL // Specifies the dimensions, in device units, of the smallest rectangle that can be drawn around the picture stored in the metafile. This rectangle is supplied by graphics device interface (GDI). Its dimensions include the right and bottom edges.
-    rclFrame       As RECTL   'RECTL // Specifies the dimensions, in .01 millimeter units, of a rectangle that surrounds the picture stored in the metafile. This rectangle must be supplied by the application that creates the metafile. Its dimensions include the right and bottom edges.
-    dSignature     As Long    'DWORD // Specifies a double word signature. This member must specify the value assigned to the ENHMETA_SIGNATURE constant.
-    nVersion       As Long    'DWORD // Specifies the metafile version. The current version value is 0x10000.
-    nBytes         As Long    'DWORD // Specifies the size of the enhanced metafile, in bytes.
-    nRecords       As Long    'DWORD // Specifies the number of records in the enhanced metafile.
-    nHandles       As Integer 'WORD  // Specifies the number of handles in the enhanced-metafile handle table. (Index zero in this table is reserved.)
-    sReserved      As Integer 'WORD  // Reserved; must be zero.
-    nDescription   As Long    'DWORD // Specifies the number of characters in the array that contains the description of the enhanced metafile's contents. This member should be set to zero if the enhanced metafile does not contain a description string.
-    offDescription As Long    'DWORD // Specifies the offset from the beginning of the ENHMETAHEADER structure to the array that contains the description of the enhanced metafile's contents. This member should be set to zero if the enhanced metafile does not contain a description string.
-    nPalEntries    As Long    'DWORD // Specifies the number of entries in the enhanced metafile's palette.
-    szlDevice      As SIZEL   'SIZEL // Specifies the resolution of the reference device, in pixels.
-    szlMillimeters As SIZEL   'SIZEL // Specifies the resolution of the reference device, in millimeters.
-    cbPixelFormat  As Long    'DWORD // Windows 95/98, Windows NT4.0 and later: Specifies the size of the last recorded pixel format in a metafile. If a pixel format is set in a reference DC at the start of recording, cbPixelFormat is set to the size of the PIXELFORMATDESCRIPTOR. When no pixel format is set when a metafile is recorded, this member is set to zero. If more than a single pixel format is set, the header points to the last pixel format.
-    offPixelFormat As Long    'DWORD // Windows 95/98, Windows NT4.0 and later: Specifies the offset of pixel format used when recording a metafile. If a pixel format is set in a reference DC at the start of recording or during recording, offPixelFormat is set to the offset of the PIXELFORMATDESCRIPTOR in the metafile. If no pixel format is set when a metafile is recorded, this member is set to zero. If more than a single pixel format is set, the header points to the last pixel format.
-    bOpenGL        As Long    'DWORD // Windows 95/98, Windows NT4.0 and later: Specifies whether any OpenGL records are present in a metafile. bOpenGL is a simple Boolean flag that you can use to determine whether an enhanced metafile requires OpenGL handling. When a metafile contains OpenGL records, bOpenGL is TRUE; otherwise it is FALSE.
-    ' szlMicrometers As SIZEL   'SIZEL // Windows 98,    Windows 2000           : Size of the reference device in micrometers.
+   iType          As Long    'DWORD // Specifies the record type. This member must specify the value assigned to the EMR_HEADER constant.
+   nSize          As Long    'DWORD // Specifies the structure size, in bytes.
+   rclBounds      As RECTL   'RECTL // Specifies the dimensions, in device units, of the smallest rectangle that can be drawn around the picture stored in the metafile. This rectangle is supplied by graphics device interface (GDI). Its dimensions include the right and bottom edges.
+   rclFrame       As RECTL   'RECTL // Specifies the dimensions, in .01 millimeter units, of a rectangle that surrounds the picture stored in the metafile. This rectangle must be supplied by the application that creates the metafile. Its dimensions include the right and bottom edges.
+   dSignature     As Long    'DWORD // Specifies a double word signature. This member must specify the value assigned to the ENHMETA_SIGNATURE constant.
+   nVersion       As Long    'DWORD // Specifies the metafile version. The current version value is 0x10000.
+   nBytes         As Long    'DWORD // Specifies the size of the enhanced metafile, in bytes.
+   nRecords       As Long    'DWORD // Specifies the number of records in the enhanced metafile.
+   nHandles       As Integer 'WORD  // Specifies the number of handles in the enhanced-metafile handle table. (Index zero in this table is reserved.)
+   sReserved      As Integer 'WORD  // Reserved; must be zero.
+   nDescription   As Long    'DWORD // Specifies the number of characters in the array that contains the description of the enhanced metafile's contents. This member should be set to zero if the enhanced metafile does not contain a description string.
+   offDescription As Long    'DWORD // Specifies the offset from the beginning of the ENHMETAHEADER structure to the array that contains the description of the enhanced metafile's contents. This member should be set to zero if the enhanced metafile does not contain a description string.
+   nPalEntries    As Long    'DWORD // Specifies the number of entries in the enhanced metafile's palette.
+   szlDevice      As SIZEL   'SIZEL // Specifies the resolution of the reference device, in pixels.
+   szlMillimeters As SIZEL   'SIZEL // Specifies the resolution of the reference device, in millimeters.
+   cbPixelFormat  As Long    'DWORD // Windows 95/98, Windows NT4.0 and later: Specifies the size of the last recorded pixel format in a metafile. If a pixel format is set in a reference DC at the start of recording, cbPixelFormat is set to the size of the PIXELFORMATDESCRIPTOR. When no pixel format is set when a metafile is recorded, this member is set to zero. If more than a single pixel format is set, the header points to the last pixel format.
+   offPixelFormat As Long    'DWORD // Windows 95/98, Windows NT4.0 and later: Specifies the offset of pixel format used when recording a metafile. If a pixel format is set in a reference DC at the start of recording or during recording, offPixelFormat is set to the offset of the PIXELFORMATDESCRIPTOR in the metafile. If no pixel format is set when a metafile is recorded, this member is set to zero. If more than a single pixel format is set, the header points to the last pixel format.
+   bOpenGL        As Long    'DWORD // Windows 95/98, Windows NT4.0 and later: Specifies whether any OpenGL records are present in a metafile. bOpenGL is a simple Boolean flag that you can use to determine whether an enhanced metafile requires OpenGL handling. When a metafile contains OpenGL records, bOpenGL is TRUE; otherwise it is FALSE.
+   ' szlMicrometers As SIZEL   'SIZEL // Windows 98,    Windows 2000           : Size of the reference device in micrometers.
 End Type
 ' Constants - BitBlt.dwRop
 Public Enum RasterOperations
-    SRCCOPY = &HCC0020          ' Copies the source rectangle directly to the destination rectangle.
-    SRCPAINT = &HEE0086         ' Combines the colors of the source and destination rectangles by using the Boolean OR operator.
-    SRCAND = &H8800C6           ' Combines the colors of the source and destination rectangles by using the Boolean AND operator.
-    SRCINVERT = &H660046        ' Combines the colors of the source and destination rectangles by using the Boolean XOR operator.
-    SRCERASE = &H440328         ' Combines the inverted colors of the destination rectangle with the colors of the source rectangle by using the Boolean AND operator.
-    NOTSRCCOPY = &H330008       ' Copies the inverted source rectangle to the destination.
-    NOTSRCERASE = &H1100A6      ' Combines the colors of the source and destination rectangles by using the Boolean OR operator and then inverts the resultant color.
-    MERGECOPY = &HC000CA        ' Merges the colors of the source rectangle with the brush currently selected in hdcDest, by using the Boolean AND operator.
-    MERGEPAINT = &HBB0226       ' Merges the colors of the inverted source rectangle with the colors of the destination rectangle by using the Boolean OR operator.
-    PATCOPY = &HF00021          ' Copies the brush currently selected in hdcDest, into the destination bitmap.
-    PATPAINT = &HFB0A09         ' Combines the colors of the brush currently selected in hdcDest, with the colors of the inverted source rectangle by using the Boolean OR operator. The result of this operation is combined with the colors of the destination rectangle by using the Boolean OR operator.
-    PATINVERT = &H5A0049        ' Combines the colors of the brush currently selected in hdcDest, with the colors of the destination rectangle by using the Boolean XOR operator.
-    DSTINVERT = &H550009        ' Inverts the destination rectangle.
-    BLACKNESS = &H42            ' Fills the destination rectangle using the color associated with index 0 in the physical palette. (This color is black for the default physical palette.)
-    WHITENESS = &HFF0062        ' Fills the destination rectangle using the color associated with index 1 in the physical palette. (This color is white for the default physical palette.)
-    NOMIRRORBITMAP = &H80000000 ' Windows 98, Windows 2000: Prevents the bitmap from being mirrored.
-    CAPTUREBLT = &H40000000     ' Windows 98, Windows 2000: Includes any windows that are layered on top of your window in the resulting image. By default, the image only contains your window.
+   SRCCOPY = &HCC0020          ' Copies the source rectangle directly to the destination rectangle.
+   SRCPAINT = &HEE0086         ' Combines the colors of the source and destination rectangles by using the Boolean OR operator.
+   SRCAND = &H8800C6           ' Combines the colors of the source and destination rectangles by using the Boolean AND operator.
+   SRCINVERT = &H660046        ' Combines the colors of the source and destination rectangles by using the Boolean XOR operator.
+   SRCERASE = &H440328         ' Combines the inverted colors of the destination rectangle with the colors of the source rectangle by using the Boolean AND operator.
+   NOTSRCCOPY = &H330008       ' Copies the inverted source rectangle to the destination.
+   NOTSRCERASE = &H1100A6      ' Combines the colors of the source and destination rectangles by using the Boolean OR operator and then inverts the resultant color.
+   MERGECOPY = &HC000CA        ' Merges the colors of the source rectangle with the brush currently selected in hdcDest, by using the Boolean AND operator.
+   MERGEPAINT = &HBB0226       ' Merges the colors of the inverted source rectangle with the colors of the destination rectangle by using the Boolean OR operator.
+   PATCOPY = &HF00021          ' Copies the brush currently selected in hdcDest, into the destination bitmap.
+   PATPAINT = &HFB0A09         ' Combines the colors of the brush currently selected in hdcDest, with the colors of the inverted source rectangle by using the Boolean OR operator. The result of this operation is combined with the colors of the destination rectangle by using the Boolean OR operator.
+   PATINVERT = &H5A0049        ' Combines the colors of the brush currently selected in hdcDest, with the colors of the destination rectangle by using the Boolean XOR operator.
+   DSTINVERT = &H550009        ' Inverts the destination rectangle.
+   BLACKNESS = &H42            ' Fills the destination rectangle using the color associated with index 0 in the physical palette. (This color is black for the default physical palette.)
+   WHITENESS = &HFF0062        ' Fills the destination rectangle using the color associated with index 1 in the physical palette. (This color is white for the default physical palette.)
+   NOMIRRORBITMAP = &H80000000 ' Windows 98, Windows 2000: Prevents the bitmap from being mirrored.
+   CAPTUREBLT = &H40000000     ' Windows 98, Windows 2000: Includes any windows that are layered on top of your window in the resulting image. By default, the image only contains your window.
 End Enum
 ' Constants - LoadResData
 Public Enum ResTypes
-    RT_BITMAP = vbResBitmap
-    RT_ICON = vbResIcon
-    RT_CURSOR = vbResCursor
-    rt_Custom = 3
+   RT_BITMAP = vbResBitmap
+   RT_ICON = vbResIcon
+   RT_CURSOR = vbResCursor
+   rt_Custom = 3
 End Enum
 ' Constants - BITMAP.bmType & CopyImage.uType
 Public Enum PictureTypes
-    IMAGE_BITMAP = 0
-    IMAGE_CURSOR = 1
-    IMAGE_ICON = 2
-    IMAGE_ENHMETAFILE = 3
+   IMAGE_BITMAP = 0
+   IMAGE_CURSOR = 1
+   IMAGE_ICON = 2
+   IMAGE_ENHMETAFILE = 3
 End Enum
 ' Constants - General
 Public Const MAX_PATH = 260
@@ -310,7 +310,6 @@ Public Declare Function SetPixel Lib "GDI32.DLL" (ByVal hdc As Long, ByVal x As 
 Public Declare Function SetStretchBltMode Lib "GDI32.DLL" (ByVal hdc As Long, ByVal iStretchMode As Long) As Long
 Public Declare Function SetBrushOrgEx Lib "GDI32.DLL" (ByVal hdc As Long, ByVal nXOrg As Long, ByVal nYOrg As Long, ByRef lpPoint As Any) As Long
 Public Declare Function StretchBlt Lib "GDI32.DLL" (ByVal hDC_Destination As Long, ByVal X_Dest As Long, ByVal Y_Dest As Long, ByVal New_Width As Long, ByVal New_Height As Long, ByVal hdc_source As Long, ByVal X_Src As Long, ByVal Y_Src As Long, ByVal Orig_Width As Long, ByVal Orig_Height As Long, ByVal RasterOperation As Long) As Long
-
 ' Convert_HM_PX
 '
 ' When dealing with the "Picture" property of VB objects such as PictureBox or Form, or StdPicture
@@ -350,30 +349,29 @@ Public Declare Function StretchBlt Lib "GDI32.DLL" (ByVal hDC_Destination As Lon
 ' typedef LONG OLE_YSIZE_HIMETRIC;
 '
 Public Function Convert_HM_PX(Optional ByVal InputHeight As Long, Optional ByVal InputWidth As Long, Optional ByRef OutputHeight As Long, Optional ByRef OutputWidth As Long, Optional ByVal VB_Picture As Boolean = True) As Boolean
-    On Error Resume Next
-    Dim TwipsX As Single
-    Dim TwipsY As Single
-    ' Reset the return values
-    OutputHeight = 0
-    OutputWidth = 0
-    ' Make sure the parameters passed are valid
-    If InputHeight = 0 And InputWidth = 0 Then Exit Function
-    ' If the user specifies to do the convertion for a Visual Basic Picture, use the
-    ' "Screen" object to get the approximate TwipsPerPixel
-    If VB_Picture = True Then
-        OutputWidth = CLng(((InputWidth / 2540) * 1440) / Screen.TwipsPerPixelX)
-        OutputHeight = CLng(((InputHeight / 2540) * 1440) / Screen.TwipsPerPixelY)
-        ' If the user doesn't specify to do the convertion for a Visual Basic Picture, assume
-        ' it's for a Win32 API call and calculate the exact TwipsPerPixel to be more accurate
-    Else
-        If GetDisplayInfo(, , TwipsX, TwipsY) = False Then Exit Function
-        OutputWidth = CLng((InputWidth / 2540 * 1440) / TwipsX)
-        OutputHeight = CLng((InputHeight / 2540 * 1440) / TwipsY)
-    End If
-    ' Function succeeded
-    Convert_HM_PX = True
+   On Error Resume Next
+   Dim TwipsX As Single
+   Dim TwipsY As Single
+   ' Reset the return values
+   OutputHeight = 0
+   OutputWidth = 0
+   ' Make sure the parameters passed are valid
+   If InputHeight = 0 And InputWidth = 0 Then Exit Function
+   ' If the user specifies to do the convertion for a Visual Basic Picture, use the
+   ' "Screen" object to get the approximate TwipsPerPixel
+   If VB_Picture = True Then
+      OutputWidth = CLng(((InputWidth / 2540) * 1440) / Screen.TwipsPerPixelX)
+      OutputHeight = CLng(((InputHeight / 2540) * 1440) / Screen.TwipsPerPixelY)
+      ' If the user doesn't specify to do the convertion for a Visual Basic Picture, assume
+      ' it's for a Win32 API call and calculate the exact TwipsPerPixel to be more accurate
+   Else
+      If GetDisplayInfo(, , TwipsX, TwipsY) = False Then Exit Function
+      OutputWidth = CLng((InputWidth / 2540 * 1440) / TwipsX)
+      OutputHeight = CLng((InputHeight / 2540 * 1440) / TwipsY)
+   End If
+   ' Function succeeded
+   Convert_HM_PX = True
 End Function
-
 ' Convert_PX_HM
 '
 ' When dealing with the "Picture" property of VB objects such as PictureBox or Form, or StdPicture
@@ -417,30 +415,29 @@ End Function
 ' typedef LONG OLE_YSIZE_HIMETRIC;
 '
 Public Function Convert_PX_HM(ByVal InputHeight As Long, ByVal InputWidth As Long, ByRef OutputHeight As Long, ByRef OutputWidth As Long, Optional ByVal VB_Picture As Boolean = True) As Boolean
-    On Error Resume Next
-    Dim TwipsX As Single
-    Dim TwipsY As Single
-    ' Reset the return values
-    OutputHeight = 0
-    OutputWidth = 0
-    ' Make sure the parameters passed are valid
-    If InputHeight = 0 And InputWidth = 0 Then Exit Function
-    ' If the user specifies to do the convertion for a Visual Basic Picture, use the
-    ' "Screen" object to get the approximate TwipsPerPixel
-    If VB_Picture = True Then
-        OutputHeight = CLng(((InputHeight * Screen.TwipsPerPixelY) / 1440) * 2540)
-        OutputWidth = CLng(((InputWidth * Screen.TwipsPerPixelX) / 1440) * 2540)
-        ' If the user doesn't specify to do the convertion for a Visual Basic Picture, assume
-        ' it's for a Win32 API call and calculate the exact TwipsPerPixel to be more accurate
-    Else
-        If GetDisplayInfo(, , TwipsX, TwipsY) = False Then Exit Function
-        OutputHeight = CLng(((InputHeight * TwipsX) / 1440) * 2540)
-        OutputWidth = CLng(((InputWidth * TwipsY) / 1440) * 2540)
-    End If
-    ' Function succeeded
-    Convert_PX_HM = True
+   On Error Resume Next
+   Dim TwipsX As Single
+   Dim TwipsY As Single
+   ' Reset the return values
+   OutputHeight = 0
+   OutputWidth = 0
+   ' Make sure the parameters passed are valid
+   If InputHeight = 0 And InputWidth = 0 Then Exit Function
+   ' If the user specifies to do the convertion for a Visual Basic Picture, use the
+   ' "Screen" object to get the approximate TwipsPerPixel
+   If VB_Picture = True Then
+      OutputHeight = CLng(((InputHeight * Screen.TwipsPerPixelY) / 1440) * 2540)
+      OutputWidth = CLng(((InputWidth * Screen.TwipsPerPixelX) / 1440) * 2540)
+      ' If the user doesn't specify to do the convertion for a Visual Basic Picture, assume
+      ' it's for a Win32 API call and calculate the exact TwipsPerPixel to be more accurate
+   Else
+      If GetDisplayInfo(, , TwipsX, TwipsY) = False Then Exit Function
+      OutputHeight = CLng(((InputHeight * TwipsX) / 1440) * 2540)
+      OutputWidth = CLng(((InputWidth * TwipsY) / 1440) * 2540)
+   End If
+   ' Function succeeded
+   Convert_PX_HM = True
 End Function
-
 '
 ' CopyPicture
 '
@@ -464,47 +461,46 @@ End Function
 ' If the function fails, the return is FALSE
 '
 Public Function CopyPicture(ByVal IN_hPicture As Long, ByRef OUT_hPicture As Long, Optional ByVal PictureType As PictureTypes = IMAGE_BITMAP, Optional ByVal PictureWidth As Long, Optional ByVal PictureHeight As Long, Optional ByVal ReturnMonochrome As Boolean = False) As Boolean
-    Dim TempEMH     As ENHMETAHEADER
-    Dim TempBITMAP  As BITMAP
-    Dim hBMP_Mask   As Long
-    Dim hBMP_Image  As Long
-    Dim ReturnValue As Long
-    Dim flags       As Long
-    ' Set the default return value
-    OUT_hPicture = 0
-    ' Make sure parameters passed are valid
-    If IN_hPicture = 0 Then Exit Function
-    ' Get the dimentions and type of picture to copy
-    If PictureWidth = 0 Or PictureHeight = 0 Then
-        Select Case PictureType
-            Case IMAGE_BITMAP
-                If GetObjectAPI(IN_hPicture, Len(TempBITMAP), TempBITMAP) = 0 Then Exit Function
-                PictureWidth = TempBITMAP.bmWidth
-                PictureHeight = TempBITMAP.bmHeight
-            Case IMAGE_ICON, IMAGE_CURSOR
-                If GetIconBitmaps(IN_hPicture, hBMP_Mask, hBMP_Image) = False Then Exit Function
-                ReturnValue = GetObjectAPI(hBMP_Image, Len(TempBITMAP), TempBITMAP)
-                DeleteObject hBMP_Mask
-                DeleteObject hBMP_Image
-                If ReturnValue = 0 Then Exit Function
-                PictureWidth = TempBITMAP.bmWidth
-                PictureHeight = TempBITMAP.bmHeight
-            Case IMAGE_ENHMETAFILE
-                TempEMH.nSize = Len(TempEMH)
-                TempEMH.iType = EMR_HEADER
-                TempEMH.dSignature = ENHMETA_SIGNATURE
-                TempEMH.nVersion = &H10000
-                If GetEnhMetaFileHeader(IN_hPicture, Len(TempEMH), TempEMH) = 0 Then Exit Function
-                PictureWidth = TempEMH.rclBounds.right
-                PictureHeight = TempEMH.rclBounds.bottom
-        End Select
-    End If
-    ' Copy the image
-    If ReturnMonochrome = True Then flags = LR_MONOCHROME
-    OUT_hPicture = CopyImage(IN_hPicture, CLng(PictureType), PictureWidth, PictureHeight, flags)
-    If OUT_hPicture <> 0 Then CopyPicture = True
+   Dim TempEMH     As ENHMETAHEADER
+   Dim TempBITMAP  As BITMAP
+   Dim hBMP_Mask   As Long
+   Dim hBMP_Image  As Long
+   Dim ReturnValue As Long
+   Dim flags       As Long
+   ' Set the default return value
+   OUT_hPicture = 0
+   ' Make sure parameters passed are valid
+   If IN_hPicture = 0 Then Exit Function
+   ' Get the dimentions and type of picture to copy
+   If PictureWidth = 0 Or PictureHeight = 0 Then
+      Select Case PictureType
+      Case IMAGE_BITMAP
+         If GetObjectAPI(IN_hPicture, Len(TempBITMAP), TempBITMAP) = 0 Then Exit Function
+         PictureWidth = TempBITMAP.bmWidth
+         PictureHeight = TempBITMAP.bmHeight
+      Case IMAGE_ICON, IMAGE_CURSOR
+         If GetIconBitmaps(IN_hPicture, hBMP_Mask, hBMP_Image) = False Then Exit Function
+         ReturnValue = GetObjectAPI(hBMP_Image, Len(TempBITMAP), TempBITMAP)
+         DeleteObject hBMP_Mask
+         DeleteObject hBMP_Image
+         If ReturnValue = 0 Then Exit Function
+         PictureWidth = TempBITMAP.bmWidth
+         PictureHeight = TempBITMAP.bmHeight
+      Case IMAGE_ENHMETAFILE
+         TempEMH.nSize = Len(TempEMH)
+         TempEMH.iType = EMR_HEADER
+         TempEMH.dSignature = ENHMETA_SIGNATURE
+         TempEMH.nVersion = &H10000
+         If GetEnhMetaFileHeader(IN_hPicture, Len(TempEMH), TempEMH) = 0 Then Exit Function
+         PictureWidth = TempEMH.rclBounds.right
+         PictureHeight = TempEMH.rclBounds.bottom
+      End Select
+   End If
+   ' Copy the image
+   If ReturnMonochrome = True Then flags = LR_MONOCHROME
+   OUT_hPicture = CopyImage(IN_hPicture, CLng(PictureType), PictureWidth, PictureHeight, flags)
+   If OUT_hPicture <> 0 Then CopyPicture = True
 End Function
-
 ' CreateCursorFromBMP
 '
 ' This function takes the handle to the mask and image BITMAPS that make up an cursor, and combine them
@@ -521,16 +517,15 @@ End Function
 ' If the function fails, the return is ZERO (0)
 '
 Public Function CreateCursorFromBMP(ByVal hBMP_Mask As Long, ByVal hBMP_Image As Long, Optional ByVal HotspotX As Long, Optional ByVal HotspotY As Long) As Long
-    Dim TempICONINFO As ICONINFO
-    If hBMP_Mask = 0 Or hBMP_Image = 0 Then Exit Function
-    TempICONINFO.fIcon = 0
-    TempICONINFO.hbmMask = hBMP_Mask
-    TempICONINFO.hbmColor = hBMP_Image
-    TempICONINFO.xHotspot = HotspotX
-    TempICONINFO.yHotspot = HotspotY
-    CreateCursorFromBMP = CreateIconIndirect(TempICONINFO)
+   Dim TempICONINFO As ICONINFO
+   If hBMP_Mask = 0 Or hBMP_Image = 0 Then Exit Function
+   TempICONINFO.fIcon = 0
+   TempICONINFO.hbmMask = hBMP_Mask
+   TempICONINFO.hbmColor = hBMP_Image
+   TempICONINFO.xHotspot = HotspotX
+   TempICONINFO.yHotspot = HotspotY
+   CreateCursorFromBMP = CreateIconIndirect(TempICONINFO)
 End Function
-
 '
 ' CreateIconFromBMP
 '
@@ -548,14 +543,13 @@ End Function
 ' If the function fails, the return is ZERO (0)
 '
 Public Function CreateIconFromBMP(ByVal hBMP_Mask As Long, ByVal hBMP_Image As Long) As Long
-    Dim TempICONINFO As ICONINFO
-    If hBMP_Mask = 0 Or hBMP_Image = 0 Then Exit Function
-    TempICONINFO.fIcon = 1
-    TempICONINFO.hbmMask = hBMP_Mask
-    TempICONINFO.hbmColor = hBMP_Image
-    CreateIconFromBMP = CreateIconIndirect(TempICONINFO)
+   Dim TempICONINFO As ICONINFO
+   If hBMP_Mask = 0 Or hBMP_Image = 0 Then Exit Function
+   TempICONINFO.fIcon = 1
+   TempICONINFO.hbmMask = hBMP_Mask
+   TempICONINFO.hbmColor = hBMP_Image
+   CreateIconFromBMP = CreateIconIndirect(TempICONINFO)
 End Function
-
 ' CreateMask
 '
 ' This function takes the specified picture and creates a sprite and a mask from it.  The sprite is the
@@ -614,90 +608,89 @@ End Function
 ' If the function fails, the return is FALSE
 '
 Public Function CreateMask(ByVal hBitmap As Long, ByVal TransparentColor As Long, Optional ByRef Return_SpriteDC As Long = -1, Optional ByRef Return_MaskDC As Long = -1, Optional ByRef Return_SpritePrevBMP As Long = -1, Optional ByRef Return_MaskPrevBMP As Long = -1) As Boolean
-    Dim hScreenDC     As Long
-    Dim PicHeight     As Long
-    Dim PicWidth      As Long
-    Dim hDC_Temp      As Long
-    Dim hDC_Sprite    As Long
-    Dim hDC_Mask      As Long
-    Dim hPrev_Temp    As Long
-    Dim hPrev_Sprite  As Long
-    Dim hPrev_Mask    As Long
-    Dim PreviousColor As Long
-    Dim hMonoBitmap   As Long
-    Dim hColrBitmap   As Long
-    ' Make sure a valid picture was passed to use to get the mask
-    If hBitmap = 0 Then Exit Function
-    ' If the user hasn't specified to return any values, exit
-    If Return_SpriteDC = -1 And Return_MaskDC = -1 Then Exit Function
-    ' Get the transparent color as a non-OLE color
-    TransparentColor = TranslateColor(TransparentColor)
-    If TransparentColor = -1 Then Exit Function
-    ' Get the height & width of the picture
-    If GetBitmapInfo(hBitmap, PicHeight, PicWidth) = False Then Exit Function
-    ' Create the Device Contexts (DC) to work with
-    hDC_Temp = MemoryDC_Create
-    hDC_Mask = MemoryDC_Create
-    hDC_Sprite = MemoryDC_Create
-    ' Create a monochrome bitmap to create the mask from
-    hMonoBitmap = CreateCompatibleBitmap(hDC_Temp, PicWidth, PicHeight)
-    ' Create a color bitmap to select into the mask
-    hScreenDC = GetDC(GetDesktopWindow)
-    hColrBitmap = CreateCompatibleBitmap(hScreenDC, PicWidth, PicHeight)
-    ReleaseDC GetDesktopWindow, hScreenDC
-    ' Copy the sprite picture into the sprite DC making it color, then
-    ' copy the monochrome bitmaps into the temp and mask DC's black & white
-    LoadBitmapToDC hDC_Temp, hMonoBitmap, hPrev_Temp
-    LoadBitmapToDC hDC_Mask, hColrBitmap, hPrev_Mask
-    LoadBitmapToDC hDC_Sprite, hBitmap, hPrev_Sprite
-    ' Set the background color to the transparent color.
-    ' This will make the transparent color black when the mask is created
-    PreviousColor = SetBkColor(hDC_Sprite, TransparentColor)
-    ' Copy the sprite picture to the temp DC - This makes a copy of the
-    ' sprite, but the copy is black and the transparent color is now transparent
-    BitBlt hDC_Temp, 0, 0, PicWidth, PicHeight, hDC_Sprite, 0, 0, SRCCOPY
-    ' Set the background color back to the original color
-    SetBkColor hDC_Sprite, PreviousColor
-    ' Copy the temp DC to the sprite - this makes the sprite's transparent
-    ' color now show up as WHITE
-    BitBlt hDC_Sprite, 0, 0, PicWidth, PicHeight, hDC_Temp, 0, 0, SRCPAINT
-    ' Create the mask (Silhouette of the original on a white background)
-    BitBlt hDC_Mask, 0, 0, PicWidth, PicHeight, hDC_Sprite, 0, 0, SRCCOPY
-    BitBlt hDC_Mask, 0, 0, PicWidth, PicHeight, hDC_Temp, 0, 0, SRCCOPY
-    ' Return the results and clean up extra memory
-    CreateMask = True
-    ' If the user specified to return the sprite, do so... else delete it
-    If Return_SpriteDC = -1 Then
-        MemoryDC_Delete hDC_Sprite, hPrev_Sprite
-        Return_SpriteDC = 0
-        Return_SpritePrevBMP = 0
-    Else
-        Return_SpriteDC = hDC_Sprite
-        If Return_SpritePrevBMP = -1 Then
-            DeleteObject hPrev_Sprite
-        Else
-            Return_SpritePrevBMP = hPrev_Sprite
-        End If
-    End If
-    ' If the user specified to return the mask, do so... else delete it
-    If Return_MaskDC = -1 Then
-        MemoryDC_Delete hDC_Mask, hPrev_Mask
-        Return_MaskDC = 0
-        Return_MaskPrevBMP = 0
-    Else
-        Return_MaskDC = hDC_Mask
-        If Return_MaskPrevBMP = -1 Then
-            DeleteObject hPrev_Mask
-        Else
-            Return_MaskPrevBMP = hPrev_Mask
-        End If
-    End If
-    ' Clean up memory used to create the sprite and mask
-    DeleteObject hMonoBitmap: hMonoBitmap = 0
-    DeleteObject hColrBitmap: hColrBitmap = 0
-    If hDC_Temp <> 0 Then MemoryDC_Delete hDC_Temp, hPrev_Temp
+   Dim hScreenDC     As Long
+   Dim PicHeight     As Long
+   Dim PicWidth      As Long
+   Dim hDC_Temp      As Long
+   Dim hDC_Sprite    As Long
+   Dim hDC_Mask      As Long
+   Dim hPrev_Temp    As Long
+   Dim hPrev_Sprite  As Long
+   Dim hPrev_Mask    As Long
+   Dim PreviousColor As Long
+   Dim hMonoBitmap   As Long
+   Dim hColrBitmap   As Long
+   ' Make sure a valid picture was passed to use to get the mask
+   If hBitmap = 0 Then Exit Function
+   ' If the user hasn't specified to return any values, exit
+   If Return_SpriteDC = -1 And Return_MaskDC = -1 Then Exit Function
+   ' Get the transparent color as a non-OLE color
+   TransparentColor = TranslateColor(TransparentColor)
+   If TransparentColor = -1 Then Exit Function
+   ' Get the height & width of the picture
+   If GetBitmapInfo(hBitmap, PicHeight, PicWidth) = False Then Exit Function
+   ' Create the Device Contexts (DC) to work with
+   hDC_Temp = MemoryDC_Create
+   hDC_Mask = MemoryDC_Create
+   hDC_Sprite = MemoryDC_Create
+   ' Create a monochrome bitmap to create the mask from
+   hMonoBitmap = CreateCompatibleBitmap(hDC_Temp, PicWidth, PicHeight)
+   ' Create a color bitmap to select into the mask
+   hScreenDC = GetDC(GetDesktopWindow)
+   hColrBitmap = CreateCompatibleBitmap(hScreenDC, PicWidth, PicHeight)
+   ReleaseDC GetDesktopWindow, hScreenDC
+   ' Copy the sprite picture into the sprite DC making it color, then
+   ' copy the monochrome bitmaps into the temp and mask DC's black & white
+   LoadBitmapToDC hDC_Temp, hMonoBitmap, hPrev_Temp
+   LoadBitmapToDC hDC_Mask, hColrBitmap, hPrev_Mask
+   LoadBitmapToDC hDC_Sprite, hBitmap, hPrev_Sprite
+   ' Set the background color to the transparent color.
+   ' This will make the transparent color black when the mask is created
+   PreviousColor = SetBkColor(hDC_Sprite, TransparentColor)
+   ' Copy the sprite picture to the temp DC - This makes a copy of the
+   ' sprite, but the copy is black and the transparent color is now transparent
+   BitBlt hDC_Temp, 0, 0, PicWidth, PicHeight, hDC_Sprite, 0, 0, SRCCOPY
+   ' Set the background color back to the original color
+   SetBkColor hDC_Sprite, PreviousColor
+   ' Copy the temp DC to the sprite - this makes the sprite's transparent
+   ' color now show up as WHITE
+   BitBlt hDC_Sprite, 0, 0, PicWidth, PicHeight, hDC_Temp, 0, 0, SRCPAINT
+   ' Create the mask (Silhouette of the original on a white background)
+   BitBlt hDC_Mask, 0, 0, PicWidth, PicHeight, hDC_Sprite, 0, 0, SRCCOPY
+   BitBlt hDC_Mask, 0, 0, PicWidth, PicHeight, hDC_Temp, 0, 0, SRCCOPY
+   ' Return the results and clean up extra memory
+   CreateMask = True
+   ' If the user specified to return the sprite, do so... else delete it
+   If Return_SpriteDC = -1 Then
+      MemoryDC_Delete hDC_Sprite, hPrev_Sprite
+      Return_SpriteDC = 0
+      Return_SpritePrevBMP = 0
+   Else
+      Return_SpriteDC = hDC_Sprite
+      If Return_SpritePrevBMP = -1 Then
+         DeleteObject hPrev_Sprite
+      Else
+         Return_SpritePrevBMP = hPrev_Sprite
+      End If
+   End If
+   ' If the user specified to return the mask, do so... else delete it
+   If Return_MaskDC = -1 Then
+      MemoryDC_Delete hDC_Mask, hPrev_Mask
+      Return_MaskDC = 0
+      Return_MaskPrevBMP = 0
+   Else
+      Return_MaskDC = hDC_Mask
+      If Return_MaskPrevBMP = -1 Then
+         DeleteObject hPrev_Mask
+      Else
+         Return_MaskPrevBMP = hPrev_Mask
+      End If
+   End If
+   ' Clean up memory used to create the sprite and mask
+   DeleteObject hMonoBitmap: hMonoBitmap = 0
+   DeleteObject hColrBitmap: hColrBitmap = 0
+   If hDC_Temp <> 0 Then MemoryDC_Delete hDC_Temp, hPrev_Temp
 End Function
-
 ' CreateOlePicture
 '
 ' This function takes the handle to a picture (Bitmap, Icon, Metafile, or Enhanced Metafile) and creates
@@ -731,87 +724,86 @@ End Function
 ' If the function fails, the return is FALSE
 '
 Public Function CreateOlePicture(ByVal PictureHandle As Long, ByVal PictureType As PictureTypeConstants, Optional ByVal BitmapPalette As Long = 0, Optional ByVal MetaHeight As Long = -1, Optional ByVal MetaWidth As Long = -1, Optional ByRef Return_ErrNum As Long, Optional ByRef Return_ErrDesc As String) As StdPicture
-    On Error Resume Next
-    Dim ReturnValue   As Long
-    Dim PicInfo_BMP   As PICTDESC_BMP
-    Dim PicInfo_EMETA As PICTDESC_EMETA
-    Dim PicInfo_ICON  As PICTDESC_ICON
-    Dim PicInfo_META  As PICTDESC_META
-    Dim ThePicture    As StdPicture 'IPicture
-    Dim rIID          As GUID
-    ' Clear the return variables
-    Return_ErrNum = 0
-    Return_ErrDesc = ""
-    ' Make sure the variable(s) passed are valid
-    If PictureHandle = 0 Then
-        Return_ErrNum = -1
-        Return_ErrDesc = "Invalid bitmap handle"
-    ElseIf PictureType = vbPicTypeNone Then
-        Return_ErrNum = -1
-        Return_ErrDesc = "Invalid picture type specified."
-    ElseIf PictureType = vbPicTypeMetafile Then
-        If MetaHeight = -1 Or MetaWidth = -1 Then
-            Return_ErrNum = -1
-            Return_ErrDesc = "Invalid metafile dimentions specified."
-        End If
-    End If
-    ' Set the correct interface identifier GUID for the "OleCreatePictureIndirect" API
-    With rIID
-        .Data1 = &H20400
-        .Data4(0) = &HC0
-        .Data4(7) = &H46
-    End With
-    ' Set the appropriate type depending on the type of picture
-    Select Case PictureType
-        Case vbPicTypeBitmap
-            PicInfo_BMP.cbSizeOfStruct = Len(PicInfo_BMP)
-            PicInfo_BMP.PicType = PICTYPE_BITMAP
-            PicInfo_BMP.hBitmap = PictureHandle
-            PicInfo_BMP.hPal = BitmapPalette
-            ReturnValue = OleCreatePictureIndirect(PicInfo_BMP, rIID, 1, ThePicture)
-        Case vbPicTypeIcon
-            PicInfo_ICON.cbSizeOfStruct = Len(PicInfo_BMP)
-            PicInfo_ICON.PicType = PICTYPE_ICON
-            PicInfo_ICON.hIcon = PictureHandle
-            ReturnValue = OleCreatePictureIndirect(PicInfo_ICON, rIID, 1, ThePicture)
-        Case vbPicTypeMetafile
-            PicInfo_META.cbSizeOfStruct = Len(PicInfo_BMP)
-            PicInfo_META.PicType = PICTYPE_METAFILE
-            PicInfo_META.hMeta = PictureHandle
-            PicInfo_META.xExt = MetaWidth
-            PicInfo_META.yExt = MetaHeight
-            ReturnValue = OleCreatePictureIndirect(PicInfo_META, rIID, 1, ThePicture)
-        Case vbPicTypeEMetafile
-            PicInfo_EMETA.cbSizeOfStruct = Len(PicInfo_BMP)
-            PicInfo_EMETA.PicType = PICTYPE_ENHMETAFILE
-            PicInfo_EMETA.hEMF = PictureHandle
-            ReturnValue = OleCreatePictureIndirect(PicInfo_BMP, rIID, 1, ThePicture)
-    End Select
-    ' Check the result
-    If ReturnValue <> S_OK Then
-        GoTo ErrorTrap
-    End If
-    ' Return the new picture
-    Set CreateOlePicture = ThePicture
-    Exit Function
+   On Error Resume Next
+   Dim ReturnValue   As Long
+   Dim PicInfo_BMP   As PICTDESC_BMP
+   Dim PicInfo_EMETA As PICTDESC_EMETA
+   Dim PicInfo_ICON  As PICTDESC_ICON
+   Dim PicInfo_META  As PICTDESC_META
+   Dim ThePicture    As StdPicture 'IPicture
+   Dim rIID          As GUID
+   ' Clear the return variables
+   Return_ErrNum = 0
+   Return_ErrDesc = ""
+   ' Make sure the variable(s) passed are valid
+   If PictureHandle = 0 Then
+      Return_ErrNum = -1
+      Return_ErrDesc = "Invalid bitmap handle"
+   ElseIf PictureType = vbPicTypeNone Then
+      Return_ErrNum = -1
+      Return_ErrDesc = "Invalid picture type specified."
+   ElseIf PictureType = vbPicTypeMetafile Then
+      If MetaHeight = -1 Or MetaWidth = -1 Then
+         Return_ErrNum = -1
+         Return_ErrDesc = "Invalid metafile dimentions specified."
+      End If
+   End If
+   ' Set the correct interface identifier GUID for the "OleCreatePictureIndirect" API
+   With rIID
+      .Data1 = &H20400
+      .Data4(0) = &HC0
+      .Data4(7) = &H46
+   End With
+   ' Set the appropriate type depending on the type of picture
+   Select Case PictureType
+   Case vbPicTypeBitmap
+      PicInfo_BMP.cbSizeOfStruct = Len(PicInfo_BMP)
+      PicInfo_BMP.PicType = PICTYPE_BITMAP
+      PicInfo_BMP.hBitmap = PictureHandle
+      PicInfo_BMP.hPal = BitmapPalette
+      ReturnValue = OleCreatePictureIndirect(PicInfo_BMP, rIID, 1, ThePicture)
+   Case vbPicTypeIcon
+      PicInfo_ICON.cbSizeOfStruct = Len(PicInfo_BMP)
+      PicInfo_ICON.PicType = PICTYPE_ICON
+      PicInfo_ICON.hIcon = PictureHandle
+      ReturnValue = OleCreatePictureIndirect(PicInfo_ICON, rIID, 1, ThePicture)
+   Case vbPicTypeMetafile
+      PicInfo_META.cbSizeOfStruct = Len(PicInfo_BMP)
+      PicInfo_META.PicType = PICTYPE_METAFILE
+      PicInfo_META.hMeta = PictureHandle
+      PicInfo_META.xExt = MetaWidth
+      PicInfo_META.yExt = MetaHeight
+      ReturnValue = OleCreatePictureIndirect(PicInfo_META, rIID, 1, ThePicture)
+   Case vbPicTypeEMetafile
+      PicInfo_EMETA.cbSizeOfStruct = Len(PicInfo_BMP)
+      PicInfo_EMETA.PicType = PICTYPE_ENHMETAFILE
+      PicInfo_EMETA.hEMF = PictureHandle
+      ReturnValue = OleCreatePictureIndirect(PicInfo_BMP, rIID, 1, ThePicture)
+   End Select
+   ' Check the result
+   If ReturnValue <> S_OK Then
+      GoTo ErrorTrap
+   End If
+   ' Return the new picture
+   Set CreateOlePicture = ThePicture
+   Exit Function
 ErrorTrap:
-    Return_ErrNum = ReturnValue
-    Select Case ReturnValue
-        Case E_NOINTERFACE
-            Return_ErrDesc = "The object does not support the interface specified in riid."
-        Case E_POINTER
-            Return_ErrDesc = "The address in pPictDesc or ppvObj is not valid. For example, it may be NULL."
-        Case E_INVALIDARG
-            Return_ErrDesc = "One or more arguments are invalid."
-        Case E_OUTOFMEMORY
-            Return_ErrDesc = "Ran out of memory."
-        Case E_UNEXPECTED
-            Return_ErrDesc = "Catastrophic Failure."
-        Case Else
-            Return_ErrDesc = "Unknown Error."
-    End Select
+   Return_ErrNum = ReturnValue
+   Select Case ReturnValue
+   Case E_NOINTERFACE
+      Return_ErrDesc = "The object does not support the interface specified in riid."
+   Case E_POINTER
+      Return_ErrDesc = "The address in pPictDesc or ppvObj is not valid. For example, it may be NULL."
+   Case E_INVALIDARG
+      Return_ErrDesc = "One or more arguments are invalid."
+   Case E_OUTOFMEMORY
+      Return_ErrDesc = "Ran out of memory."
+   Case E_UNEXPECTED
+      Return_ErrDesc = "Catastrophic Failure."
+   Case Else
+      Return_ErrDesc = "Unknown Error."
+   End Select
 End Function
-
 '
 ' ExtractFromRES
 '
@@ -853,97 +845,96 @@ End Function
 ' If the function fails, the return is FALSE
 '
 Public Function ExtractFromRES(ByVal OutputFile As String, ByVal RES_ID As Long, Optional ByVal RES_Section As String, Optional ByVal FileType As ResTypes = rt_Custom, Optional ByVal OverwriteFile As Boolean = True, Optional ByVal ConfirmOnOverwrite As Boolean = False, Optional ByVal ReturnPicRef As Boolean = False, Optional ByRef Return_Picture As StdPicture) As Boolean
-    On Error GoTo ErrorTrap
-    Dim ResFile() As Byte
-    Dim TestVar   As Variant
-    Dim RESPic    As StdPicture
-    Dim FileNum   As Long
-    Dim MyAnswer  As VbMsgBoxResult
-    Dim DelFile   As Boolean
-    ' Make sure parameters are valid
-    If RES_ID < 1 Or RES_ID > 32767 Then
-        MsgBox "Resource ID is invalid.  Value must be between 1 and 32767.", vbOKOnly + vbExclamation, "  Invalid Resource ID"
-        Exit Function
-    ElseIf FileType = rt_Custom And RES_Section = "" Then
-        MsgBox "No resource type specified.", vbOKOnly + vbExclamation, "  Error Extracting Resource"
-        Exit Function
-    ElseIf OutputFile = "" And ReturnPicRef = False Then
-        MsgBox "No output file specified to extract resource to.", vbOKOnly + vbExclamation, "  No Output File Specified"
-        Exit Function
-    ElseIf Dir(OutputFile) <> "" And OverwriteFile = False Then
-        If ConfirmOnOverwrite = True Then
-            MyAnswer = MsgBox(OutputFile & Chr(13) & "This file already exists." & Chr(13) & Chr(13) & "Overwrite existing file?", vbYesNo + vbExclamation, "  Confirm File Overwrite")
-            If MyAnswer = vbNo Then
-                ExtractFromRES = True
-                Exit Function
-            End If
-        Else
+   On Error GoTo ErrorTrap
+   Dim ResFile() As Byte
+   Dim TestVar   As Variant
+   Dim RESPic    As StdPicture
+   Dim FileNum   As Long
+   Dim MyAnswer  As VbMsgBoxResult
+   Dim DelFile   As Boolean
+   ' Make sure parameters are valid
+   If RES_ID < 1 Or RES_ID > 32767 Then
+      MsgBox "Resource ID is invalid.  Value must be between 1 and 32767.", vbOKOnly + vbExclamation, "  Invalid Resource ID"
+      Exit Function
+   ElseIf FileType = rt_Custom And RES_Section = "" Then
+      MsgBox "No resource type specified.", vbOKOnly + vbExclamation, "  Error Extracting Resource"
+      Exit Function
+   ElseIf OutputFile = "" And ReturnPicRef = False Then
+      MsgBox "No output file specified to extract resource to.", vbOKOnly + vbExclamation, "  No Output File Specified"
+      Exit Function
+   ElseIf Dir(OutputFile) <> "" And OverwriteFile = False Then
+      If ConfirmOnOverwrite = True Then
+         MyAnswer = MsgBox(OutputFile & VBA.Chr(13) & "This file already exists." & VBA.Chr(13) & VBA.Chr(13) & "Overwrite existing file?", vbYesNo + vbExclamation, "  Confirm File Overwrite")
+         If MyAnswer = vbNo Then
+            ExtractFromRES = True
             Exit Function
-        End If
-    End If
-    ' Extract and process the specified file
-    Select Case FileType
-            ' Save out the specified picture resource
-        Case RT_BITMAP, RT_CURSOR, RT_ICON
-            Set RESPic = LoadResPicture(RES_ID, FileType)
-            If RESPic Is Nothing Then Exit Function
-            If OutputFile <> "" Then SavePicture RESPic, OutputFile
-            If ReturnPicRef = True Then
-                Set Return_Picture = RESPic
-            Else
-                Set RESPic = Nothing
-            End If
-            ' Save out the specified custom resource file
-        Case rt_Custom
-            ' If no output file specified, use a temporary one
-            If OutputFile = "" Then
-                OutputFile = "C:\TEMP.TMP"
-                On Error Resume Next
-                Kill OutputFile
-                Err.Clear
-                On Error GoTo ErrorTrap
-                DelFile = True
-            End If
-            ' Load the resource
-            ResFile = LoadResData(RES_ID, RES_Section)
-            ' Check if an error occured while loading the resource
-            On Error Resume Next
+         End If
+      Else
+         Exit Function
+      End If
+   End If
+   ' Extract and process the specified file
+   Select Case FileType
+      ' Save out the specified picture resource
+   Case RT_BITMAP, RT_CURSOR, RT_ICON
+      Set RESPic = LoadResPicture(RES_ID, FileType)
+      If RESPic Is Nothing Then Exit Function
+      If OutputFile <> "" Then SavePicture RESPic, OutputFile
+      If ReturnPicRef = True Then
+         Set Return_Picture = RESPic
+      Else
+         Set RESPic = Nothing
+      End If
+      ' Save out the specified custom resource file
+   Case rt_Custom
+      ' If no output file specified, use a temporary one
+      If OutputFile = "" Then
+         OutputFile = "C:\TEMP.TMP"
+         On Error Resume Next
+         Kill OutputFile
+         Err.Clear
+         On Error GoTo ErrorTrap
+         DelFile = True
+      End If
+      ' Load the resource
+      ResFile = LoadResData(RES_ID, RES_Section)
+      ' Check if an error occured while loading the resource
+      On Error Resume Next
+      Err.Clear
+      TestVar = UBound(ResFile)
+      If Err Then Err.Clear: Exit Function
+      On Error GoTo ErrorTrap
+      ' Save the resource file out to disk
+      FileNum = FreeFile
+      Open OutputFile For Binary As #FileNum
+      Put #FileNum, 1, ResFile()
+      Close #FileNum
+      ' If the user specified to return the picture, assume the custom file is a picture
+      ' and try to load it and return a reference to it
+      If ReturnPicRef = True Then
+         On Error Resume Next
+         Set Return_Picture = LoadPicture(OutputFile)
+         If Err Or (Return_Picture Is Nothing) Then
+            Set Return_Picture = Nothing
             Err.Clear
-            TestVar = UBound(ResFile)
-            If Err Then Err.Clear: Exit Function
-            On Error GoTo ErrorTrap
-            ' Save the resource file out to disk
-            FileNum = FreeFile
-            Open OutputFile For Binary As #FileNum
-            Put #FileNum, 1, ResFile()
-            Close #FileNum
-            ' If the user specified to return the picture, assume the custom file is a picture
-            ' and try to load it and return a reference to it
-            If ReturnPicRef = True Then
-                On Error Resume Next
-                Set Return_Picture = LoadPicture(OutputFile)
-                If Err Or (Return_Picture Is Nothing) Then
-                    Set Return_Picture = Nothing
-                    Err.Clear
-                End If
-            End If
-            ' Clean up temp file
-            If DelFile = True Then Kill OutputFile
-    End Select
-    ' Return SUCCESS
-    ExtractFromRES = True
-    Exit Function
+         End If
+      End If
+      ' Clean up temp file
+      If DelFile = True Then Kill OutputFile
+   End Select
+   ' Return SUCCESS
+   ExtractFromRES = True
+   Exit Function
 ErrorTrap:
-    If Err.Number = 0 Then      ' No Error
-        Resume Next
-    ElseIf Err.Number = 20 Then ' Resume Without Error
-        Resume Next
-    Else                        ' Unknown Error
-        MsgBox Err.Source & " encountered the following error:" & Chr(13) & Chr(13) & "Error Number = " & CStr(Err.Number) & Chr(13) & "Error Description = " & Err.Description, vbOKOnly + vbExclamation, "  Error  -  " & Err.Description
-        Err.Clear
-    End If
+   If Err.Number = 0 Then      ' No Error
+      Resume Next
+   ElseIf Err.Number = 20 Then ' Resume Without Error
+      Resume Next
+   Else                        ' Unknown Error
+      MsgBox Err.Source & " encountered the following error:" & VBA.Chr(13) & VBA.Chr(13) & "Error Number = " & CStr(Err.Number) & VBA.Chr(13) & "Error Description = " & Err.Description, vbOKOnly + vbExclamation, "  Error  -  " & Err.Description
+      Err.Clear
+   End If
 End Function
-
 '
 ' GetDisplayInfo
 '
@@ -965,38 +956,37 @@ End Function
 ' If the function fails, the return is FALSE
 '
 Public Function GetDisplayInfo(Optional ByRef ScreenWidth As Long, Optional ByRef ScreenHeight As Long, Optional ByRef TwipsX As Single, Optional ByRef TwipsY As Single, Optional ByRef BitsPerPixel As Long) As Boolean
-    On Error Resume Next
-    Dim TempW     As Long
-    Dim TempH     As Long
-    Dim hScreenDC As Long
-    ' Reset the return values
-    ScreenWidth = 0
-    ScreenHeight = 0
-    TwipsX = 0
-    TwipsY = 0
-    BitsPerPixel = 0
-    ' Get the handle to the display area's Device Context
-    hScreenDC = GetDC(GetDesktopWindow)
-    If hScreenDC = 0 Then Exit Function
-    ' Get the color depth
-    BitsPerPixel = GetDeviceCaps(hScreenDC, BITSPIXEL)
-    ' Get the screen width / height in pixels
-    ScreenWidth = GetDeviceCaps(hScreenDC, HORZRES)
-    ScreenHeight = GetDeviceCaps(hScreenDC, VERTRES)
-    ' Get the physical width / height of the screen in millimeters
-    TempH = GetDeviceCaps(hScreenDC, VERTSIZE)
-    TempW = GetDeviceCaps(hScreenDC, HORZSIZE)
-    ' Get the TwipsPerPixelX & TwipsPerPixelY (There are 56.7 twips per millimeter)
-    TwipsX = CSng((56.7 * TempW) / ScreenWidth)
-    TwipsY = CSng((56.7 * TempH) / ScreenHeight)
-    ' Format the return to one decimal place
-    TwipsX = CSng(Format(TwipsX, "0.0"))
-    TwipsY = CSng(Format(TwipsY, "0.0"))
-    ' Clean up and return
-    ReleaseDC GetDesktopWindow, hScreenDC
-    GetDisplayInfo = True
+   On Error Resume Next
+   Dim TempW     As Long
+   Dim TempH     As Long
+   Dim hScreenDC As Long
+   ' Reset the return values
+   ScreenWidth = 0
+   ScreenHeight = 0
+   TwipsX = 0
+   TwipsY = 0
+   BitsPerPixel = 0
+   ' Get the handle to the display area's Device Context
+   hScreenDC = GetDC(GetDesktopWindow)
+   If hScreenDC = 0 Then Exit Function
+   ' Get the color depth
+   BitsPerPixel = GetDeviceCaps(hScreenDC, BITSPIXEL)
+   ' Get the screen width / height in pixels
+   ScreenWidth = GetDeviceCaps(hScreenDC, HORZRES)
+   ScreenHeight = GetDeviceCaps(hScreenDC, VERTRES)
+   ' Get the physical width / height of the screen in millimeters
+   TempH = GetDeviceCaps(hScreenDC, VERTSIZE)
+   TempW = GetDeviceCaps(hScreenDC, HORZSIZE)
+   ' Get the TwipsPerPixelX & TwipsPerPixelY (There are 56.7 twips per millimeter)
+   TwipsX = CSng((56.7 * TempW) / ScreenWidth)
+   TwipsY = CSng((56.7 * TempH) / ScreenHeight)
+   ' Format the return to one decimal place
+   TwipsX = CSng(Format(TwipsX, "0.0"))
+   TwipsY = CSng(Format(TwipsY, "0.0"))
+   ' Clean up and return
+   ReleaseDC GetDesktopWindow, hScreenDC
+   GetDisplayInfo = True
 End Function
-
 ' GetBitmapInfo
 '
 ' This function takes a given picture and finds out all possible information about it and returns the
@@ -1021,30 +1011,29 @@ End Function
 ' If the function fails, the return is FALSE
 '
 Public Function GetBitmapInfo(ByVal hBitmap As Long, Optional ByRef Return_Height As Long, Optional ByRef Return_Width As Long, Optional ByRef Return_BitsPerPixel As Integer, Optional ByRef Return_Size As Double, Optional ByRef Return_PointerToBits As Long) As Boolean
-    On Error Resume Next
-    Dim BMP As BITMAP
-    ' Clear the return variables
-    Return_Height = 0
-    Return_Width = 0
-    Return_BitsPerPixel = 0
-    Return_Size = 0
-    Return_PointerToBits = 0
-    ' Check that there's a valid input
-    If hBitmap = 0 Then Exit Function
-    ' Get the information
-    If GetObjectAPI(hBitmap, Len(BMP), BMP) = 0 Then Exit Function
-    ' Return the information
-    With BMP
-        Return_Height = .bmHeight
-        Return_Width = .bmWidth
-        Return_BitsPerPixel = (.bmBitsPixel * .bmPlanes)
-        Return_Size = ((.bmWidth * 3 + 3) And &HFFFFFFFC) * .bmHeight
-        Return_PointerToBits = .bmBits
-    End With
-    ' Function succeeded
-    GetBitmapInfo = True
+   On Error Resume Next
+   Dim BMP As BITMAP
+   ' Clear the return variables
+   Return_Height = 0
+   Return_Width = 0
+   Return_BitsPerPixel = 0
+   Return_Size = 0
+   Return_PointerToBits = 0
+   ' Check that there's a valid input
+   If hBitmap = 0 Then Exit Function
+   ' Get the information
+   If GetObjectAPI(hBitmap, Len(BMP), BMP) = 0 Then Exit Function
+   ' Return the information
+   With BMP
+      Return_Height = .bmHeight
+      Return_Width = .bmWidth
+      Return_BitsPerPixel = (.bmBitsPixel * .bmPlanes)
+      Return_Size = ((.bmWidth * 3 + 3) And &HFFFFFFFC) * .bmHeight
+      Return_PointerToBits = .bmBits
+   End With
+   ' Function succeeded
+   GetBitmapInfo = True
 End Function
-
 ' GetIconBitmaps
 '
 ' This function takes the given ICON or CURSOR and breaks out the Image and Mask BITMAPs that make it up.
@@ -1067,13 +1056,12 @@ End Function
 ' If the function fails, the return is FALSE
 '
 Public Function GetIconBitmaps(ByVal hIcon As Long, ByRef Return_hBmpMask As Long, ByRef Return_hBmpImage As Long) As Boolean
-    Dim TempICONINFO As ICONINFO
-    If GetIconInfo(hIcon, TempICONINFO) = 0 Then Exit Function
-    Return_hBmpMask = TempICONINFO.hbmMask
-    Return_hBmpImage = TempICONINFO.hbmColor
-    GetIconBitmaps = True
+   Dim TempICONINFO As ICONINFO
+   If GetIconInfo(hIcon, TempICONINFO) = 0 Then Exit Function
+   Return_hBmpMask = TempICONINFO.hbmMask
+   Return_hBmpImage = TempICONINFO.hbmColor
+   GetIconBitmaps = True
 End Function
-
 ' GetBitmapFromDC
 '
 ' This function returns the handle to the picture that is currently selected into the specified Device
@@ -1090,9 +1078,8 @@ End Function
 ' If the function fails, the return is ZERO (0)
 '
 Public Function GetBitmapFromDC(ByVal hdc As Long) As Long
-    GetBitmapFromDC = GetCurrentObject(hdc, OBJ_BITMAP)
+   GetBitmapFromDC = GetCurrentObject(hdc, OBJ_BITMAP)
 End Function
-
 ' MemoryDC_Create
 '
 ' This function creates a Device Context (DC) in memory compatible with the current screen display.
@@ -1119,15 +1106,14 @@ End Function
 ' If the function fails, the return is ZERO (0)
 '
 Public Function MemoryDC_Create() As Long
-    Dim hScreenDC As Long
-    ' Get the handle to the current display screen's DC
-    hScreenDC = GetDC(GetDesktopWindow)
-    ' Create a compatible DC
-    If hScreenDC <> 0 Then MemoryDC_Create = CreateCompatibleDC(hScreenDC)
-    ' Release the handle to the display screen
-    ReleaseDC GetDesktopWindow, hScreenDC
+   Dim hScreenDC As Long
+   ' Get the handle to the current display screen's DC
+   hScreenDC = GetDC(GetDesktopWindow)
+   ' Create a compatible DC
+   If hScreenDC <> 0 Then MemoryDC_Create = CreateCompatibleDC(hScreenDC)
+   ' Release the handle to the display screen
+   ReleaseDC GetDesktopWindow, hScreenDC
 End Function
-
 ' MemoryDC_Delete
 '
 ' This function deletes any memory Device Context (DC) created by a call to such Win32 APIs as "CreateDC"
@@ -1147,20 +1133,19 @@ End Function
 ' If the function fails, the return is FALSE
 '
 Public Function MemoryDC_Delete(ByRef hMemoryDC As Long, Optional ByRef hPrevBitmap As Long) As Boolean
-    ' Make sure parameter(s) are valid
-    If hMemoryDC = 0 Then Exit Function
-    ' Put the previous bitmap back into the DC and delete the one that's in it now
-    If hPrevBitmap <> 0 Then
-        DeleteObject SelectObject(hMemoryDC, hPrevBitmap)
-        hPrevBitmap = 0
-    End If
-    ' Delete the DC
-    If DeleteDC(hMemoryDC) <> 0 Then
-        MemoryDC_Delete = True
-        hMemoryDC = 0
-    End If
+   ' Make sure parameter(s) are valid
+   If hMemoryDC = 0 Then Exit Function
+   ' Put the previous bitmap back into the DC and delete the one that's in it now
+   If hPrevBitmap <> 0 Then
+      DeleteObject SelectObject(hMemoryDC, hPrevBitmap)
+      hPrevBitmap = 0
+   End If
+   ' Delete the DC
+   If DeleteDC(hMemoryDC) <> 0 Then
+      MemoryDC_Delete = True
+      hMemoryDC = 0
+   End If
 End Function
-
 '
 ' LoadBitmapToDC
 '
@@ -1183,14 +1168,13 @@ End Function
 ' If the function fails, the return is FALSE
 '
 Public Function LoadBitmapToDC(ByVal hdc As Long, ByVal hPictureToLoad As Long, Optional ByRef Return_hPrevPic As Long) As Boolean
-    ' Make sure the values passed are valid
-    If hdc = 0 Or hPictureToLoad = 0 Then Exit Function
-    ' Select the specified picture into the specified DC
-    Return_hPrevPic = SelectObject(hdc, hPictureToLoad)
-    ' Return successful results
-    LoadBitmapToDC = True
+   ' Make sure the values passed are valid
+   If hdc = 0 Or hPictureToLoad = 0 Then Exit Function
+   ' Select the specified picture into the specified DC
+   Return_hPrevPic = SelectObject(hdc, hPictureToLoad)
+   ' Return successful results
+   LoadBitmapToDC = True
 End Function
-
 ' RefreshHWND
 '
 ' This function "refreshes" the specified window by invalidating it's contents.  This sends messages
@@ -1215,11 +1199,10 @@ End Function
 ' If the function fails, the return is FALSE
 '
 Public Function RefreshHWND(ByVal WindowHandle As Long) As Boolean
-    On Error Resume Next
-    ' If RedrawWindow(WindowHandle, ByVal 0, 0, RDW_INVALIDATE Or RDW_ALLCHILDREN) <> 0 Then RefreshHWND = True
-    If RedrawWindow(WindowHandle, ByVal 0, 0, RDW_INVALIDATE) <> 0 Then RefreshHWND = True
+   On Error Resume Next
+   ' If RedrawWindow(WindowHandle, ByVal 0, 0, RDW_INVALIDATE Or RDW_ALLCHILDREN) <> 0 Then RefreshHWND = True
+   If RedrawWindow(WindowHandle, ByVal 0, 0, RDW_INVALIDATE) <> 0 Then RefreshHWND = True
 End Function
-
 ' RenderIcon
 '
 ' This function takes the specified icon and renders it to the specified Device Context.
@@ -1240,13 +1223,12 @@ End Function
 ' If the function succeeds, the return is TRUE
 ' If the function fails, the return is FALSE
 Public Function RenderIcon(ByVal Dest_hDC As Long, ByVal hIcon As Long, Optional ByVal Dest_X As Long, Optional ByVal Dest_Y As Long, Optional ByVal Dest_Height As Long, Optional ByVal Dest_Width As Long) As Boolean
-    ' Make sure parameters passed are valid
-    If Dest_hDC = 0 Or hIcon = 0 Then Exit Function
-    If DrawIconEx(Dest_hDC, Dest_X, Dest_Y, hIcon, Dest_Width, Dest_Height, 0, 0, DI_NORMAL) <> 0 Then
-        RenderIcon = True
-    End If
+   ' Make sure parameters passed are valid
+   If Dest_hDC = 0 Or hIcon = 0 Then Exit Function
+   If DrawIconEx(Dest_hDC, Dest_X, Dest_Y, hIcon, Dest_Width, Dest_Height, 0, 0, DI_NORMAL) <> 0 Then
+      RenderIcon = True
+   End If
 End Function
-
 ' RenderIconGrayscale
 '
 ' This function takes the specified icon and converts it to grayscale and then renders it to the
@@ -1269,36 +1251,35 @@ End Function
 ' If the function fails, the return is FALSE
 '
 Public Function RenderIconGrayscale(ByVal Dest_hDC As Long, ByVal hIcon As Long, Optional ByVal Dest_X As Long, Optional ByVal Dest_Y As Long, Optional ByVal Dest_Height As Long, Optional ByVal Dest_Width As Long) As Boolean
-    Dim hBMP_Mask  As Long
-    Dim hBMP_Image As Long
-    Dim hBMP_Prev  As Long
-    Dim hIcon_Temp As Long
-    Dim hDC_Temp   As Long
-    ' Make sure parameters passed are valid
-    If Dest_hDC = 0 Or hIcon = 0 Then Exit Function
-    ' Extract the bitmaps from the icon
-    If GetIconBitmaps(hIcon, hBMP_Mask, hBMP_Image) = False Then Exit Function
-    ' Create a memory DC to work with
-    hDC_Temp = MemoryDC_Create
-    If hDC_Temp = 0 Then GoTo CleanUp
-    ' Make the image bitmap gradient
-    If RenderBitmapGrayscale(hDC_Temp, hBMP_Image, 0, 0, , , True) = False Then GoTo CleanUp
-    ' Extract the gradient bitmap out of the DC
-    SelectObject hDC_Temp, hBMP_Prev
-    ' Take the newly gradient bitmap and make a gradient icon from it
-    hIcon_Temp = CreateIconFromBMP(hBMP_Mask, hBMP_Image)
-    If hIcon_Temp = 0 Then GoTo CleanUp
-    ' Draw the newly created gradient icon onto the specified DC
-    If DrawIconEx(Dest_hDC, Dest_X, Dest_Y, hIcon_Temp, Dest_Width, Dest_Height, 0, 0, DI_NORMAL) <> 0 Then
-        RenderIconGrayscale = True
-    End If
+   Dim hBMP_Mask  As Long
+   Dim hBMP_Image As Long
+   Dim hBMP_Prev  As Long
+   Dim hIcon_Temp As Long
+   Dim hDC_Temp   As Long
+   ' Make sure parameters passed are valid
+   If Dest_hDC = 0 Or hIcon = 0 Then Exit Function
+   ' Extract the bitmaps from the icon
+   If GetIconBitmaps(hIcon, hBMP_Mask, hBMP_Image) = False Then Exit Function
+   ' Create a memory DC to work with
+   hDC_Temp = MemoryDC_Create
+   If hDC_Temp = 0 Then GoTo CleanUp
+   ' Make the image bitmap gradient
+   If RenderBitmapGrayscale(hDC_Temp, hBMP_Image, 0, 0, , , True) = False Then GoTo CleanUp
+   ' Extract the gradient bitmap out of the DC
+   SelectObject hDC_Temp, hBMP_Prev
+   ' Take the newly gradient bitmap and make a gradient icon from it
+   hIcon_Temp = CreateIconFromBMP(hBMP_Mask, hBMP_Image)
+   If hIcon_Temp = 0 Then GoTo CleanUp
+   ' Draw the newly created gradient icon onto the specified DC
+   If DrawIconEx(Dest_hDC, Dest_X, Dest_Y, hIcon_Temp, Dest_Width, Dest_Height, 0, 0, DI_NORMAL) <> 0 Then
+      RenderIconGrayscale = True
+   End If
 CleanUp:
-    DestroyIcon hIcon_Temp: hIcon_Temp = 0
-    DeleteDC hDC_Temp: hDC_Temp = 0
-    DeleteObject hBMP_Mask: hBMP_Mask = 0
-    DeleteObject hBMP_Image: hBMP_Image = 0
+   DestroyIcon hIcon_Temp: hIcon_Temp = 0
+   DeleteDC hDC_Temp: hDC_Temp = 0
+   DeleteObject hBMP_Mask: hBMP_Mask = 0
+   DeleteObject hBMP_Image: hBMP_Image = 0
 End Function
-
 ' RenderCursor
 '
 ' This function takes the specified cursor and renders it to the specified Device Context.
@@ -1323,13 +1304,12 @@ End Function
 ' If the function fails, the return is FALSE
 '
 Public Function RenderCursor(ByVal Dest_hDC As Long, ByVal hCursor As Long, Optional ByVal Dest_X As Long, Optional ByVal Dest_Y As Long, Optional ByVal Dest_Height As Long, Optional ByVal Dest_Width As Long, Optional ByVal AnimatedCursorFrame As Long) As Boolean
-    ' Make sure parameters passed are valid
-    If Dest_hDC = 0 Or hCursor = 0 Then Exit Function
-    If DrawIconEx(Dest_hDC, Dest_X, Dest_Y, hCursor, Dest_Width, Dest_Height, AnimatedCursorFrame, 0, DI_NORMAL) <> 0 Then
-        RenderCursor = True
-    End If
+   ' Make sure parameters passed are valid
+   If Dest_hDC = 0 Or hCursor = 0 Then Exit Function
+   If DrawIconEx(Dest_hDC, Dest_X, Dest_Y, hCursor, Dest_Width, Dest_Height, AnimatedCursorFrame, 0, DI_NORMAL) <> 0 Then
+      RenderCursor = True
+   End If
 End Function
-
 ' RenderCursorGrayscale
 '
 ' This function takes the specified cursor and changes it to grayscale and then renders it to the
@@ -1352,36 +1332,35 @@ End Function
 ' If the function fails, the return is FALSE
 '
 Public Function RenderCursorGrayscale(ByVal Dest_hDC As Long, ByVal hCursor As Long, Optional ByVal Dest_X As Long, Optional ByVal Dest_Y As Long, Optional ByVal Dest_Height As Long, Optional ByVal Dest_Width As Long) As Boolean
-    Dim hBMP_Mask    As Long
-    Dim hBMP_Image   As Long
-    Dim hBMP_Prev    As Long
-    Dim hCursor_Temp As Long
-    Dim hDC_Temp     As Long
-    ' Make sure parameters passed are valid
-    If Dest_hDC = 0 Or hCursor = 0 Then Exit Function
-    ' Extract the bitmaps from the cursor
-    If GetIconBitmaps(hCursor, hBMP_Mask, hBMP_Image) = False Then Exit Function
-    ' Create a memory DC to work with
-    hDC_Temp = MemoryDC_Create
-    If hDC_Temp = 0 Then GoTo CleanUp
-    ' Make the image bitmap gradient
-    If RenderBitmapGrayscale(hDC_Temp, hBMP_Image, 0, 0, , , True) = False Then GoTo CleanUp
-    ' Extract the gradient bitmap out of the DC
-    SelectObject hDC_Temp, hBMP_Prev
-    ' Take the newly gradient bitmap and make a gradient cursor from it
-    hCursor_Temp = CreateCursorFromBMP(hBMP_Mask, hBMP_Image)
-    If hCursor_Temp = 0 Then GoTo CleanUp
-    ' Draw the newly created gradient cursor onto the specified DC
-    If DrawIconEx(Dest_hDC, Dest_X, Dest_Y, hCursor_Temp, Dest_Width, Dest_Height, 0, 0, DI_NORMAL) <> 0 Then
-        RenderCursorGrayscale = True
-    End If
+   Dim hBMP_Mask    As Long
+   Dim hBMP_Image   As Long
+   Dim hBMP_Prev    As Long
+   Dim hCursor_Temp As Long
+   Dim hDC_Temp     As Long
+   ' Make sure parameters passed are valid
+   If Dest_hDC = 0 Or hCursor = 0 Then Exit Function
+   ' Extract the bitmaps from the cursor
+   If GetIconBitmaps(hCursor, hBMP_Mask, hBMP_Image) = False Then Exit Function
+   ' Create a memory DC to work with
+   hDC_Temp = MemoryDC_Create
+   If hDC_Temp = 0 Then GoTo CleanUp
+   ' Make the image bitmap gradient
+   If RenderBitmapGrayscale(hDC_Temp, hBMP_Image, 0, 0, , , True) = False Then GoTo CleanUp
+   ' Extract the gradient bitmap out of the DC
+   SelectObject hDC_Temp, hBMP_Prev
+   ' Take the newly gradient bitmap and make a gradient cursor from it
+   hCursor_Temp = CreateCursorFromBMP(hBMP_Mask, hBMP_Image)
+   If hCursor_Temp = 0 Then GoTo CleanUp
+   ' Draw the newly created gradient cursor onto the specified DC
+   If DrawIconEx(Dest_hDC, Dest_X, Dest_Y, hCursor_Temp, Dest_Width, Dest_Height, 0, 0, DI_NORMAL) <> 0 Then
+      RenderCursorGrayscale = True
+   End If
 CleanUp:
-    DestroyIcon hCursor_Temp: hCursor_Temp = 0
-    DeleteDC hDC_Temp: hDC_Temp = 0
-    DeleteObject hBMP_Mask: hBMP_Mask = 0
-    DeleteObject hBMP_Image: hBMP_Image = 0
+   DestroyIcon hCursor_Temp: hCursor_Temp = 0
+   DeleteDC hDC_Temp: hDC_Temp = 0
+   DeleteObject hBMP_Mask: hBMP_Mask = 0
+   DeleteObject hBMP_Image: hBMP_Image = 0
 End Function
-
 ' RenderBitmap
 '
 ' This function takes the specified bitmap and renders it to the specified device context.  This is a
@@ -1409,31 +1388,30 @@ End Function
 '
 '=============================================================================================================
 Public Function RenderBitmap(ByVal Dest_hDC As Long, ByVal hBitmap As Long, Optional ByVal Dest_X As Long, Optional ByVal Dest_Y As Long, Optional ByVal Srce_X As Long, Optional ByVal Srce_Y As Long, Optional ByVal RasterOperation As RasterOperations = SRCCOPY) As Boolean
-    Dim TempBMP    As BITMAP
-    Dim hDC_Temp   As Long
-    Dim hDC_Screen As Long
-    Dim hBMP_Prev  As Long
-    ' Make sure parameters passed are valid
-    If Dest_hDC = 0 Or hBitmap = 0 Then Exit Function
-    ' Get the information about the bitmap (and make sure it's a valid BITMAP
-    If GetObjectAPI(hBitmap, Len(TempBMP), TempBMP) = 0 Then Exit Function
-    ' Create a memory DC to use for the render operation
-    hDC_Screen = GetDC(GetDesktopWindow)
-    If hDC_Screen = 0 Then Exit Function
-    hDC_Temp = CreateCompatibleDC(hDC_Screen)
-    If hDC_Temp = 0 Then GoTo CleanUp
-    ' Select the specified bitmap into the memory DC just created
-    hBMP_Prev = SelectObject(hDC_Temp, hBitmap)
-    ' Render the bitmap onto the specified hDC
-    If BitBlt(Dest_hDC, Dest_X, Dest_Y, TempBMP.bmWidth, TempBMP.bmHeight, hDC_Temp, Srce_X, Srce_Y, RasterOperation) <> 0 Then
-        RenderBitmap = True
-    End If
+   Dim TempBMP    As BITMAP
+   Dim hDC_Temp   As Long
+   Dim hDC_Screen As Long
+   Dim hBMP_Prev  As Long
+   ' Make sure parameters passed are valid
+   If Dest_hDC = 0 Or hBitmap = 0 Then Exit Function
+   ' Get the information about the bitmap (and make sure it's a valid BITMAP
+   If GetObjectAPI(hBitmap, Len(TempBMP), TempBMP) = 0 Then Exit Function
+   ' Create a memory DC to use for the render operation
+   hDC_Screen = GetDC(GetDesktopWindow)
+   If hDC_Screen = 0 Then Exit Function
+   hDC_Temp = CreateCompatibleDC(hDC_Screen)
+   If hDC_Temp = 0 Then GoTo CleanUp
+   ' Select the specified bitmap into the memory DC just created
+   hBMP_Prev = SelectObject(hDC_Temp, hBitmap)
+   ' Render the bitmap onto the specified hDC
+   If BitBlt(Dest_hDC, Dest_X, Dest_Y, TempBMP.bmWidth, TempBMP.bmHeight, hDC_Temp, Srce_X, Srce_Y, RasterOperation) <> 0 Then
+      RenderBitmap = True
+   End If
 CleanUp:
-    ReleaseDC GetDesktopWindow, hDC_Screen: hDC_Screen = 0
-    SelectObject hDC_Temp, hBMP_Prev
-    DeleteDC hDC_Temp: hDC_Temp = 0
+   ReleaseDC GetDesktopWindow, hDC_Screen: hDC_Screen = 0
+   SelectObject hDC_Temp, hBMP_Prev
+   DeleteDC hDC_Temp: hDC_Temp = 0
 End Function
-
 '=============================================================================================================
 '
 ' RenderBitmapEx
@@ -1500,80 +1478,79 @@ End Function
 ' If the function fails, the return is FALSE
 '
 Public Function RenderBitmapEx(ByVal Dest_hDC As Long, Optional ByVal Source_hDC As Long, Optional ByVal hBitmap As Long, Optional ByVal Dest_X As Long, Optional ByVal Dest_Y As Long, Optional ByVal Srce_X As Long, Optional ByVal Srce_Y As Long, Optional ByVal PicHeight As Long, Optional ByVal PicWidth As Long, Optional ByVal RasterOperation As RasterOperations = SRCCOPY, Optional ByVal StretchPicture As Boolean = False, Optional ByVal StretchHeight As Long, Optional ByVal StretchWidth As Long, Optional ByVal RefreshWindow As Boolean = False, Optional ByVal RefreshHandle As Long) As Boolean
-    On Error Resume Next
-    Dim ScrHWND     As Long
-    Dim ScrHDC      As Long
-    Dim hMemoryDC   As Long
-    Dim BMP         As BITMAP
-    Dim bDelMemDC   As Boolean
-    Dim hOldBitmap  As Long
-    Dim PrevStrMode As Long
-    ' Make sure parameters passed are valid
-    If Dest_hDC = 0 Then
-        Exit Function
-    ElseIf Source_hDC = 0 And hBitmap = 0 Then
-        Exit Function
-    End If
-    ' If no source DC was specified, but a picture was specified, create a DC to use
-    If Source_hDC = 0 And hBitmap <> 0 Then
-        bDelMemDC = True
-        ScrHWND = GetDesktopWindow
-        ScrHDC = GetDC(ScrHWND)
-        hMemoryDC = CreateCompatibleDC(ScrHDC)
-        ReleaseDC ScrHWND, ScrHDC
-        If hMemoryDC = 0 Then GoTo CleanUp
-        hOldBitmap = SelectObject(hMemoryDC, hBitmap)
-        ' If a source DC was specified and no picture was specified, make sure the source hDC has a picture
-    ElseIf Source_hDC <> 0 And hBitmap = 0 Then
-        bDelMemDC = False
-        hMemoryDC = Source_hDC
-        hBitmap = GetBitmapFromDC(Source_hDC)
-        If hBitmap = 0 Then
-            Exit Function
-        End If
-        ' If a source DC AND a picture was specified, use them both
-    ElseIf Source_hDC <> 0 And hBitmap <> 0 Then
-        bDelMemDC = False
-        hMemoryDC = Source_hDC
-    End If
-    ' If the user didn't specify a Height / Width, get them from the picture
-    If PicHeight = 0 Or PicWidth = 0 Then
-        If GetObjectAPI(hBitmap, Len(BMP), BMP) = 0 Then GoTo CleanUp
-        If PicHeight = 0 Then PicHeight = BMP.bmHeight
-        If PicWidth = 0 Then PicWidth = BMP.bmWidth
-    End If
-    ' Check if the user wants to stretch the picture
-    If StretchPicture = True Then
-        If StretchHeight = PicHeight And StretchWidth = PicWidth Then
-            StretchPicture = False
-        ElseIf StretchHeight = 0 Or StretchWidth = 0 Then
-            StretchPicture = False
-        End If
-    End If
-    ' Render the picture onto the specified DC
-    If StretchPicture = False Then
-        If BitBlt(Dest_hDC, Dest_X, Dest_Y, PicWidth, PicHeight, hMemoryDC, Srce_X, Srce_Y, RasterOperation) <> 0 Then
-            RenderBitmapEx = True
-        End If
-    Else
-        PrevStrMode = SetStretchBltMode(Dest_hDC, STRETCH_HALFTONE) ' This DRAMATICALLY improves the quality of the following stretch operation
-        If SetBrushOrgEx(Dest_hDC, 0, 0, ByVal 0) = 0 Then GoTo CleanUp
-        If StretchBlt(Dest_hDC, Dest_X, Dest_Y, StretchWidth, StretchHeight, hMemoryDC, Srce_X, Srce_Y, PicWidth, PicHeight, RasterOperation) <> 0 Then
-            RenderBitmapEx = True
-        End If
-        SetStretchBltMode Dest_hDC, PrevStrMode
-    End If
-    ' Refresh the DC to show the picture just drawn on it
-    If RenderBitmapEx = True And RefreshWindow = True And RefreshHandle <> 0 Then
-        RefreshHWND RefreshHandle
-    End If
+   On Error Resume Next
+   Dim ScrHWND     As Long
+   Dim ScrHDC      As Long
+   Dim hMemoryDC   As Long
+   Dim BMP         As BITMAP
+   Dim bDelMemDC   As Boolean
+   Dim hOldBitmap  As Long
+   Dim PrevStrMode As Long
+   ' Make sure parameters passed are valid
+   If Dest_hDC = 0 Then
+      Exit Function
+   ElseIf Source_hDC = 0 And hBitmap = 0 Then
+      Exit Function
+   End If
+   ' If no source DC was specified, but a picture was specified, create a DC to use
+   If Source_hDC = 0 And hBitmap <> 0 Then
+      bDelMemDC = True
+      ScrHWND = GetDesktopWindow
+      ScrHDC = GetDC(ScrHWND)
+      hMemoryDC = CreateCompatibleDC(ScrHDC)
+      ReleaseDC ScrHWND, ScrHDC
+      If hMemoryDC = 0 Then GoTo CleanUp
+      hOldBitmap = SelectObject(hMemoryDC, hBitmap)
+      ' If a source DC was specified and no picture was specified, make sure the source hDC has a picture
+   ElseIf Source_hDC <> 0 And hBitmap = 0 Then
+      bDelMemDC = False
+      hMemoryDC = Source_hDC
+      hBitmap = GetBitmapFromDC(Source_hDC)
+      If hBitmap = 0 Then
+         Exit Function
+      End If
+      ' If a source DC AND a picture was specified, use them both
+   ElseIf Source_hDC <> 0 And hBitmap <> 0 Then
+      bDelMemDC = False
+      hMemoryDC = Source_hDC
+   End If
+   ' If the user didn't specify a Height / Width, get them from the picture
+   If PicHeight = 0 Or PicWidth = 0 Then
+      If GetObjectAPI(hBitmap, Len(BMP), BMP) = 0 Then GoTo CleanUp
+      If PicHeight = 0 Then PicHeight = BMP.bmHeight
+      If PicWidth = 0 Then PicWidth = BMP.bmWidth
+   End If
+   ' Check if the user wants to stretch the picture
+   If StretchPicture = True Then
+      If StretchHeight = PicHeight And StretchWidth = PicWidth Then
+         StretchPicture = False
+      ElseIf StretchHeight = 0 Or StretchWidth = 0 Then
+         StretchPicture = False
+      End If
+   End If
+   ' Render the picture onto the specified DC
+   If StretchPicture = False Then
+      If BitBlt(Dest_hDC, Dest_X, Dest_Y, PicWidth, PicHeight, hMemoryDC, Srce_X, Srce_Y, RasterOperation) <> 0 Then
+         RenderBitmapEx = True
+      End If
+   Else
+      PrevStrMode = SetStretchBltMode(Dest_hDC, STRETCH_HALFTONE) ' This DRAMATICALLY improves the quality of the following stretch operation
+      If SetBrushOrgEx(Dest_hDC, 0, 0, ByVal 0) = 0 Then GoTo CleanUp
+      If StretchBlt(Dest_hDC, Dest_X, Dest_Y, StretchWidth, StretchHeight, hMemoryDC, Srce_X, Srce_Y, PicWidth, PicHeight, RasterOperation) <> 0 Then
+         RenderBitmapEx = True
+      End If
+      SetStretchBltMode Dest_hDC, PrevStrMode
+   End If
+   ' Refresh the DC to show the picture just drawn on it
+   If RenderBitmapEx = True And RefreshWindow = True And RefreshHandle <> 0 Then
+      RefreshHWND RefreshHandle
+   End If
 CleanUp:
-    If bDelMemDC = True And hMemoryDC <> 0 Then
-        SelectObject hMemoryDC, hOldBitmap
-        DeleteDC hMemoryDC: hMemoryDC = 0
-    End If
+   If bDelMemDC = True And hMemoryDC <> 0 Then
+      SelectObject hMemoryDC, hOldBitmap
+      DeleteDC hMemoryDC: hMemoryDC = 0
+   End If
 End Function
-
 ' RenderBitmapGrayscale
 '
 ' This function takes the specified bitmap and converts it to grayscale before rendering it to the
@@ -1600,65 +1577,64 @@ End Function
 ' If the function fails, the return is FALSE
 '
 Public Function RenderBitmapGrayscale(ByVal Dest_hDC As Long, ByVal hBitmap As Long, Optional ByVal Dest_X As Long, Optional ByVal Dest_Y As Long, Optional ByVal Srce_X As Long, Optional ByVal Srce_Y As Long, Optional ByVal AlterOriginalPic As Boolean = False) As Boolean
-    Dim TempBITMAP  As BITMAP
-    Dim hScreen     As Long
-    Dim hDC_Temp    As Long
-    Dim hBMP_Prev   As Long
-    Dim MyCounterX  As Long
-    Dim MyCounterY  As Long
-    Dim NewColor    As Long
-    Dim hNewPicture As Long
-    Dim DeletePic   As Boolean
-    ' Make sure parameters passed are valid
-    If Dest_hDC = 0 Or hBitmap = 0 Then Exit Function
-    ' Get the handle to the screen DC
-    hScreen = GetDC(GetDesktopWindow)
-    If hScreen = 0 Then Exit Function
-    ' Create a memory DC to work with the picture
-    hDC_Temp = CreateCompatibleDC(hScreen)
-    If hDC_Temp = 0 Then GoTo CleanUp
-    ' If the user specifies NOT to alter the original, then make a copy of it to use
-    If AlterOriginalPic = False Then
-        DeletePic = True
-        If CopyPicture(hBitmap, hNewPicture) = False Then GoTo CleanUp
-    Else
-        DeletePic = False
-        hNewPicture = hBitmap
-    End If
-    ' Select the bitmap into the DC
-    hBMP_Prev = SelectObject(hDC_Temp, hNewPicture)
-    ' Get the height / width of the bitmap in pixels
-    If GetObjectAPI(hNewPicture, Len(TempBITMAP), TempBITMAP) = 0 Then GoTo CleanUp
-    If TempBITMAP.bmHeight <= 0 Or TempBITMAP.bmWidth <= 0 Then GoTo CleanUp
-    ' Loop through each pixel and conver it to it's grayscale equivelant
-    For MyCounterX = 0 To TempBITMAP.bmWidth - 1
-        For MyCounterY = 0 To TempBITMAP.bmHeight - 1
-            NewColor = GetPixel(hDC_Temp, MyCounterX, MyCounterY)
-            If NewColor <> -1 Then
-                Select Case NewColor
-                        ' If the color is already a grey shade, no need to convert it
-                    Case vbBlack, vbWhite, &H101010, &H202020, &H303030, &H404040, &H505050, &H606060, &H707070, &H808080, &HA0A0A0, &HB0B0B0, &HC0C0C0, &HD0D0D0, &HE0E0E0, &HF0F0F0
-                        NewColor = NewColor
-                    Case Else
-                        NewColor = GrayScale(NewColor)
-                End Select
-                SetPixel hDC_Temp, MyCounterX, MyCounterY, NewColor
-            End If
-        Next MyCounterY
-    Next MyCounterX
-    ' Display the picture on the specified hDC
-    BitBlt Dest_hDC, Dest_X, Dest_Y, TempBITMAP.bmWidth, TempBITMAP.bmHeight, hDC_Temp, Srce_X, Srce_Y, vbSrcCopy
-    RenderBitmapGrayscale = True
+   Dim TempBITMAP  As BITMAP
+   Dim hScreen     As Long
+   Dim hDC_Temp    As Long
+   Dim hBMP_Prev   As Long
+   Dim MyCounterX  As Long
+   Dim MyCounterY  As Long
+   Dim NewColor    As Long
+   Dim hNewPicture As Long
+   Dim DeletePic   As Boolean
+   ' Make sure parameters passed are valid
+   If Dest_hDC = 0 Or hBitmap = 0 Then Exit Function
+   ' Get the handle to the screen DC
+   hScreen = GetDC(GetDesktopWindow)
+   If hScreen = 0 Then Exit Function
+   ' Create a memory DC to work with the picture
+   hDC_Temp = CreateCompatibleDC(hScreen)
+   If hDC_Temp = 0 Then GoTo CleanUp
+   ' If the user specifies NOT to alter the original, then make a copy of it to use
+   If AlterOriginalPic = False Then
+      DeletePic = True
+      If CopyPicture(hBitmap, hNewPicture) = False Then GoTo CleanUp
+   Else
+      DeletePic = False
+      hNewPicture = hBitmap
+   End If
+   ' Select the bitmap into the DC
+   hBMP_Prev = SelectObject(hDC_Temp, hNewPicture)
+   ' Get the height / width of the bitmap in pixels
+   If GetObjectAPI(hNewPicture, Len(TempBITMAP), TempBITMAP) = 0 Then GoTo CleanUp
+   If TempBITMAP.bmHeight <= 0 Or TempBITMAP.bmWidth <= 0 Then GoTo CleanUp
+   ' Loop through each pixel and conver it to it's grayscale equivelant
+   For MyCounterX = 0 To TempBITMAP.bmWidth - 1
+      For MyCounterY = 0 To TempBITMAP.bmHeight - 1
+         NewColor = GetPixel(hDC_Temp, MyCounterX, MyCounterY)
+         If NewColor <> -1 Then
+            Select Case NewColor
+               ' If the color is already a grey shade, no need to convert it
+            Case vbBlack, vbWhite, &H101010, &H202020, &H303030, &H404040, &H505050, &H606060, &H707070, &H808080, &HA0A0A0, &HB0B0B0, &HC0C0C0, &HD0D0D0, &HE0E0E0, &HF0F0F0
+               NewColor = NewColor
+            Case Else
+               NewColor = GrayScale(NewColor)
+            End Select
+            SetPixel hDC_Temp, MyCounterX, MyCounterY, NewColor
+         End If
+      Next MyCounterY
+   Next MyCounterX
+   ' Display the picture on the specified hDC
+   BitBlt Dest_hDC, Dest_X, Dest_Y, TempBITMAP.bmWidth, TempBITMAP.bmHeight, hDC_Temp, Srce_X, Srce_Y, vbSrcCopy
+   RenderBitmapGrayscale = True
 CleanUp:
-    ReleaseDC GetDesktopWindow, hScreen: hScreen = 0
-    SelectObject hDC_Temp, hBMP_Prev
-    DeleteDC hDC_Temp: hDC_Temp = 0
-    If DeletePic = True Then
-        DeleteObject hNewPicture
-        hNewPicture = 0
-    End If
+   ReleaseDC GetDesktopWindow, hScreen: hScreen = 0
+   SelectObject hDC_Temp, hBMP_Prev
+   DeleteDC hDC_Temp: hDC_Temp = 0
+   If DeletePic = True Then
+      DeleteObject hNewPicture
+      hNewPicture = 0
+   End If
 End Function
-
 ' RenderBitmapTransparentGS
 '
 ' This function takes the specified BITMAP and first changes it to grayscale, then renders it onto the
@@ -1685,55 +1661,54 @@ End Function
 ' If the function fails, the return is FALSE
 '
 Public Function RenderBitmapTransparentGS(ByVal Dest_hDC As Long, ByVal hBitmap As Long, ByVal TransparentColor As Long, Optional ByVal Dest_X As Long, Optional ByVal Dest_Y As Long, Optional ByVal Srce_X As Long, Optional ByVal Srce_Y As Long, Optional ByVal hDC_Background As Long) As Boolean
-    Dim TempBITMAP As BITMAP
-    Dim hDC_Temp   As Long
-    Dim hBMP_Copy  As Long
-    Dim hBMP_Prev  As Long
-    Dim MyCounterX As Long
-    Dim MyCounterY As Long
-    Dim NewColor   As Long
-    ' Make sure parameters passed are valid
-    If Dest_hDC = 0 Or hBitmap = 0 Then Exit Function
-    ' Make sure the transparent color is a valid Win32 color
-    TransparentColor = TranslateColor(TransparentColor)
-    If TransparentColor = -1 Then Exit Function
-    ' Create a DC to work with
-    hDC_Temp = MemoryDC_Create
-    If hDC_Temp = 0 Then Exit Function
-    ' Create a copy of the orginal picture so we don't alter the original
-    If CopyPicture(hBitmap, hBMP_Copy) = False Then Exit Function
-    If hBMP_Copy = 0 Then GoTo CleanUp
-    ' Get the information about the bitmap
-    If GetObjectAPI(hBMP_Copy, Len(TempBITMAP), TempBITMAP) = 0 Then GoTo CleanUp
-    ' Select the picture INTO the DC in order to work with it
-    hBMP_Prev = SelectObject(hDC_Temp, hBMP_Copy)
-    ' Loop through each pixel and conver it to it's grayscale equivelant
-    For MyCounterX = 0 To TempBITMAP.bmWidth - 1
-        For MyCounterY = 0 To TempBITMAP.bmHeight - 1
-            NewColor = GetPixel(hDC_Temp, MyCounterX, MyCounterY)
-            If NewColor <> -1 Then
-                Select Case NewColor
-                        ' If the color is already a grey shade, no need to convert it
-                    Case TransparentColor, vbBlack, vbWhite, &H101010, &H202020, &H303030, &H404040, &H505050, &H606060, &H707070, &H808080, &HA0A0A0, &HB0B0B0, &HC0C0C0, &HD0D0D0, &HE0E0E0, &HF0F0F0
-                        NewColor = NewColor
-                    Case Else
-                        NewColor = GrayScale(NewColor)
-                End Select
-                SetPixel hDC_Temp, MyCounterX, MyCounterY, NewColor
-            End If
-        Next MyCounterY
-    Next MyCounterX
-    ' Select the picture OUT OF the DC to paint it
-    SelectObject hDC_Temp, hBMP_Prev
-    ' Render the grayscale bitmap transparently
-    If RenderBitmapTransparent(Dest_hDC, hBMP_Copy, TransparentColor, Dest_X, Dest_Y, Srce_X, Srce_Y, hDC_Background) = True Then
-        RenderBitmapTransparentGS = True
-    End If
+   Dim TempBITMAP As BITMAP
+   Dim hDC_Temp   As Long
+   Dim hBMP_Copy  As Long
+   Dim hBMP_Prev  As Long
+   Dim MyCounterX As Long
+   Dim MyCounterY As Long
+   Dim NewColor   As Long
+   ' Make sure parameters passed are valid
+   If Dest_hDC = 0 Or hBitmap = 0 Then Exit Function
+   ' Make sure the transparent color is a valid Win32 color
+   TransparentColor = TranslateColor(TransparentColor)
+   If TransparentColor = -1 Then Exit Function
+   ' Create a DC to work with
+   hDC_Temp = MemoryDC_Create
+   If hDC_Temp = 0 Then Exit Function
+   ' Create a copy of the orginal picture so we don't alter the original
+   If CopyPicture(hBitmap, hBMP_Copy) = False Then Exit Function
+   If hBMP_Copy = 0 Then GoTo CleanUp
+   ' Get the information about the bitmap
+   If GetObjectAPI(hBMP_Copy, Len(TempBITMAP), TempBITMAP) = 0 Then GoTo CleanUp
+   ' Select the picture INTO the DC in order to work with it
+   hBMP_Prev = SelectObject(hDC_Temp, hBMP_Copy)
+   ' Loop through each pixel and conver it to it's grayscale equivelant
+   For MyCounterX = 0 To TempBITMAP.bmWidth - 1
+      For MyCounterY = 0 To TempBITMAP.bmHeight - 1
+         NewColor = GetPixel(hDC_Temp, MyCounterX, MyCounterY)
+         If NewColor <> -1 Then
+            Select Case NewColor
+               ' If the color is already a grey shade, no need to convert it
+            Case TransparentColor, vbBlack, vbWhite, &H101010, &H202020, &H303030, &H404040, &H505050, &H606060, &H707070, &H808080, &HA0A0A0, &HB0B0B0, &HC0C0C0, &HD0D0D0, &HE0E0E0, &HF0F0F0
+               NewColor = NewColor
+            Case Else
+               NewColor = GrayScale(NewColor)
+            End Select
+            SetPixel hDC_Temp, MyCounterX, MyCounterY, NewColor
+         End If
+      Next MyCounterY
+   Next MyCounterX
+   ' Select the picture OUT OF the DC to paint it
+   SelectObject hDC_Temp, hBMP_Prev
+   ' Render the grayscale bitmap transparently
+   If RenderBitmapTransparent(Dest_hDC, hBMP_Copy, TransparentColor, Dest_X, Dest_Y, Srce_X, Srce_Y, hDC_Background) = True Then
+      RenderBitmapTransparentGS = True
+   End If
 CleanUp:
-    DeleteDC hDC_Temp: hDC_Temp = 0
-    DeleteObject hBMP_Copy: hBMP_Copy = 0
+   DeleteDC hDC_Temp: hDC_Temp = 0
+   DeleteObject hBMP_Copy: hBMP_Copy = 0
 End Function
-
 ' RenderBitmapTransparent
 '
 ' This function takes the specified BITMAP and renders it onto the specified Device Context (DC) but
@@ -1762,93 +1737,92 @@ End Function
 ' If the function fails, the return is FALSE
 '
 Public Function RenderBitmapTransparent(ByVal Dest_hDC As Long, ByVal hBitmap As Long, ByVal TransparentColor As Long, Optional ByVal Dest_X As Long, Optional ByVal Dest_Y As Long, Optional ByVal Srce_X As Long, Optional ByVal Srce_Y As Long, Optional ByVal hDC_Background As Long) As Boolean
-    Dim TempBITMAP     As BITMAP
-    Dim PreviousColor  As Long  'COLORREF
-    Dim hBMP_AndBack   As Long  'HBITMAP
-    Dim hBMP_BackOld   As Long  'HBITMAP
-    Dim hBMP_AndObject As Long  'HBITMAP
-    Dim hBMP_ObjectOld As Long  'HBITMAP
-    Dim hBMP_AndMem    As Long  'HBITMAP
-    Dim hBMP_MemOld    As Long  'HBITMAP
-    Dim hBMP_Save      As Long  'HBITMAP
-    Dim hBMP_SaveOld   As Long  'HBITMAP
-    Dim hDC_Mem        As Long  'HDC
-    Dim hDC_Back       As Long  'HDC
-    Dim hDC_Object     As Long  'HDC
-    Dim hDC_Temp       As Long  'HDC
-    Dim hDC_Save       As Long  'HDC
-    Dim PicWidth       As Long
-    Dim PicHeight      As Long
-    ' Make sure parameters passed are valid
-    If Dest_hDC = 0 Or hBitmap = 0 Then Exit Function
-    ' Make sure the transparent color is a valid Win32 color
-    TransparentColor = TranslateColor(TransparentColor)
-    If TransparentColor = -1 Then Exit Function
-    ' Create the DC to work from and get info on the bitmap
-    hDC_Temp = CreateCompatibleDC(Dest_hDC)
-    SelectObject hDC_Temp, hBitmap
-    GetObjectAPI hBitmap, Len(TempBITMAP), TempBITMAP
-    PicWidth = TempBITMAP.bmWidth
-    PicHeight = TempBITMAP.bmHeight
-    ' Create some DCs to hold temporary data
-    hDC_Back = CreateCompatibleDC(Dest_hDC)
-    hDC_Object = CreateCompatibleDC(Dest_hDC)
-    hDC_Mem = CreateCompatibleDC(Dest_hDC)
-    hDC_Save = CreateCompatibleDC(Dest_hDC)
-    ' Monochrome DC
-    hBMP_AndBack = CreateBitmap(PicWidth, PicHeight, 1, 1, 0)
-    ' Monochrome DC
-    hBMP_AndObject = CreateBitmap(PicWidth, PicHeight, 1, 1, 0)
-    ' Compatible DC's
-    hBMP_AndMem = CreateCompatibleBitmap(Dest_hDC, PicWidth, PicHeight)
-    hBMP_Save = CreateCompatibleBitmap(Dest_hDC, PicWidth, PicHeight)
-    ' Each DC must select a bitmap object to store pixel data.
-    hBMP_BackOld = SelectObject(hDC_Back, hBMP_AndBack)
-    hBMP_ObjectOld = SelectObject(hDC_Object, hBMP_AndObject)
-    hBMP_MemOld = SelectObject(hDC_Mem, hBMP_AndMem)
-    hBMP_SaveOld = SelectObject(hDC_Save, hBMP_Save)
-    ' Set proper mapping mode.
-    SetMapMode hDC_Temp, GetMapMode(Dest_hDC)
-    ' Save the bitmap sent here, because it will be overwritten
-    BitBlt hDC_Save, 0, 0, PicWidth, PicHeight, hDC_Temp, Srce_X, Srce_Y, vbSrcCopy
-    ' Set the background color of the source DC to the color contained in the parts of the bitmap that should be transparent
-    PreviousColor = SetBkColor(hDC_Temp, TransparentColor)
-    ' Create the object mask for the bitmap by performaing a BitBlt from the source bitmap to a monochrome bitmap.
-    BitBlt hDC_Object, 0, 0, PicWidth, PicHeight, hDC_Temp, Srce_X, Srce_Y, vbSrcCopy
-    ' Set the background color of the source DC back to the original color
-    SetBkColor hDC_Temp, PreviousColor
-    ' Create the inverse of the object mask.
-    BitBlt hDC_Back, 0, 0, PicWidth, PicHeight, hDC_Object, 0, 0, vbNotSrcCopy
-    ' Copy the background of the main DC to the destination
-    If hDC_Background <> 0 Then
-        BitBlt hDC_Mem, 0, 0, PicWidth, PicHeight, hDC_Background, Dest_X, Dest_Y, vbSrcCopy
-    Else
-        BitBlt hDC_Mem, 0, 0, PicWidth, PicHeight, Dest_hDC, Dest_X, Dest_Y, vbSrcCopy
-    End If
-    ' Mask out the places where the bitmap will be placed
-    BitBlt hDC_Mem, 0, 0, PicWidth, PicHeight, hDC_Object, 0, 0, vbSrcAnd
-    ' Mask out the transparent colored pixels on the bitmap
-    BitBlt hDC_Temp, Srce_X, Srce_Y, PicWidth, PicHeight, hDC_Back, 0, 0, vbSrcAnd
-    ' XOR the bitmap with the background on the destination DC
-    BitBlt hDC_Mem, 0, 0, PicWidth, PicHeight, hDC_Temp, Srce_X, Srce_Y, vbSrcPaint
-    ' Copy the destination to the screen
-    BitBlt Dest_hDC, Dest_X, Dest_Y, PicWidth, PicHeight, hDC_Mem, 0, 0, vbSrcCopy
-    ' Place the original bitmap back into the bitmap sent here
-    BitBlt hDC_Temp, Srce_X, Srce_Y, PicWidth, PicHeight, hDC_Save, 0, 0, vbSrcCopy
-    ' Delete memory bitmaps
-    DeleteObject SelectObject(hDC_Back, hBMP_BackOld): hBMP_AndBack = 0
-    DeleteObject SelectObject(hDC_Object, hBMP_ObjectOld): hBMP_AndObject = 0
-    DeleteObject SelectObject(hDC_Mem, hBMP_MemOld): hBMP_AndMem = 0
-    DeleteObject SelectObject(hDC_Save, hBMP_SaveOld): hBMP_Save = 0
-    ' Delete memory DC's
-    DeleteDC hDC_Back: hDC_Back = 0
-    DeleteDC hDC_Mem: hDC_Mem = 0
-    DeleteDC hDC_Object: hDC_Object = 0
-    DeleteDC hDC_Temp: hDC_Temp = 0
-    DeleteDC hDC_Save: hDC_Save = 0
-    RenderBitmapTransparent = True
+   Dim TempBITMAP     As BITMAP
+   Dim PreviousColor  As Long  'COLORREF
+   Dim hBMP_AndBack   As Long  'HBITMAP
+   Dim hBMP_BackOld   As Long  'HBITMAP
+   Dim hBMP_AndObject As Long  'HBITMAP
+   Dim hBMP_ObjectOld As Long  'HBITMAP
+   Dim hBMP_AndMem    As Long  'HBITMAP
+   Dim hBMP_MemOld    As Long  'HBITMAP
+   Dim hBMP_Save      As Long  'HBITMAP
+   Dim hBMP_SaveOld   As Long  'HBITMAP
+   Dim hDC_Mem        As Long  'HDC
+   Dim hDC_Back       As Long  'HDC
+   Dim hDC_Object     As Long  'HDC
+   Dim hDC_Temp       As Long  'HDC
+   Dim hDC_Save       As Long  'HDC
+   Dim PicWidth       As Long
+   Dim PicHeight      As Long
+   ' Make sure parameters passed are valid
+   If Dest_hDC = 0 Or hBitmap = 0 Then Exit Function
+   ' Make sure the transparent color is a valid Win32 color
+   TransparentColor = TranslateColor(TransparentColor)
+   If TransparentColor = -1 Then Exit Function
+   ' Create the DC to work from and get info on the bitmap
+   hDC_Temp = CreateCompatibleDC(Dest_hDC)
+   SelectObject hDC_Temp, hBitmap
+   GetObjectAPI hBitmap, Len(TempBITMAP), TempBITMAP
+   PicWidth = TempBITMAP.bmWidth
+   PicHeight = TempBITMAP.bmHeight
+   ' Create some DCs to hold temporary data
+   hDC_Back = CreateCompatibleDC(Dest_hDC)
+   hDC_Object = CreateCompatibleDC(Dest_hDC)
+   hDC_Mem = CreateCompatibleDC(Dest_hDC)
+   hDC_Save = CreateCompatibleDC(Dest_hDC)
+   ' Monochrome DC
+   hBMP_AndBack = CreateBitmap(PicWidth, PicHeight, 1, 1, 0)
+   ' Monochrome DC
+   hBMP_AndObject = CreateBitmap(PicWidth, PicHeight, 1, 1, 0)
+   ' Compatible DC's
+   hBMP_AndMem = CreateCompatibleBitmap(Dest_hDC, PicWidth, PicHeight)
+   hBMP_Save = CreateCompatibleBitmap(Dest_hDC, PicWidth, PicHeight)
+   ' Each DC must select a bitmap object to store pixel data.
+   hBMP_BackOld = SelectObject(hDC_Back, hBMP_AndBack)
+   hBMP_ObjectOld = SelectObject(hDC_Object, hBMP_AndObject)
+   hBMP_MemOld = SelectObject(hDC_Mem, hBMP_AndMem)
+   hBMP_SaveOld = SelectObject(hDC_Save, hBMP_Save)
+   ' Set proper mapping mode.
+   SetMapMode hDC_Temp, GetMapMode(Dest_hDC)
+   ' Save the bitmap sent here, because it will be overwritten
+   BitBlt hDC_Save, 0, 0, PicWidth, PicHeight, hDC_Temp, Srce_X, Srce_Y, vbSrcCopy
+   ' Set the background color of the source DC to the color contained in the parts of the bitmap that should be transparent
+   PreviousColor = SetBkColor(hDC_Temp, TransparentColor)
+   ' Create the object mask for the bitmap by performaing a BitBlt from the source bitmap to a monochrome bitmap.
+   BitBlt hDC_Object, 0, 0, PicWidth, PicHeight, hDC_Temp, Srce_X, Srce_Y, vbSrcCopy
+   ' Set the background color of the source DC back to the original color
+   SetBkColor hDC_Temp, PreviousColor
+   ' Create the inverse of the object mask.
+   BitBlt hDC_Back, 0, 0, PicWidth, PicHeight, hDC_Object, 0, 0, vbNotSrcCopy
+   ' Copy the background of the main DC to the destination
+   If hDC_Background <> 0 Then
+      BitBlt hDC_Mem, 0, 0, PicWidth, PicHeight, hDC_Background, Dest_X, Dest_Y, vbSrcCopy
+   Else
+      BitBlt hDC_Mem, 0, 0, PicWidth, PicHeight, Dest_hDC, Dest_X, Dest_Y, vbSrcCopy
+   End If
+   ' Mask out the places where the bitmap will be placed
+   BitBlt hDC_Mem, 0, 0, PicWidth, PicHeight, hDC_Object, 0, 0, vbSrcAnd
+   ' Mask out the transparent colored pixels on the bitmap
+   BitBlt hDC_Temp, Srce_X, Srce_Y, PicWidth, PicHeight, hDC_Back, 0, 0, vbSrcAnd
+   ' XOR the bitmap with the background on the destination DC
+   BitBlt hDC_Mem, 0, 0, PicWidth, PicHeight, hDC_Temp, Srce_X, Srce_Y, vbSrcPaint
+   ' Copy the destination to the screen
+   BitBlt Dest_hDC, Dest_X, Dest_Y, PicWidth, PicHeight, hDC_Mem, 0, 0, vbSrcCopy
+   ' Place the original bitmap back into the bitmap sent here
+   BitBlt hDC_Temp, Srce_X, Srce_Y, PicWidth, PicHeight, hDC_Save, 0, 0, vbSrcCopy
+   ' Delete memory bitmaps
+   DeleteObject SelectObject(hDC_Back, hBMP_BackOld): hBMP_AndBack = 0
+   DeleteObject SelectObject(hDC_Object, hBMP_ObjectOld): hBMP_AndObject = 0
+   DeleteObject SelectObject(hDC_Mem, hBMP_MemOld): hBMP_AndMem = 0
+   DeleteObject SelectObject(hDC_Save, hBMP_SaveOld): hBMP_Save = 0
+   ' Delete memory DC's
+   DeleteDC hDC_Back: hDC_Back = 0
+   DeleteDC hDC_Mem: hDC_Mem = 0
+   DeleteDC hDC_Object: hDC_Object = 0
+   DeleteDC hDC_Temp: hDC_Temp = 0
+   DeleteDC hDC_Save: hDC_Save = 0
+   RenderBitmapTransparent = True
 End Function
-
 ' TileBitmap
 '
 ' This function makes it easy to tile the specified picture onto any Device Context (DC).
@@ -1870,51 +1844,45 @@ End Function
 ' If the function fails, the return is FALSE
 '
 Public Function TileBitmap(ByVal Dest_hDC As Long, ByVal hBitmap As Long, ByVal Dest_Width As Long, ByVal Dest_Height As Long) As Boolean
-    Dim CurrentX   As Long
-    Dim CurrentY   As Long
-    Dim TempBITMAP As BITMAP
-    ' Make sure the parameters passed are VALID
-    If hBitmap = 0 Or Dest_hDC = 0 Or Dest_Width <= 0 Or Dest_Height <= 0 Then Exit Function
-    ' Get the dimentions of the specified bitmap (this also verifies the image is truely a BITMAP)
-    If GetObjectAPI(hBitmap, Len(TempBITMAP), TempBITMAP) = 0 Then Exit Function
-    ' Line by line, row by row, tile the picture into the specified DC
-    While CurrentX < Dest_Width
-        While CurrentY < Dest_Height
-            If RenderBitmap(Dest_hDC, hBitmap, CurrentX, CurrentY, 0, 0, SRCCOPY) = False Then Exit Function
-            CurrentY = CurrentY + TempBITMAP.bmHeight
-        Wend
-        CurrentY = 0
-        CurrentX = CurrentX + TempBITMAP.bmWidth
-    Wend
-    TileBitmap = True
+   Dim CurrentX   As Long
+   Dim CurrentY   As Long
+   Dim TempBITMAP As BITMAP
+   ' Make sure the parameters passed are VALID
+   If hBitmap = 0 Or Dest_hDC = 0 Or Dest_Width <= 0 Or Dest_Height <= 0 Then Exit Function
+   ' Get the dimentions of the specified bitmap (this also verifies the image is truely a BITMAP)
+   If GetObjectAPI(hBitmap, Len(TempBITMAP), TempBITMAP) = 0 Then Exit Function
+   ' Line by line, row by row, tile the picture into the specified DC
+   While CurrentX < Dest_Width
+      While CurrentY < Dest_Height
+         If RenderBitmap(Dest_hDC, hBitmap, CurrentX, CurrentY, 0, 0, SRCCOPY) = False Then Exit Function
+         CurrentY = CurrentY + TempBITMAP.bmHeight
+      Wend
+      CurrentY = 0
+      CurrentX = CurrentX + TempBITMAP.bmWidth
+   Wend
+   TileBitmap = True
 End Function
-
 ' Function that converts automation colors such as "vbButtonFace" to standard
 ' color such as "12632256".  It is safest to pass all colors through this
 ' function to make sure that if a user passes a color like "Me.BackColor" and
 ' the BackColor is vbButtonFace, it won't mess up any of the API's that are
 ' expecting a normal color value.
 Public Function TranslateColor(ByVal oClr As Long, Optional ByVal hPal As Long = 0) As Long
-    On Error Resume Next
-    If OleTranslateColor(oClr, hPal, TranslateColor) <> 0 Then TranslateColor = -1
+   On Error Resume Next
+   If OleTranslateColor(oClr, hPal, TranslateColor) <> 0 Then TranslateColor = -1
 End Function
-
 ' Takes a color value and converts it to an equivalent grayscale value
 Private Function GrayScale(ByVal ColorToConvert As Long, Optional ByVal ExemptColor As Long = -1) As Long
-    If ExemptColor = -1 Then
-        ColorToConvert = 0.33 * (ColorToConvert Mod 256) + _
-           0.59 * ((ColorToConvert \ 256) Mod 256) + _
-           0.11 * ((ColorToConvert \ 65536) Mod 256)
-        GrayScale = RGB(ColorToConvert, ColorToConvert, ColorToConvert)
-        Exit Function
-    Else
-        If ColorToConvert <> ExemptColor Then
-            ColorToConvert = 0.33 * (ColorToConvert Mod 256) + _
-               0.59 * ((ColorToConvert \ 256) Mod 256) + _
-               0.11 * ((ColorToConvert \ 65536) Mod 256)
-            GrayScale = RGB(ColorToConvert, ColorToConvert, ColorToConvert)
-            Exit Function
-        End If
-    End If
-    GrayScale = ColorToConvert
+   If ExemptColor = -1 Then
+      ColorToConvert = 0.33 * (ColorToConvert Mod 256) + 0.59 * ((ColorToConvert \ 256) Mod 256) + 0.11 * ((ColorToConvert \ 65536) Mod 256)
+      GrayScale = RGB(ColorToConvert, ColorToConvert, ColorToConvert)
+      Exit Function
+   Else
+      If ColorToConvert <> ExemptColor Then
+         ColorToConvert = 0.33 * (ColorToConvert Mod 256) + 0.59 * ((ColorToConvert \ 256) Mod 256) + 0.11 * ((ColorToConvert \ 65536) Mod 256)
+         GrayScale = RGB(ColorToConvert, ColorToConvert, ColorToConvert)
+         Exit Function
+      End If
+   End If
+   GrayScale = ColorToConvert
 End Function

@@ -54,11 +54,10 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub Form_Load()
-    CreateRoundRectFromWindow Me
-    CreateRoundRectFromWindow Frame1
-    frmMain.SetWindowPos Me.hWnd, -1, 0, 0, 0, 0, False, False
+   CreateRoundRectFromWindow Me
+   CreateRoundRectFromWindow Frame1
+   frmMain.SetWindowPos Me.hWnd, -1, 0, 0, 0, 0, False, False
 End Sub
-
 Private Sub Form_Activate()
-    WindowTransparency Me.hWnd, displayTransSettings, vbBlack
+   WindowTransparency Me.hWnd, displayTransSettings, vbBlack
 End Sub

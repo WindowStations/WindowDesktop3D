@@ -78,56 +78,56 @@ Private Const ENUM_REGISTRY_SETTINGS             As Long = -2
 '    dmDisplayFrequency As Long
 'End Type
 Private Type typDevMODE
-    dmDeviceName As String * 32
-    dmSpecVersion As Integer
-    dmDriverVersion As Integer
-    dmSize As Integer
-    dmDriverExtra As Integer
-    dmFields As Long
-    dmOrientation As Integer
-    dmPaperSize As Integer
-    dmPaperLength As Integer
-    dmPaperWidth As Integer
-    dmScale As Integer
-    dmCopies As Integer
-    dmDefaultSource As Integer
-    dmPrintQuality As Integer
-    dmColor As Integer
-    dmDuplex As Integer
-    dmYResolution As Integer
-    dmTTOption As Integer
-    dmCollate As Integer
-    dmFormName As String * 32
-    dmUnusedPadding As Integer
-    dmBitsPerPixel As Integer
-    dmPelsWidth As Long
-    dmPelsHeight As Long
-    dmDisplayFlags As Long
-    dmDisplayFrequency As Long
-    dmICMMethod As Long
-    dmICMIntent As Long
-    dmMediaType As Long
-    dmDitherType As Long
-    dmReserved1 As Long
-    dmReserved2 As Long
-    dmPanningWidth As Long
-    dmPanningHeight As Long
+   dmDeviceName As String * 32
+   dmSpecVersion As Integer
+   dmDriverVersion As Integer
+   dmSize As Integer
+   dmDriverExtra As Integer
+   dmFields As Long
+   dmOrientation As Integer
+   dmPaperSize As Integer
+   dmPaperLength As Integer
+   dmPaperWidth As Integer
+   dmScale As Integer
+   dmCopies As Integer
+   dmDefaultSource As Integer
+   dmPrintQuality As Integer
+   dmColor As Integer
+   dmDuplex As Integer
+   dmYResolution As Integer
+   dmTTOption As Integer
+   dmCollate As Integer
+   dmFormName As String * 32
+   dmUnusedPadding As Integer
+   dmBitsPerPixel As Integer
+   dmPelsWidth As Long
+   dmPelsHeight As Long
+   dmDisplayFlags As Long
+   dmDisplayFrequency As Long
+   dmICMMethod As Long
+   dmICMIntent As Long
+   dmMediaType As Long
+   dmDitherType As Long
+   dmReserved1 As Long
+   dmReserved2 As Long
+   dmPanningWidth As Long
+   dmPanningHeight As Long
 End Type
 Private Type RECT
-    left            As Long
-    top             As Long
-    right           As Long
-    bottom          As Long
+   left            As Long
+   top             As Long
+   right           As Long
+   bottom          As Long
 End Type
 Private Type MONITORINFO
-    cbSize          As Long
-    rcMonitor       As RECT
-    rcWork          As RECT
-    dwFlags         As Long
+   cbSize          As Long
+   rcMonitor       As RECT
+   rcWork          As RECT
+   dwFlags         As Long
 End Type
 Private Type POINTAPI
-    x As Long
-    y As Long
+   x As Long
+   y As Long
 End Type
 Private Declare Function apiChangeDisplaySettings Lib "user32" Alias "ChangeDisplaySettingsA" (ByRef lptypDevMode As typDevMODE, ByVal dwFlags As Long) As Long
 Private Declare Function apiChangeDisplaySettingsEx Lib "user32" Alias "ChangeDisplaySettingsExA" (ByRef lpszDeviceName As Any, ByRef lpDevMode As Any, ByVal hWnd As Long, ByVal dwFlags As Long, ByRef lParam As Any) As Long
@@ -144,88 +144,88 @@ Public Bounds         As New Rectangle
 Public Primary        As Boolean
 Public WorkingArea    As New Rectangle
 Friend Function AllScreens() As Screen()
-    On Error Resume Next
-    Dim i As Long
-    lMonitorCount = 0
-    ReDim screens(-1)
-    Call apiEnumDisplayMonitors(0, ByVal 0, AddressOf MonitorEnumProc, lMonitorCount)
-    AllScreens = screens
+   On Error Resume Next
+   Dim i As Long
+   lMonitorCount = 0
+   ReDim screens(-1)
+   Call apiEnumDisplayMonitors(0, ByVal 0, AddressOf MonitorEnumProc, lMonitorCount)
+   AllScreens = screens
 End Function
 Friend Function DeviceName() As String
-    Dim d() As DISPLAY_DEVICE
-    d = GetDisplayDevices
-    Dim i As Long
-    For i = 0 To UBound(d)
-        If CBool(d(i).StateFlags And DISPLAY_DEVICE_PRIMARY_DEVICE) Then DeviceName = d(i).DeviceName: Exit For
-    Next
+   Dim d() As DISPLAY_DEVICE
+   d = GetDisplayDevices
+   Dim i As Long
+   For i = 0 To UBound(d)
+      If CBool(d(i).StateFlags And DISPLAY_DEVICE_PRIMARY_DEVICE) Then DeviceName = d(i).DeviceName: Exit For
+   Next
 End Function
 Friend Function GetBounds(ByRef p As Point) As Rectangle
-    Dim pt As POINTAPI
-    pt.x = p.x: pt.y = p.y
-    Dim ret As Long
-    ret = apiMonitorFromPoint(pt.x, pt.y, MONITOR_DEFAULTTONULL)
-    If ret = 0 Then Exit Function
-    Dim r   As New Rectangle
-    Dim s() As Screen
-    hMon = ret 'save variable in public module so that callback can see alternate monitor specified as primary
-    s = My.Computer.Screen.AllScreens
-    hMon = 0
-    Dim i As Long
-    For i = 0 To UBound(s)
-        If s(i).Primary = True Then 'match monitor here and return working area
-            Set r = s(i).Bounds
-            Exit For
-        End If
-    Next
-    Set GetBounds = r
+   Dim pt As POINTAPI
+   pt.x = p.x: pt.y = p.y
+   Dim ret As Long
+   ret = apiMonitorFromPoint(pt.x, pt.y, MONITOR_DEFAULTTONULL)
+   If ret = 0 Then Exit Function
+   Dim r   As New Rectangle
+   Dim s() As Screen
+   hMon = ret 'save variable in public module so that callback can see alternate monitor specified as primary
+   s = My.Computer.Screen.AllScreens
+   hMon = 0
+   Dim i As Long
+   For i = 0 To UBound(s)
+      If s(i).Primary = True Then 'match monitor here and return working area
+         Set r = s(i).Bounds
+         Exit For
+      End If
+   Next
+   Set GetBounds = r
 End Function
 Friend Function GetWorkingArea(ByRef p As Point) As Rectangle
-    Dim pt As POINTAPI
-    pt.x = p.x: pt.y = p.y
-    Dim ret As Long
-    ret = apiMonitorFromPoint(pt.x, pt.y, MONITOR_DEFAULTTONULL)
-    If ret = 0 Then Exit Function
-    Dim r   As New Rectangle
-    Dim s() As Screen
-    hMon = ret 'save variable in public module so that callback can see alternate monitor specified as primary
-    s = My.Computer.Screen.AllScreens
-    hMon = 0
-    Dim i As Long
-    For i = 0 To UBound(s)
-        If s(i).Primary = True Then 'match monitor here and return working area
-            Set r = s(i).WorkingArea
-            Exit For
-        End If
-    Next
-    Set GetWorkingArea = r
+   Dim pt As POINTAPI
+   pt.x = p.x: pt.y = p.y
+   Dim ret As Long
+   ret = apiMonitorFromPoint(pt.x, pt.y, MONITOR_DEFAULTTONULL)
+   If ret = 0 Then Exit Function
+   Dim r   As New Rectangle
+   Dim s() As Screen
+   hMon = ret 'save variable in public module so that callback can see alternate monitor specified as primary
+   s = My.Computer.Screen.AllScreens
+   hMon = 0
+   Dim i As Long
+   For i = 0 To UBound(s)
+      If s(i).Primary = True Then 'match monitor here and return working area
+         Set r = s(i).WorkingArea
+         Exit For
+      End If
+   Next
+   Set GetWorkingArea = r
 End Function
 Friend Function PrimaryScreen() As Screen
-    Dim ps  As New Screen
-    Dim s() As Screen
-    s = My.Computer.Screen.AllScreens
-    Dim i As Long
-    For i = 0 To UBound(s)
-        If s(i).Primary = True Then
-            Set ps = s(i)
-            Exit For
-        End If
-    Next
-    Set PrimaryScreen = ps
+   Dim ps  As New Screen
+   Dim s() As Screen
+   s = My.Computer.Screen.AllScreens
+   Dim i As Long
+   For i = 0 To UBound(s)
+      If s(i).Primary = True Then
+         Set ps = s(i)
+         Exit For
+      End If
+   Next
+   Set PrimaryScreen = ps
 End Function
 Friend Function GetDisplayDevices() As DISPLAY_DEVICE()
-    Dim d() As DISPLAY_DEVICE
-    Dim dd  As DISPLAY_DEVICE
-    dd.cb = Len(dd)
-    Dim i As Long
-    Do
-        If apiEnumDisplayDevices(vbNullString, i, dd, 0) = 0 Then Exit Do
-        If CBool(dd.StateFlags And DISPLAY_DEVICE_ACTIVE) Then
-            ReDim Preserve d(i)
-            d(i) = dd
-        End If
-        i = i + 1
-    Loop
-    GetDisplayDevices = d
+   Dim d() As DISPLAY_DEVICE
+   Dim dd  As DISPLAY_DEVICE
+   dd.cb = Len(dd)
+   Dim i As Long
+   Do
+      If apiEnumDisplayDevices(vbNullString, i, dd, 0) = 0 Then Exit Do
+      If CBool(dd.StateFlags And DISPLAY_DEVICE_ACTIVE) Then
+         ReDim Preserve d(i)
+         d(i) = dd
+      End If
+      i = i + 1
+   Loop
+   GetDisplayDevices = d
 End Function
 'Todo for net conversion
 'Friend Function FromHandle(ByVal hwnd As Long) As Screen
@@ -298,7 +298,7 @@ End Function
 '    Dim rc      As RECT
 '    Dim sRegKey As String
 '    sRegKey = IIf((App.title <> ""), App.title, App.EXEName)
-'    If Trim(sWinName) <> "" Then sRegKey = sRegKey & "_" & Trim(sWinName)
+'    If VBA.Trim(sWinName) <> "" Then sRegKey = sRegKey & "_" & VBA.Trim(sWinName)
 '    If apiGetWindowRect(hwnd, rc) = 0 Then Exit Sub
 '    SaveSetting sRegKey, "WindowPosition", "Left", rc.Left
 '    SaveSetting sRegKey, "WindowPosition", "Top", rc.Top
@@ -312,7 +312,7 @@ End Function
 '    Dim MI          As MONITORINFO
 '    Dim sRegKey As String
 '    sRegKey = IIf((App.title <> ""), App.title, App.EXEName)
-'    If Trim(sWinName) <> "" Then sRegKey = sRegKey & "_" & Trim(sWinName)
+'    If VBA.Trim(sWinName) <> "" Then sRegKey = sRegKey & "_" & VBA.Trim(sWinName)
 '    If apiGetWindowRect(hwnd, rc) = 0 Then Exit Sub
 '    Left = GetSetting(sRegKey, "WindowPosition", "Left", rc.Left)
 '    Top = GetSetting(sRegKey, "WindowPosition", "Top", rc.Left)
@@ -340,15 +340,15 @@ End Function
 '    Bounds = r
 'End Function
 Friend Sub EnumDispSettings()
-    On Error Resume Next
-    Dim dm     As typDevMODE
-    Dim RetVal As Long
-    dm.dmSize = Len(dm)
-    RetVal = apiEnumDisplaySettings(vbNullString, ENUM_CURRENT_SETTINGS, dm)
-    Dim txt As String
-    txt = txt & "Bits Per Pixel: " & dm.dmBitsPerPixel & vbCrLf
-    txt = txt & "Width (Pixels): " & dm.dmPelsWidth & vbCrLf
-    txt = txt & "Height (Pixels):" & dm.dmPelsHeight & vbCrLf
-    txt = txt & "Display Freq.:  " & dm.dmDisplayFrequency & vbCrLf
-    MsgBox txt
+   On Error Resume Next
+   Dim dm     As typDevMODE
+   Dim RetVal As Long
+   dm.dmSize = Len(dm)
+   RetVal = apiEnumDisplaySettings(vbNullString, ENUM_CURRENT_SETTINGS, dm)
+   Dim txt As String
+   txt = txt & "Bits Per Pixel: " & dm.dmBitsPerPixel & vbCrLf
+   txt = txt & "Width (Pixels): " & dm.dmPelsWidth & vbCrLf
+   txt = txt & "Height (Pixels):" & dm.dmPelsHeight & vbCrLf
+   txt = txt & "Display Freq.:  " & dm.dmDisplayFrequency & vbCrLf
+   MsgBox txt
 End Sub

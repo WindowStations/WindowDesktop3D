@@ -27,11 +27,11 @@ Begin VB.Form frmDisplay
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   9735
-      Left            =   120
+      Height          =   9915
+      Left            =   30
       TabIndex        =   0
-      Top             =   120
-      Width           =   12735
+      Top             =   30
+      Width           =   12915
       Begin VB.Frame frachkDisable2D 
          Appearance      =   0  'Flat
          BackColor       =   &H00000000&
@@ -622,317 +622,288 @@ Private isloaded  As Boolean
 Private dragx As Long
 Private dragy As Long
 Private mdown As Boolean
-
-
-
 Private Sub Form_Load()
-    On Error Resume Next
-    CreateRoundRectFromWindow Me
-    CreateRoundRectFromWindow fraMain
-    chkHideText.Value = displayHide
-    
-    lblTitleSlider1.Tag = displayDelay
-    lblTitleSlider1.Caption = "Text delay " & CStr(displayDelay)
-    lblValueSlider1.Width = fraSlider1.Width * (displayDelay / 5000)
-    lblTitleSlider2.Tag = displaySpeed
-    lblTitleSlider2.Caption = "Text speed " & CStr(displaySpeed)
-    lblValueSlider2.Width = fraSlider2.Width * (displaySpeed / 5)
-    lblTitleSlider3.Tag = displayFade
-    lblTitleSlider3.Caption = "Text fade " & CStr(displayFade)
-    lblValueSlider3.Width = fraSlider3.Width * (displayFade / 5000)
-    lblTitleSlider4.Tag = displayPosition '- 1000
-    lblTitleSlider4.Caption = "Text position " & CStr(displayPosition)
-    lblValueSlider4.Width = fraSlider4.Width * (displayPosition / 2000)
-    lblTitleSlider5.Tag = displayTrans3D
-    lblTitleSlider5.Caption = "Window translucency 3D " & CStr(displayTrans3D)
-    lblValueSlider5.Width = fraSlider5.Width * (displayTrans3D / 255)
-    lblTitleSlider6.Tag = displayTransSettings
-    lblTitleSlider6.Caption = "Window translucency Settings " & CStr(displayTransSettings)
-    lblValueSlider6.Width = fraSlider6.Width * (displayTransSettings / 255)
-    dragx = -1
-    dragy = -1
-    isloaded = True
+   On Error Resume Next
+   CreateRoundRectFromWindow Me
+   CreateRoundRectFromWindow fraMain
+   chkHideText.Value = displayHide
+   lblTitleSlider1.Tag = displayDelay
+   lblTitleSlider1.Caption = "Text delay " & CStr(displayDelay)
+   lblValueSlider1.Width = fraSlider1.Width * (displayDelay / 5000)
+   lblTitleSlider2.Tag = displaySpeed
+   lblTitleSlider2.Caption = "Text speed " & CStr(displaySpeed)
+   lblValueSlider2.Width = fraSlider2.Width * (displaySpeed / 5)
+   lblTitleSlider3.Tag = displayFade
+   lblTitleSlider3.Caption = "Text fade " & CStr(displayFade)
+   lblValueSlider3.Width = fraSlider3.Width * (displayFade / 5000)
+   lblTitleSlider4.Tag = displayPosition '- 1000
+   lblTitleSlider4.Caption = "Text position " & CStr(displayPosition)
+   lblValueSlider4.Width = fraSlider4.Width * (displayPosition / 2000)
+   lblTitleSlider5.Tag = displayTrans3D
+   lblTitleSlider5.Caption = "Window translucency 3D " & CStr(displayTrans3D)
+   lblValueSlider5.Width = fraSlider5.Width * (displayTrans3D / 255)
+   lblTitleSlider6.Tag = displayTransSettings
+   lblTitleSlider6.Caption = "Window translucency Settings " & CStr(displayTransSettings)
+   lblValueSlider6.Width = fraSlider6.Width * (displayTransSettings / 255)
+   dragx = -1
+   dragy = -1
+   isloaded = True
 End Sub
 Private Sub Form_Activate()
-    WindowTransparency Me.hWnd, displayTransSettings, vbBlack
+   WindowTransparency Me.hWnd, displayTransSettings, vbBlack
 End Sub
-Private Sub fraMain_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    dragx = X
-    dragy = Y
+Private Sub fraMain_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   dragx = x
+   dragy = y
 End Sub
-Private Sub fraMain_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    dragx = -1
-    dragy = -1
+Private Sub fraMain_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   dragx = -1
+   dragy = -1
 End Sub
-Private Sub fraTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    fraMain_MouseDown Button, Shift, X, Y
+Private Sub fraTitle_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   fraMain_MouseDown Button, Shift, x, y
 End Sub
-
-
-Private Sub lblTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    fraMain_MouseDown Button, Shift, X, Y
+Private Sub lblTitle_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   fraMain_MouseDown Button, Shift, x, y
 End Sub
-Private Sub fraTitle_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    fraMain_MouseMove Button, Shift, X, Y
+Private Sub fraTitle_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   fraMain_MouseMove Button, Shift, x, y
 End Sub
-Private Sub lblTitle_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    fraMain_MouseMove Button, Shift, X, Y
+Private Sub lblTitle_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   fraMain_MouseMove Button, Shift, x, y
 End Sub
-Private Sub fraTitle_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    fraMain_MouseUp Button, Shift, X, Y
+Private Sub fraTitle_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   fraMain_MouseUp Button, Shift, x, y
 End Sub
-Private Sub lblTitle_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    fraMain_MouseUp Button, Shift, X, Y
+Private Sub lblTitle_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   fraMain_MouseUp Button, Shift, x, y
 End Sub
-Private Sub fraMain_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    On Error Resume Next
-    If fracmdBack.BackColor <> &H404040 Then fracmdBack.BackColor = &H404040
-    If fracmdApply.BackColor <> &H404040 Then fracmdApply.BackColor = &H404040
-    If fracmdClose.BackColor <> &H404040 Then fracmdClose.BackColor = &H404040
-    If dragx > -1 Then
-        If X > dragx Then
-            Me.left = Me.left + (X - dragx)
-        ElseIf X < dragx Then
-            Me.left = Me.left - (dragx - X)
-        End If
-    End If
-    If dragy > -1 Then
-        If Y > dragy Then
-            Me.top = Me.top + (Y - dragy)
-        ElseIf Y < dragy Then
-            Me.top = Me.top - (dragy - Y)
-        End If
-    End If
+Private Sub fraMain_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   On Error Resume Next
+   If fracmdBack.BackColor <> &H404040 Then fracmdBack.BackColor = &H404040
+   If fracmdApply.BackColor <> &H404040 Then fracmdApply.BackColor = &H404040
+   If fracmdClose.BackColor <> &H404040 Then fracmdClose.BackColor = &H404040
+   If dragx > -1 Then
+      If x > dragx Then
+         Me.left = Me.left + (x - dragx)
+      ElseIf x < dragx Then
+         Me.left = Me.left - (dragx - x)
+      End If
+   End If
+   If dragy > -1 Then
+      If y > dragy Then
+         Me.top = Me.top + (y - dragy)
+      ElseIf y < dragy Then
+         Me.top = Me.top - (dragy - y)
+      End If
+   End If
 End Sub
-Private Sub fracmdBack_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    fracmdBack.BackColor = &H808080
+Private Sub fracmdBack_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   fracmdBack.BackColor = &H808080
 End Sub
-Private Sub fracmdApply_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    fracmdApply.BackColor = &H808080
+Private Sub fracmdApply_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   fracmdApply.BackColor = &H808080
 End Sub
-Private Sub fracmdClose_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    fracmdClose.BackColor = &H808080
+Private Sub fracmdClose_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   fracmdClose.BackColor = &H808080
 End Sub
 Private Sub fracmdBack_Click()
-    frmSettings.show
-    frmSettings.top = Me.top
-    frmSettings.left = Me.left
-    frmMain.SetWindowPos frmSettings.hWnd, -1, 0, 0, 0, 0, False, False
-    Unload Me
+   frmSettings.show
+   frmSettings.top = Me.top
+   frmSettings.left = Me.left
+   frmMain.SetWindowPos frmSettings.hWnd, -1, 0, 0, 0, 0, False, False
+   Unload Me
 End Sub
 Private Sub lblBack_Click()
-    fracmdBack_Click
+   fracmdBack_Click
 End Sub
-
-
-Private Sub chkHideText_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-  CheckBoxSetting
+Private Sub chkHideText_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   CheckBoxSetting
 End Sub
-
-
-Private Sub lblDisable2D_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    If chkHideText.Value = vbUnchecked Then
-        chkHideText.Value = vbChecked
-    Else
-        chkHideText.Value = vbUnchecked
-    End If
-    CheckBoxSetting
+Private Sub lblDisable2D_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   If chkHideText.Value = vbUnchecked Then
+      chkHideText.Value = vbChecked
+   Else
+      chkHideText.Value = vbUnchecked
+   End If
+   CheckBoxSetting
 End Sub
 Private Sub CheckBoxSetting()
    displayHide = chkHideText.Value
 End Sub
 Private Sub fracmdApply_Click()
-    On Error Resume Next
-    displayDelay = CLng(lblTitleSlider1.Tag)
-    displaySpeed = CLng(lblTitleSlider2.Tag)
-    displayFade = CLng(lblTitleSlider3.Tag)
-    displayPosition = CLng(lblTitleSlider4.Tag)
-    displayTrans3D = CInt(lblTitleSlider5.Tag)
-    displayTransSettings = CInt(lblTitleSlider6.Tag)
-    displayHide = chkHideText.Value
-    
-    SaveSetting "Window3D", "Display", "Delay", CStr(displayDelay)
-    SaveSetting "Window3D", "Display", "Speed", CStr(displaySpeed)
-    SaveSetting "Window3D", "Display", "Fade", CStr(displayFade)
-    SaveSetting "Window3D", "Display", "Position", CStr(displayPosition)
-    SaveSetting "Window3D", "Display", "3D", CStr(displayTrans3D)
-    SaveSetting "Window3D", "Display", "Settings", CStr(displayTransSettings)
-    SaveSetting "Window3D", "Display", "Hide", CStr(displayHide)
-    Beep
+   On Error Resume Next
+   displayDelay = CLng(lblTitleSlider1.Tag)
+   displaySpeed = CLng(lblTitleSlider2.Tag)
+   displayFade = CLng(lblTitleSlider3.Tag)
+   displayPosition = CLng(lblTitleSlider4.Tag)
+   displayTrans3D = CInt(lblTitleSlider5.Tag)
+   displayTransSettings = CInt(lblTitleSlider6.Tag)
+   displayHide = chkHideText.Value
+   SaveSetting "Window3D", "Display", "Delay", CStr(displayDelay)
+   SaveSetting "Window3D", "Display", "Speed", CStr(displaySpeed)
+   SaveSetting "Window3D", "Display", "Fade", CStr(displayFade)
+   SaveSetting "Window3D", "Display", "Position", CStr(displayPosition)
+   SaveSetting "Window3D", "Display", "3D", CStr(displayTrans3D)
+   SaveSetting "Window3D", "Display", "Settings", CStr(displayTransSettings)
+   SaveSetting "Window3D", "Display", "Hide", CStr(displayHide)
+   Beep
 End Sub
 Private Sub lblApply_Click()
-    fracmdApply_Click
+   fracmdApply_Click
 End Sub
 Private Sub fracmdClose_Click()
-    Unload Me
+   Unload Me
 End Sub
 Private Sub lblClose_Click()
-    fracmdClose_Click
+   fracmdClose_Click
 End Sub
-Private Function UpdateSlider(ByVal X As Single, ByRef sldr As Frame, ByRef lvl As Label, ByRef lbl As Label, ByVal name As String) As Long
-    On Error Resume Next
-    Dim v As Long
-    Dim mm() As String
-    Dim min As Long
-    Dim max As Long
-    mm = Split(sldr.Tag, ",")
-    min = mm(0)
-    max = mm(1)
-    v = (X / sldr.Width) * max
-    If v < min Then v = min
-    If v > max Then v = max
-    If X < 0 Then lvl.Width = 0
-    If X >= 0 Then lvl.Width = X
-    lbl.Tag = v
-    lbl.Caption = name & " " & v
-    UpdateSlider = v
+Private Function UpdateSlider(ByVal x As Single, ByRef sldr As Frame, ByRef lvl As Label, ByRef lbl As Label, ByVal name As String) As Long
+   On Error Resume Next
+   Dim v As Long
+   Dim mm() As String
+   Dim min As Long
+   Dim max As Long
+   mm = Split(sldr.Tag, ",")
+   min = mm(0)
+   max = mm(1)
+   v = (x / sldr.Width) * max
+   If v < min Then v = min
+   If v > max Then v = max
+   If x < 0 Then lvl.Width = 0
+   If x >= 0 Then lvl.Width = x
+   lbl.Tag = v
+   lbl.Caption = name & " " & v
+   UpdateSlider = v
 End Function
-
-Private Sub lblSlider1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = True
-    displayDelay = UpdateSlider(X, fraSlider1, lblValueSlider1, lblTitleSlider1, "Text delay")
+Private Sub lblSlider1_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = True
+   displayDelay = UpdateSlider(x, fraSlider1, lblValueSlider1, lblTitleSlider1, "Text delay")
 End Sub
-Private Sub lblValueSlider1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider1_MouseDown Button, Shift, X, Y
+Private Sub lblValueSlider1_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider1_MouseDown Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    If mdown = False Then Exit Sub
-    displayDelay = UpdateSlider(X, fraSlider1, lblValueSlider1, lblTitleSlider1, "Text delay")
+Private Sub lblSlider1_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   If mdown = False Then Exit Sub
+   displayDelay = UpdateSlider(x, fraSlider1, lblValueSlider1, lblTitleSlider1, "Text delay")
 End Sub
-Private Sub lblValueSlider1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider1_MouseMove Button, Shift, X, Y
+Private Sub lblValueSlider1_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider1_MouseMove Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider1_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = False
+Private Sub lblSlider1_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = False
 End Sub
-Private Sub lblValueSlider1_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider1_MouseUp Button, Shift, X, Y
+Private Sub lblValueSlider1_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider1_MouseUp Button, Shift, x, y
 End Sub
 ''''''''''''''
-
-Private Sub lblSlider2_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = True
-    displaySpeed = UpdateSlider(X, fraSlider2, lblValueSlider2, lblTitleSlider2, "Text speed")
+Private Sub lblSlider2_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = True
+   displaySpeed = UpdateSlider(x, fraSlider2, lblValueSlider2, lblTitleSlider2, "Text speed")
 End Sub
-Private Sub lblValueSlider2_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider2_MouseDown Button, Shift, X, Y
+Private Sub lblValueSlider2_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider2_MouseDown Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider2_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    If mdown = False Then Exit Sub
-    displaySpeed = UpdateSlider(X, fraSlider2, lblValueSlider2, lblTitleSlider2, "Text speed")
+Private Sub lblSlider2_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   If mdown = False Then Exit Sub
+   displaySpeed = UpdateSlider(x, fraSlider2, lblValueSlider2, lblTitleSlider2, "Text speed")
 End Sub
-Private Sub lblValueSlider2_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider2_MouseMove Button, Shift, X, Y
+Private Sub lblValueSlider2_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider2_MouseMove Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider2_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = False
+Private Sub lblSlider2_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = False
 End Sub
-Private Sub lblValueSlider2_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider2_MouseUp Button, Shift, X, Y
+Private Sub lblValueSlider2_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider2_MouseUp Button, Shift, x, y
 End Sub
 '''''''''''''''''''''''''''''''''
-
-Private Sub lblSlider3_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = True
-    displayFade = UpdateSlider(X, fraSlider3, lblValueSlider3, lblTitleSlider3, "Text fade")
+Private Sub lblSlider3_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = True
+   displayFade = UpdateSlider(x, fraSlider3, lblValueSlider3, lblTitleSlider3, "Text fade")
 End Sub
-Private Sub lblValueSlider3_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider3_MouseDown Button, Shift, X, Y
+Private Sub lblValueSlider3_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider3_MouseDown Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider3_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    If mdown = False Then Exit Sub
-    displayFade = UpdateSlider(X, fraSlider3, lblValueSlider3, lblTitleSlider3, "Text fade")
+Private Sub lblSlider3_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   If mdown = False Then Exit Sub
+   displayFade = UpdateSlider(x, fraSlider3, lblValueSlider3, lblTitleSlider3, "Text fade")
 End Sub
-Private Sub lblValueSlider3_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider3_MouseMove Button, Shift, X, Y
+Private Sub lblValueSlider3_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider3_MouseMove Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider3_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = False
+Private Sub lblSlider3_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = False
 End Sub
-Private Sub lblValueSlider3_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider3_MouseUp Button, Shift, X, Y
+Private Sub lblValueSlider3_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider3_MouseUp Button, Shift, x, y
 End Sub
 '''''''''''''''''''''''''''''''''
-
-Private Sub lblSlider4_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = True
-    displayPosition = UpdateSlider(X, fraSlider4, lblValueSlider4, lblTitleSlider4, "Text position") '- 1000
+Private Sub lblSlider4_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = True
+   displayPosition = UpdateSlider(x, fraSlider4, lblValueSlider4, lblTitleSlider4, "Text position") '- 1000
 End Sub
-Private Sub lblValueSlider4_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider4_MouseDown Button, Shift, X, Y
+Private Sub lblValueSlider4_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider4_MouseDown Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider4_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    If mdown = False Then Exit Sub
-    displayPosition = UpdateSlider(X, fraSlider4, lblValueSlider4, lblTitleSlider4, "Text position") ' - 1000
+Private Sub lblSlider4_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   If mdown = False Then Exit Sub
+   displayPosition = UpdateSlider(x, fraSlider4, lblValueSlider4, lblTitleSlider4, "Text position") ' - 1000
 End Sub
-Private Sub lblValueSlider4_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider4_MouseMove Button, Shift, X, Y
+Private Sub lblValueSlider4_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider4_MouseMove Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider4_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = False
+Private Sub lblSlider4_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = False
 End Sub
-Private Sub lblValueSlider4_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider4_MouseUp Button, Shift, X, Y
+Private Sub lblValueSlider4_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider4_MouseUp Button, Shift, x, y
 End Sub
 '''''''''''''''''''''''''''''''''
-
-Private Sub lblSlider5_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = True
-    displayTrans3D = CInt(UpdateSlider(X, fraSlider5, lblValueSlider5, lblTitleSlider5, "Window translucency 3D"))
-    WindowTransparency frmMain.hWnd, displayTrans3D, vbBlack
+Private Sub lblSlider5_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = True
+   displayTrans3D = CInt(UpdateSlider(x, fraSlider5, lblValueSlider5, lblTitleSlider5, "Window translucency 3D"))
+   WindowTransparency frmMain.hWnd, displayTrans3D, vbBlack
 End Sub
-Private Sub lblValueSlider5_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider5_MouseDown Button, Shift, X, Y
+Private Sub lblValueSlider5_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider5_MouseDown Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider5_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    If mdown = False Then Exit Sub
-    displayTrans3D = CInt(UpdateSlider(X, fraSlider5, lblValueSlider5, lblTitleSlider5, "Window translucency 3D"))
-    WindowTransparency frmMain.hWnd, displayTrans3D, vbBlack
+Private Sub lblSlider5_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   If mdown = False Then Exit Sub
+   displayTrans3D = CInt(UpdateSlider(x, fraSlider5, lblValueSlider5, lblTitleSlider5, "Window translucency 3D"))
+   WindowTransparency frmMain.hWnd, displayTrans3D, vbBlack
 End Sub
-Private Sub lblValueSlider5_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider5_MouseMove Button, Shift, X, Y
+Private Sub lblValueSlider5_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider5_MouseMove Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider5_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = False
+Private Sub lblSlider5_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = False
 End Sub
-Private Sub lblValueSlider5_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider5_MouseUp Button, Shift, X, Y
+Private Sub lblValueSlider5_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider5_MouseUp Button, Shift, x, y
 End Sub
 '''''''''''''''''''''''''''''''''
-
-Private Sub lblSlider6_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = True
-    displayTransSettings = CInt(UpdateSlider(X, fraSlider6, lblValueSlider6, lblTitleSlider6, "Window translucency Settings"))
-    WindowTransparency Me.hWnd, displayTransSettings, vbBlack
+Private Sub lblSlider6_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = True
+   displayTransSettings = CInt(UpdateSlider(x, fraSlider6, lblValueSlider6, lblTitleSlider6, "Window translucency Settings"))
+   WindowTransparency Me.hWnd, displayTransSettings, vbBlack
 End Sub
-Private Sub lblValueSlider6_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider6_MouseDown Button, Shift, X, Y
+Private Sub lblValueSlider6_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider6_MouseDown Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider6_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    If mdown = False Then Exit Sub
-    displayTransSettings = CInt(UpdateSlider(X, fraSlider6, lblValueSlider6, lblTitleSlider6, "Window translucency Settings"))
-    WindowTransparency Me.hWnd, displayTransSettings, vbBlack
+Private Sub lblSlider6_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   If mdown = False Then Exit Sub
+   displayTransSettings = CInt(UpdateSlider(x, fraSlider6, lblValueSlider6, lblTitleSlider6, "Window translucency Settings"))
+   WindowTransparency Me.hWnd, displayTransSettings, vbBlack
 End Sub
-Private Sub lblValueSlider6_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider6_MouseMove Button, Shift, X, Y
+Private Sub lblValueSlider6_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider6_MouseMove Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider6_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = False
+Private Sub lblSlider6_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = False
 End Sub
-Private Sub lblValueSlider6_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider6_MouseUp Button, Shift, X, Y
+Private Sub lblValueSlider6_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider6_MouseUp Button, Shift, x, y
 End Sub
 '''''''''''''''''''''''''''''''''
 '

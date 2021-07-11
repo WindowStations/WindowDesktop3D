@@ -4,10 +4,10 @@ Private Const GWL_WNDPROC        As Long = -4
 Private Const WM_MOUSEWHEEL      As Long = &H20A
 Private Const CB_GETDROPPEDSTATE As Long = &H157
 Private Type RECT
-    left As Long
-    top As Long
-    right As Long
-    bottom As Long
+   left As Long
+   top As Long
+   right As Long
+   bottom As Long
 End Type
 Private Declare Function GetProp Lib "user32" Alias "GetPropA" (ByVal hWnd As Long, ByVal lpString As String) As Long
 Private Declare Function SetProp Lib "user32" Alias "SetPropA" (ByVal hWnd As Long, ByVal lpString As String, ByVal hData As Long) As Long
@@ -20,42 +20,41 @@ Private Declare Function apiGetParent Lib "user32" Alias "GetParent" (ByVal hWnd
 Private Declare Function apiGetTickCount Lib "user32" Alias "GetTickCount" () As Long
 Private lasttick  As Long
 Public scrollposi As Long
-
 Public Sub WheelHook(ByVal hWnd As Long)
-    On Error Resume Next
-    SetProp hWnd, "PrevWndProc", SetWindowLong(hWnd, GWL_WNDPROC, AddressOf WindowProc)
+   On Error Resume Next
+   SetProp hWnd, "PrevWndProc", SetWindowLong(hWnd, GWL_WNDPROC, AddressOf WindowProc)
 End Sub
 Public Sub WheelUnHook(ByVal hWnd As Long)
-    On Error Resume Next
-    SetWindowLong hWnd, GWL_WNDPROC, GetProp(hWnd, "PrevWndProc")
-    RemoveProp hWnd, "PrevWndProc"
+   On Error Resume Next
+   SetWindowLong hWnd, GWL_WNDPROC, GetProp(hWnd, "PrevWndProc")
+   RemoveProp hWnd, "PrevWndProc"
 End Sub
 Private Function WindowProc(ByVal Lwnd As Long, ByVal Lmsg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
-    On Error Resume Next
-    Dim Rotation As Long
-    If Lmsg = WM_MOUSEWHEEL Then
-        Rotation = wParam / 65536
-        If Rotation = Abs(Rotation) Then
-            scrollposi = Rotation
-        Else
-            scrollposi = Rotation
-        End If
-    Else
-    End If
-    WindowProc = CallWindowProc(GetProp(Lwnd, "PrevWndProc"), Lwnd, Lmsg, wParam, lParam)
+   On Error Resume Next
+   Dim Rotation As Long
+   If Lmsg = WM_MOUSEWHEEL Then
+      Rotation = wParam / 65536
+      If Rotation = Abs(Rotation) Then
+         scrollposi = Rotation
+      Else
+         scrollposi = Rotation
+      End If
+   Else
+   End If
+   WindowProc = CallWindowProc(GetProp(Lwnd, "PrevWndProc"), Lwnd, Lmsg, wParam, lParam)
 End Function
 Public Function IsOver(ByVal hWnd As Long, ByVal lX As Long, ByVal lY As Long) As Boolean
-    Dim rectCtl As RECT
-    apiGetWindowRect hWnd, rectCtl
-    With rectCtl
-        IsOver = (lX >= .left And lX <= .right And lY >= .top And lY <= .bottom)
-    End With
+   Dim rectCtl As RECT
+   apiGetWindowRect hWnd, rectCtl
+   With rectCtl
+      IsOver = (lX >= .left And lX <= .right And lY >= .top And lY <= .bottom)
+   End With
 End Function
 Private Function GetForm(ByVal hWnd As Long) As Form
-    For Each GetForm In Forms
-        If GetForm.hWnd = hWnd Then Exit Function
-    Next GetForm
-    Set GetForm = Nothing
+   For Each GetForm In Forms
+      If GetForm.hWnd = hWnd Then Exit Function
+   Next GetForm
+   Set GetForm = Nothing
 End Function
 'Public Sub PictureBoxZoom(ByRef picBox As PictureBox, ByVal MouseKeys As Long, ByVal Rotation As Long, ByVal Xpos As Long, ByVal Ypos As Long)
 '    picBox.Cls

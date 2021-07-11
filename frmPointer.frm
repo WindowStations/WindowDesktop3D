@@ -18,11 +18,11 @@ Begin VB.Form frmPointer
    Begin VB.Frame Frame1 
       BackColor       =   &H00000000&
       BorderStyle     =   0  'None
-      Height          =   9735
-      Left            =   120
+      Height          =   9915
+      Left            =   30
       TabIndex        =   0
-      Top             =   120
-      Width           =   12735
+      Top             =   30
+      Width           =   12915
       Begin VB.Frame frachkDisable3D 
          Appearance      =   0  'Flat
          BackColor       =   &H00000000&
@@ -842,413 +842,375 @@ Private dragx As Long
 Private dragy As Long
 Private mdown As Boolean
 Private Sub Form_Load()
-    On Error Resume Next
-    CreateRoundRectFromWindow Me
-    CreateRoundRectFromWindow Frame1
-    chkDisable2D.Value = pointerDisable2D
-    chkDisable3D.Value = pointerDisable3D
-    lblTitleSlider1.Tag = pointerMaxPointerSpeed
-    lblTitleSlider1.Caption = "Pointer speed " & pointerMaxPointerSpeed
-    lblValueSlider1.Width = fraSlider1.Width * (pointerMaxPointerSpeed / 20)
-    lblTitleSlider2.Tag = pointerMaxPointerAcceleration
-    lblTitleSlider2.Caption = "Pointer acceleration " & pointerMaxPointerAcceleration
-    lblValueSlider2.Width = fraSlider2.Width * (pointerMaxPointerAcceleration / 50)
-    lblTitleSlider3.Tag = pointerMaxWheelSpeed
-    lblTitleSlider3.Caption = "Wheel speed " & pointerMaxWheelSpeed
-    lblValueSlider3.Width = fraSlider3.Width * (pointerMaxWheelSpeed / 50)
-    lblTitleSlider4.Tag = pointerMaxWheelAcceleration
-    lblTitleSlider4.Caption = "Wheel acceleration " & pointerMaxWheelAcceleration
-    lblValueSlider4.Width = fraSlider4.Width * (pointerMaxWheelAcceleration / 50)
-    lblTitleSlider5.Tag = pointerMaxPOVSpeed
-    lblTitleSlider5.Caption = "Point of view speed " & pointerMaxPOVSpeed
-    lblValueSlider5.Width = fraSlider5.Width * (pointerMaxPOVSpeed / 50)
-    lblTitleSlider6.Tag = pointerMaxPOVAcceleration
-    lblTitleSlider6.Caption = "Point of view acceleration " & pointerMaxPOVAcceleration
-    lblValueSlider6.Width = fraSlider6.Width * (pointerMaxPOVAcceleration / 50)
-    lblTitleSlider7.Tag = pointerMaxWalkSpeed
-    lblTitleSlider7.Caption = "Walk speed " & pointerMaxWalkSpeed
-    lblValueSlider7.Width = fraSlider7.Width * (pointerMaxWalkSpeed / 5)
-    lblTitleSlider8.Tag = pointerMaxWalkAcceleration
-    lblTitleSlider8.Caption = "Walk acceleration " & pointerMaxWalkAcceleration
-    lblValueSlider8.Width = fraSlider8.Width * (pointerMaxWalkAcceleration / 5)
-    dragx = -1
-    dragy = -1
-    isloaded = True
+   On Error Resume Next
+   CreateRoundRectFromWindow Me
+   CreateRoundRectFromWindow Frame1
+   chkDisable2D.Value = pointerDisable2D
+   chkDisable3D.Value = pointerDisable3D
+   lblTitleSlider1.Tag = pointerMaxPointerSpeed
+   lblTitleSlider1.Caption = "Pointer speed " & pointerMaxPointerSpeed
+   lblValueSlider1.Width = fraSlider1.Width * (pointerMaxPointerSpeed / 20)
+   lblTitleSlider2.Tag = pointerMaxPointerAcceleration
+   lblTitleSlider2.Caption = "Pointer acceleration " & pointerMaxPointerAcceleration
+   lblValueSlider2.Width = fraSlider2.Width * (pointerMaxPointerAcceleration / 50)
+   lblTitleSlider3.Tag = pointerMaxWheelSpeed
+   lblTitleSlider3.Caption = "Wheel speed " & pointerMaxWheelSpeed
+   lblValueSlider3.Width = fraSlider3.Width * (pointerMaxWheelSpeed / 50)
+   lblTitleSlider4.Tag = pointerMaxWheelAcceleration
+   lblTitleSlider4.Caption = "Wheel acceleration " & pointerMaxWheelAcceleration
+   lblValueSlider4.Width = fraSlider4.Width * (pointerMaxWheelAcceleration / 50)
+   lblTitleSlider5.Tag = pointerMaxPOVSpeed
+   lblTitleSlider5.Caption = "Point of view speed " & pointerMaxPOVSpeed
+   lblValueSlider5.Width = fraSlider5.Width * (pointerMaxPOVSpeed / 50)
+   lblTitleSlider6.Tag = pointerMaxPOVAcceleration
+   lblTitleSlider6.Caption = "Point of view acceleration " & pointerMaxPOVAcceleration
+   lblValueSlider6.Width = fraSlider6.Width * (pointerMaxPOVAcceleration / 50)
+   lblTitleSlider7.Tag = pointerMaxWalkSpeed
+   lblTitleSlider7.Caption = "Walk speed " & pointerMaxWalkSpeed
+   lblValueSlider7.Width = fraSlider7.Width * (pointerMaxWalkSpeed / 5)
+   lblTitleSlider8.Tag = pointerMaxWalkAcceleration
+   lblTitleSlider8.Caption = "Walk acceleration " & pointerMaxWalkAcceleration
+   lblValueSlider8.Width = fraSlider8.Width * (pointerMaxWalkAcceleration / 5)
+   dragx = -1
+   dragy = -1
+   isloaded = True
 End Sub
 Private Sub Form_Activate()
-    WindowTransparency Me.hWnd, displayTransSettings, vbBlack
-    lblTitle.TabIndex = 0
+   WindowTransparency Me.hWnd, displayTransSettings, vbBlack
+   lblTitle.TabIndex = 0
 End Sub
-Private Sub Frame1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    dragx = X
-    dragy = Y
+Private Sub Frame1_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   dragx = x
+   dragy = y
 End Sub
-Private Sub Frame1_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    dragx = -1
-    dragy = -1
+Private Sub Frame1_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   dragx = -1
+   dragy = -1
 End Sub
-
-
-Private Sub lblTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    Frame1_MouseDown Button, Shift, X, Y
+Private Sub lblTitle_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   Frame1_MouseDown Button, Shift, x, y
 End Sub
-Private Sub lblTitle_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    Frame1_MouseMove Button, Shift, X, Y
+Private Sub lblTitle_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   Frame1_MouseMove Button, Shift, x, y
 End Sub
-Private Sub lblTitle_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    Frame1_MouseUp Button, Shift, X, Y
+Private Sub lblTitle_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   Frame1_MouseUp Button, Shift, x, y
 End Sub
 Private Sub Frame2_Click()
-    frmSettings.show
-    frmSettings.top = Me.top
-    frmSettings.left = Me.left
-    frmMain.SetWindowPos frmSettings.hWnd, -1, 0, 0, 0, 0, False, False
-    Unload Me
+   frmSettings.show
+   frmSettings.top = Me.top
+   frmSettings.left = Me.left
+   frmMain.SetWindowPos frmSettings.hWnd, -1, 0, 0, 0, 0, False, False
+   Unload Me
 End Sub
-
-Private Sub chkDisable2D_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    CheckBoxSetting1
+Private Sub chkDisable2D_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   CheckBoxSetting1
 End Sub
-Private Sub lblDisable2D_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    If chkDisable2D.Value = vbUnchecked Then
-        chkDisable2D.Value = vbChecked
-    Else
-        chkDisable2D.Value = vbUnchecked
-    End If
-    CheckBoxSetting1
+Private Sub lblDisable2D_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   If chkDisable2D.Value = vbUnchecked Then
+      chkDisable2D.Value = vbChecked
+   Else
+      chkDisable2D.Value = vbUnchecked
+   End If
+   CheckBoxSetting1
 End Sub
 Private Sub CheckBoxSetting1()
    pointerDisable2D = chkDisable2D.Value
 End Sub
-
-
-Private Sub chkDisable3D_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    CheckBoxSetting2
+Private Sub chkDisable3D_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   CheckBoxSetting2
 End Sub
-Private Sub lblDisable3d_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    If chkDisable3D.Value = vbUnchecked Then
-        chkDisable3D.Value = vbChecked
-    Else
-        chkDisable3D.Value = vbUnchecked
-    End If
-    CheckBoxSetting2
+Private Sub lblDisable3d_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   If chkDisable3D.Value = vbUnchecked Then
+      chkDisable3D.Value = vbChecked
+   Else
+      chkDisable3D.Value = vbUnchecked
+   End If
+   CheckBoxSetting2
 End Sub
 Private Sub CheckBoxSetting2()
-  pointerDisable3D = chkDisable3D.Value
+   pointerDisable3D = chkDisable3D.Value
 End Sub
-
 Private Sub Frame3_Click()
-    On Error Resume Next
-    pointerMaxPointerSpeed = lblTitleSlider1.Tag
-    pointerMaxPointerAcceleration = lblTitleSlider2.Tag ' traPointerAcceleration.Value
-    pointerMaxWheelSpeed = lblTitleSlider3.Tag 'traWheelSpeed.Value
-    pointerMaxWheelAcceleration = lblTitleSlider4.Tag ' traWheelAcceleration.Value
-    pointerMaxPOVSpeed = lblTitleSlider5.Tag 'traPOVSpeed.Value
-    pointerMaxPOVAcceleration = lblTitleSlider6.Tag 'traPOVAcceleration.Value
-    pointerMaxWalkSpeed = lblTitleSlider7.Tag 'traWalkSpeed.Value
-    pointerMaxWalkAcceleration = lblTitleSlider8.Tag 'traWalkAcceleration.Value
-    pointerDisable2D = chkDisable2D.Value
-    pointerDisable3D = chkDisable3D.Value
-    
-    frmMain.Visible = Not CBool(pointerDisable3D)
-    RenderEnabled = Not CBool(pointerDisable3D)
-    
-    SaveSetting "Window3D", "Pointer", "MaxPointerSpeed", CStr(pointerMaxPointerSpeed)
-    SaveSetting "Window3D", "Pointer", "MaxPOVSpeed", CStr(pointerMaxPOVSpeed)
-    SaveSetting "Window3D", "Pointer", "MaxPointerAcceleration", CStr(pointerMaxPointerAcceleration)
-    SaveSetting "Window3D", "Pointer", "MaxPOVAcceleration", CStr(pointerMaxPOVAcceleration)
-    SaveSetting "Window3D", "Pointer", "MaxWheelSpeed", CStr(pointerMaxWheelSpeed)
-    SaveSetting "Window3D", "Pointer", "MaxWalkSpeed", CStr(pointerMaxWalkSpeed)
-    SaveSetting "Window3D", "Pointer", "MaxWheelAcceleration", CStr(pointerMaxWheelAcceleration)
-    SaveSetting "Window3D", "Pointer", "MaxWalkAcceleration", CStr(pointerMaxWalkAcceleration)
-    SaveSetting "Window3D", "Pointer", "Disable2D", CStr(pointerDisable2D)
-    SaveSetting "Window3D", "Pointer", "Disable3D", CStr(pointerDisable3D)
-    Beep
+   On Error Resume Next
+   pointerMaxPointerSpeed = lblTitleSlider1.Tag
+   pointerMaxPointerAcceleration = lblTitleSlider2.Tag ' traPointerAcceleration.Value
+   pointerMaxWheelSpeed = lblTitleSlider3.Tag 'traWheelSpeed.Value
+   pointerMaxWheelAcceleration = lblTitleSlider4.Tag ' traWheelAcceleration.Value
+   pointerMaxPOVSpeed = lblTitleSlider5.Tag 'traPOVSpeed.Value
+   pointerMaxPOVAcceleration = lblTitleSlider6.Tag 'traPOVAcceleration.Value
+   pointerMaxWalkSpeed = lblTitleSlider7.Tag 'traWalkSpeed.Value
+   pointerMaxWalkAcceleration = lblTitleSlider8.Tag 'traWalkAcceleration.Value
+   pointerDisable2D = chkDisable2D.Value
+   pointerDisable3D = chkDisable3D.Value
+   frmMain.Visible = Not CBool(pointerDisable3D)
+   RenderEnabled = Not CBool(pointerDisable3D)
+   SaveSetting "Window3D", "Pointer", "MaxPointerSpeed", CStr(pointerMaxPointerSpeed)
+   SaveSetting "Window3D", "Pointer", "MaxPOVSpeed", CStr(pointerMaxPOVSpeed)
+   SaveSetting "Window3D", "Pointer", "MaxPointerAcceleration", CStr(pointerMaxPointerAcceleration)
+   SaveSetting "Window3D", "Pointer", "MaxPOVAcceleration", CStr(pointerMaxPOVAcceleration)
+   SaveSetting "Window3D", "Pointer", "MaxWheelSpeed", CStr(pointerMaxWheelSpeed)
+   SaveSetting "Window3D", "Pointer", "MaxWalkSpeed", CStr(pointerMaxWalkSpeed)
+   SaveSetting "Window3D", "Pointer", "MaxWheelAcceleration", CStr(pointerMaxWheelAcceleration)
+   SaveSetting "Window3D", "Pointer", "MaxWalkAcceleration", CStr(pointerMaxWalkAcceleration)
+   SaveSetting "Window3D", "Pointer", "Disable2D", CStr(pointerDisable2D)
+   SaveSetting "Window3D", "Pointer", "Disable3D", CStr(pointerDisable3D)
+   Beep
 End Sub
 Private Sub Frame4_Click()
-    Unload Me
+   Unload Me
 End Sub
-
 Private Sub Frame6_Click()
-    pointerMaxPointerSpeed = 6
-    pointerMaxPOVSpeed = 10
-    pointerMaxPointerAcceleration = 20
-    pointerMaxPOVAcceleration = 40
-    pointerMaxWheelSpeed = 10
-    pointerMaxWalkSpeed = 1
-    pointerMaxWheelAcceleration = 4
-    pointerMaxWalkAcceleration = 5
-    pointerDisable2D = 0
-    pointerDisable3D = 0
+   pointerMaxPointerSpeed = 6
+   pointerMaxPOVSpeed = 10
+   pointerMaxPointerAcceleration = 20
+   pointerMaxPOVAcceleration = 40
+   pointerMaxWheelSpeed = 10
+   pointerMaxWalkSpeed = 1
+   pointerMaxWheelAcceleration = 4
+   pointerMaxWalkAcceleration = 5
+   pointerDisable2D = 0
+   pointerDisable3D = 0
 End Sub
 Private Sub lblDefault_Click()
-    Frame6_Click
+   Frame6_Click
 End Sub
 '
 '
 '
-Private Function UpdateSlider(ByVal X As Single, ByRef sldr As Frame, ByRef lvl As Label, ByRef lbl As Label, ByVal name As String) As Long
-    On Error Resume Next
-    Dim v As Long
-    Dim mm() As String
-    Dim min As Long
-    Dim max As Long
-    mm = Split(sldr.Tag, ",")
-    min = mm(0)
-    max = mm(1)
-    v = (X / sldr.Width) * max
-    If v < min Then v = min
-    If v > max Then v = max
-    If X < 0 Then lvl.Width = 0
-    If X >= 0 Then lvl.Width = X
-    lbl.Tag = v
-    lbl.Caption = name & " " & v
-    UpdateSlider = v
+Private Function UpdateSlider(ByVal x As Single, ByRef sldr As Frame, ByRef lvl As Label, ByRef lbl As Label, ByVal name As String) As Long
+   On Error Resume Next
+   Dim v As Long
+   Dim mm() As String
+   Dim min As Long
+   Dim max As Long
+   mm = Split(sldr.Tag, ",")
+   min = mm(0)
+   max = mm(1)
+   v = (x / sldr.Width) * max
+   If v < min Then v = min
+   If v > max Then v = max
+   If x < 0 Then lvl.Width = 0
+   If x >= 0 Then lvl.Width = x
+   lbl.Tag = v
+   lbl.Caption = name & " " & v
+   UpdateSlider = v
 End Function
-
-Private Sub lblSlider1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = True
-    pointerMaxPointerSpeed = UpdateSlider(X, fraSlider1, lblValueSlider1, lblTitleSlider1, "Pointer speed")
+Private Sub lblSlider1_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = True
+   pointerMaxPointerSpeed = UpdateSlider(x, fraSlider1, lblValueSlider1, lblTitleSlider1, "Pointer speed")
 End Sub
-Private Sub lblValueSlider1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider1_MouseDown Button, Shift, X, Y
+Private Sub lblValueSlider1_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider1_MouseDown Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    If mdown = False Then Exit Sub
-    pointerMaxPointerSpeed = UpdateSlider(X, fraSlider1, lblValueSlider1, lblTitleSlider1, "Pointer speed")
+Private Sub lblSlider1_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   If mdown = False Then Exit Sub
+   pointerMaxPointerSpeed = UpdateSlider(x, fraSlider1, lblValueSlider1, lblTitleSlider1, "Pointer speed")
 End Sub
-Private Sub lblValueSlider1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider1_MouseMove Button, Shift, X, Y
+Private Sub lblValueSlider1_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider1_MouseMove Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider1_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = False
-    pointerMaxPointerSpeed = UpdateSlider(X, fraSlider1, lblValueSlider1, lblTitleSlider1, "Pointer speed")
+Private Sub lblSlider1_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = False
+   pointerMaxPointerSpeed = UpdateSlider(x, fraSlider1, lblValueSlider1, lblTitleSlider1, "Pointer speed")
 End Sub
-Private Sub lblValueSlider1_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider1_MouseUp Button, Shift, X, Y
+Private Sub lblValueSlider1_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider1_MouseUp Button, Shift, x, y
 End Sub
 ''''''''''''''
-
-Private Sub lblSlider2_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = True
-    pointerMaxPointerAcceleration = UpdateSlider(X, fraSlider2, lblValueSlider2, lblTitleSlider2, "Pointer acceleration")
+Private Sub lblSlider2_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = True
+   pointerMaxPointerAcceleration = UpdateSlider(x, fraSlider2, lblValueSlider2, lblTitleSlider2, "Pointer acceleration")
 End Sub
-Private Sub lblValueSlider2_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider2_MouseDown Button, Shift, X, Y
+Private Sub lblValueSlider2_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider2_MouseDown Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider2_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    If mdown = False Then Exit Sub
-    pointerMaxPointerAcceleration = UpdateSlider(X, fraSlider2, lblValueSlider2, lblTitleSlider2, "Pointer acceleration")
+Private Sub lblSlider2_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   If mdown = False Then Exit Sub
+   pointerMaxPointerAcceleration = UpdateSlider(x, fraSlider2, lblValueSlider2, lblTitleSlider2, "Pointer acceleration")
 End Sub
-Private Sub lblValueSlider2_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider2_MouseMove Button, Shift, X, Y
+Private Sub lblValueSlider2_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider2_MouseMove Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider2_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = False
-    pointerMaxPointerAcceleration = UpdateSlider(X, fraSlider2, lblValueSlider2, lblTitleSlider2, "Pointer acceleration")
+Private Sub lblSlider2_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = False
+   pointerMaxPointerAcceleration = UpdateSlider(x, fraSlider2, lblValueSlider2, lblTitleSlider2, "Pointer acceleration")
 End Sub
-Private Sub lblValueSlider2_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider2_MouseUp Button, Shift, X, Y
+Private Sub lblValueSlider2_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider2_MouseUp Button, Shift, x, y
 End Sub
 '''''''''''''''''''''''''''''''''
-
-Private Sub lblSlider3_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = True
-    pointerMaxWheelSpeed = UpdateSlider(X, fraSlider3, lblValueSlider3, lblTitleSlider3, "Wheel speed")
+Private Sub lblSlider3_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = True
+   pointerMaxWheelSpeed = UpdateSlider(x, fraSlider3, lblValueSlider3, lblTitleSlider3, "Wheel speed")
 End Sub
-Private Sub lblValueSlider3_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider3_MouseDown Button, Shift, X, Y
+Private Sub lblValueSlider3_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider3_MouseDown Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider3_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    If mdown = False Then Exit Sub
-    pointerMaxWheelSpeed = UpdateSlider(X, fraSlider3, lblValueSlider3, lblTitleSlider3, "Wheel speed")
+Private Sub lblSlider3_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   If mdown = False Then Exit Sub
+   pointerMaxWheelSpeed = UpdateSlider(x, fraSlider3, lblValueSlider3, lblTitleSlider3, "Wheel speed")
 End Sub
-Private Sub lblValueSlider3_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider3_MouseMove Button, Shift, X, Y
+Private Sub lblValueSlider3_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider3_MouseMove Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider3_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = False
-    pointerMaxWheelSpeed = UpdateSlider(X, fraSlider3, lblValueSlider3, lblTitleSlider3, "Wheel speed")
+Private Sub lblSlider3_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = False
+   pointerMaxWheelSpeed = UpdateSlider(x, fraSlider3, lblValueSlider3, lblTitleSlider3, "Wheel speed")
 End Sub
-Private Sub lblValueSlider3_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider3_MouseUp Button, Shift, X, Y
+Private Sub lblValueSlider3_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider3_MouseUp Button, Shift, x, y
 End Sub
 '''''''''''''''''''''''''''''''''
-
-Private Sub lblSlider4_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = True
-    pointerMaxWheelAcceleration = UpdateSlider(X, fraSlider4, lblValueSlider4, lblTitleSlider4, "Wheel acceleration")
+Private Sub lblSlider4_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = True
+   pointerMaxWheelAcceleration = UpdateSlider(x, fraSlider4, lblValueSlider4, lblTitleSlider4, "Wheel acceleration")
 End Sub
-Private Sub lblValueSlider4_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider4_MouseDown Button, Shift, X, Y
+Private Sub lblValueSlider4_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider4_MouseDown Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider4_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    If mdown = False Then Exit Sub
-    pointerMaxWheelAcceleration = UpdateSlider(X, fraSlider4, lblValueSlider4, lblTitleSlider4, "Wheel acceleration")
+Private Sub lblSlider4_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   If mdown = False Then Exit Sub
+   pointerMaxWheelAcceleration = UpdateSlider(x, fraSlider4, lblValueSlider4, lblTitleSlider4, "Wheel acceleration")
 End Sub
-Private Sub lblValueSlider4_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider4_MouseMove Button, Shift, X, Y
+Private Sub lblValueSlider4_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider4_MouseMove Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider4_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = False
-    pointerMaxWheelAcceleration = UpdateSlider(X, fraSlider4, lblValueSlider4, lblTitleSlider4, "Wheel acceleration")
+Private Sub lblSlider4_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = False
+   pointerMaxWheelAcceleration = UpdateSlider(x, fraSlider4, lblValueSlider4, lblTitleSlider4, "Wheel acceleration")
 End Sub
-Private Sub lblValueSlider4_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider4_MouseUp Button, Shift, X, Y
+Private Sub lblValueSlider4_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider4_MouseUp Button, Shift, x, y
 End Sub
 '''''''''''''''''''''''''''''''''
-
-Private Sub lblSlider5_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = True
-    pointerMaxPOVSpeed = UpdateSlider(X, fraSlider5, lblValueSlider5, lblTitleSlider5, "Point of view speed")
+Private Sub lblSlider5_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = True
+   pointerMaxPOVSpeed = UpdateSlider(x, fraSlider5, lblValueSlider5, lblTitleSlider5, "Point of view speed")
 End Sub
-Private Sub lblValueSlider5_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider5_MouseDown Button, Shift, X, Y
+Private Sub lblValueSlider5_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider5_MouseDown Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider5_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    If mdown = False Then Exit Sub
-    pointerMaxPOVSpeed = UpdateSlider(X, fraSlider5, lblValueSlider5, lblTitleSlider5, "Point of view speed")
+Private Sub lblSlider5_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   If mdown = False Then Exit Sub
+   pointerMaxPOVSpeed = UpdateSlider(x, fraSlider5, lblValueSlider5, lblTitleSlider5, "Point of view speed")
 End Sub
-Private Sub lblValueSlider5_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider5_MouseMove Button, Shift, X, Y
+Private Sub lblValueSlider5_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider5_MouseMove Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider5_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = False
-    pointerMaxPOVSpeed = UpdateSlider(X, fraSlider5, lblValueSlider5, lblTitleSlider5, "Point of view speed")
+Private Sub lblSlider5_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = False
+   pointerMaxPOVSpeed = UpdateSlider(x, fraSlider5, lblValueSlider5, lblTitleSlider5, "Point of view speed")
 End Sub
-Private Sub lblValueSlider5_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider5_MouseUp Button, Shift, X, Y
+Private Sub lblValueSlider5_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider5_MouseUp Button, Shift, x, y
 End Sub
 '''''''''''''''''''''''''''''''''
-
-Private Sub lblSlider6_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = True
-    pointerMaxPOVAcceleration = UpdateSlider(X, fraSlider6, lblValueSlider6, lblTitleSlider6, "Point of view acceleration")
+Private Sub lblSlider6_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = True
+   pointerMaxPOVAcceleration = UpdateSlider(x, fraSlider6, lblValueSlider6, lblTitleSlider6, "Point of view acceleration")
 End Sub
-Private Sub lblValueSlider6_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider6_MouseDown Button, Shift, X, Y
+Private Sub lblValueSlider6_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider6_MouseDown Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider6_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    If mdown = False Then Exit Sub
-    pointerMaxPOVAcceleration = UpdateSlider(X, fraSlider6, lblValueSlider6, lblTitleSlider6, "Point of view acceleration")
+Private Sub lblSlider6_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   If mdown = False Then Exit Sub
+   pointerMaxPOVAcceleration = UpdateSlider(x, fraSlider6, lblValueSlider6, lblTitleSlider6, "Point of view acceleration")
 End Sub
-Private Sub lblValueSlider6_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider6_MouseMove Button, Shift, X, Y
+Private Sub lblValueSlider6_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider6_MouseMove Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider6_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = False
-    pointerMaxPOVAcceleration = UpdateSlider(X, fraSlider6, lblValueSlider6, lblTitleSlider6, "Point of view acceleration")
+Private Sub lblSlider6_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = False
+   pointerMaxPOVAcceleration = UpdateSlider(x, fraSlider6, lblValueSlider6, lblTitleSlider6, "Point of view acceleration")
 End Sub
-Private Sub lblValueSlider6_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider6_MouseUp Button, Shift, X, Y
+Private Sub lblValueSlider6_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider6_MouseUp Button, Shift, x, y
 End Sub
 '''''''''''''''''''''''''''''''''
-
-Private Sub lblSlider7_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = True
-    pointerMaxWalkSpeed = UpdateSlider(X, fraSlider7, lblValueSlider7, lblTitleSlider7, "Walk speed")
+Private Sub lblSlider7_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = True
+   pointerMaxWalkSpeed = UpdateSlider(x, fraSlider7, lblValueSlider7, lblTitleSlider7, "Walk speed")
 End Sub
-Private Sub lblValueSlider7_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider7_MouseDown Button, Shift, X, Y
+Private Sub lblValueSlider7_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider7_MouseDown Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider7_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    If mdown = False Then Exit Sub
-    pointerMaxWalkSpeed = UpdateSlider(X, fraSlider7, lblValueSlider7, lblTitleSlider7, "Walk speed")
+Private Sub lblSlider7_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   If mdown = False Then Exit Sub
+   pointerMaxWalkSpeed = UpdateSlider(x, fraSlider7, lblValueSlider7, lblTitleSlider7, "Walk speed")
 End Sub
-Private Sub lblValueSlider7_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider7_MouseMove Button, Shift, X, Y
+Private Sub lblValueSlider7_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider7_MouseMove Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider7_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = False
-    pointerMaxWalkSpeed = UpdateSlider(X, fraSlider7, lblValueSlider7, lblTitleSlider7, "Walk speed")
+Private Sub lblSlider7_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = False
+   pointerMaxWalkSpeed = UpdateSlider(x, fraSlider7, lblValueSlider7, lblTitleSlider7, "Walk speed")
 End Sub
-Private Sub lblValueSlider7_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider7_MouseUp Button, Shift, X, Y
+Private Sub lblValueSlider7_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider7_MouseUp Button, Shift, x, y
 End Sub
 '''''''''''''''''''''''''''''''''
-
-Private Sub lblSlider8_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = True
-    pointerMaxWalkAcceleration = UpdateSlider(X, fraSlider8, lblValueSlider8, lblTitleSlider8, "Walk acceleration")
+Private Sub lblSlider8_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = True
+   pointerMaxWalkAcceleration = UpdateSlider(x, fraSlider8, lblValueSlider8, lblTitleSlider8, "Walk acceleration")
 End Sub
-Private Sub lblValueSlider8_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider8_MouseDown Button, Shift, X, Y
+Private Sub lblValueSlider8_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider8_MouseDown Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider8_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    If mdown = False Then Exit Sub
-    pointerMaxWalkAcceleration = UpdateSlider(X, fraSlider8, lblValueSlider8, lblTitleSlider8, "Walk acceleration")
+Private Sub lblSlider8_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   If mdown = False Then Exit Sub
+   pointerMaxWalkAcceleration = UpdateSlider(x, fraSlider8, lblValueSlider8, lblTitleSlider8, "Walk acceleration")
 End Sub
-Private Sub lblValueSlider8_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider8_MouseMove Button, Shift, X, Y
+Private Sub lblValueSlider8_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider8_MouseMove Button, Shift, x, y
 End Sub
-
-Private Sub lblSlider8_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    mdown = False
-    pointerMaxWalkAcceleration = UpdateSlider(X, fraSlider8, lblValueSlider8, lblTitleSlider8, "Walk acceleration")
+Private Sub lblSlider8_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   mdown = False
+   pointerMaxWalkAcceleration = UpdateSlider(x, fraSlider8, lblValueSlider8, lblTitleSlider8, "Walk acceleration")
 End Sub
-Private Sub lblValueSlider8_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    lblSlider8_MouseUp Button, Shift, X, Y
+Private Sub lblValueSlider8_MouseUp(Button As Integer, Shift As Integer, x As Single, y As Single)
+   lblSlider8_MouseUp Button, Shift, x, y
 End Sub
-
 Private Sub lblClose_Click()
-    Frame4_Click
+   Frame4_Click
 End Sub
-
 Private Sub lblBack_Click()
-    Frame2_Click
+   Frame2_Click
 End Sub
 Private Sub lblApply_Click()
-    Frame3_Click
+   Frame3_Click
 End Sub
-
-Private Sub Frame6_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    Frame6.BackColor = &H808080
+Private Sub Frame6_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   Frame6.BackColor = &H808080
 End Sub
-Private Sub Frame4_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    Frame4.BackColor = &H808080
+Private Sub Frame4_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   Frame4.BackColor = &H808080
 End Sub
-Private Sub Frame3_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    Frame3.BackColor = &H808080
+Private Sub Frame3_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   Frame3.BackColor = &H808080
 End Sub
-Private Sub Frame2_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    Frame2.BackColor = &H808080
+Private Sub Frame2_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   Frame2.BackColor = &H808080
 End Sub
-Private Sub Frame1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    If Frame6.BackColor <> &H404040 Then Frame6.BackColor = &H404040
-    If Frame4.BackColor <> &H404040 Then Frame4.BackColor = &H404040
-    If Frame3.BackColor <> &H404040 Then Frame3.BackColor = &H404040
-    If Frame2.BackColor <> &H404040 Then Frame2.BackColor = &H404040
-    If dragx > -1 Then
-        If X > dragx Then
-            Me.left = Me.left + (X - dragx)
-        ElseIf X < dragx Then
-            Me.left = Me.left - (dragx - X)
-        End If
-    End If
-    If dragy > -1 Then
-        If Y > dragy Then
-            Me.top = Me.top + (Y - dragy)
-        ElseIf Y < dragy Then
-            Me.top = Me.top - (dragy - Y)
-        End If
-    End If
+Private Sub Frame1_MouseMove(Button As Integer, Shift As Integer, x As Single, y As Single)
+   If Frame6.BackColor <> &H404040 Then Frame6.BackColor = &H404040
+   If Frame4.BackColor <> &H404040 Then Frame4.BackColor = &H404040
+   If Frame3.BackColor <> &H404040 Then Frame3.BackColor = &H404040
+   If Frame2.BackColor <> &H404040 Then Frame2.BackColor = &H404040
+   If dragx > -1 Then
+      If x > dragx Then
+         Me.left = Me.left + (x - dragx)
+      ElseIf x < dragx Then
+         Me.left = Me.left - (dragx - x)
+      End If
+   End If
+   If dragy > -1 Then
+      If y > dragy Then
+         Me.top = Me.top + (y - dragy)
+      ElseIf y < dragy Then
+         Me.top = Me.top - (dragy - y)
+      End If
+   End If
 End Sub
-
 Private Sub UserControl11_GotFocus()
-
 End Sub
